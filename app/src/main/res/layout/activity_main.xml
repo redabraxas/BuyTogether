@@ -1,0 +1,57 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical" >
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/main_color">
+        <ImageView
+            android:id="@+id/left_menu"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/left_menu"
+            android:scaleType="fitXY"/>
+        <LinearLayout
+            android:layout_gravity="center"
+            android:layout_marginLeft="12dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent">
+            <TextView
+                android:id="@+id/title_bar_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textSize="20dp"
+                android:textColor="#ffffff"
+                android:typeface="serif"
+                android:text="@string/app_name" />
+
+            <TextView
+                android:id="@+id/title_url"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textSize="20dp"
+                android:textColor="#ffffff"
+                android:typeface="serif"
+                android:text="" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <fragment
+        android:id="@+id/container"
+        android:name="com.chocoroll.buyto.Home.HomeFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

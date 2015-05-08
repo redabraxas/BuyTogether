@@ -1,0 +1,38 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" tools:context="com.chocoroll.buyto.AllDeal.AllDealFragment"
+    android:orientation="vertical"
+   >
+
+    <LinearLayout
+        android:background="@color/category_background"
+        android:padding="10dp"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <Spinner
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner_big_category"
+            android:entries="@array/big_category_arrays"
+            android:prompt="@string/big_category_prompt"
+            android:spinnerMode="dropdown" />
+
+        <Spinner
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner_small_category"
+            android:prompt="@string/small_category_prompt"
+            android:spinnerMode="dropdown" />
+    </LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        android:id="@+id/listView" />
+</LinearLayout>

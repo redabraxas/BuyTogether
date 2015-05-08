@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="main_color">#9981cf65</color>
+
+    <color name="slide_backgroud">#ff57555c</color>
+    <color name="slide_tab_bar">#ff5c5b5a</color>
+    <color name="slide_tab_backgroud">#ffcecece</color>
+    <color name ="slide_line">#ff5c5b5a</color>
+
+    <color name ="category_background">#99a0ff7a</color>
+
+
+</resources>
