@@ -21,8 +21,9 @@ import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 public class MainActivity extends FragmentActivity implements AllDealFragment.AllDealListner, WishDealFragment.WishDealListner{
 
+    // 안녕하세요~~~
     private SlidingMenu slidingMenu;
-   TabHost tabs;
+    TabHost tabs;
     TextView titleURL ;
 
     public static final int LOGOUTUSER = 0;
