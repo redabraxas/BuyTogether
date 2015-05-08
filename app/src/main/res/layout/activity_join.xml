@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="#FFFFFF"
+    android:onClick="onClickedButton">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="회원가입"
+        android:textSize="25dp"
+        android:typeface="sans"
+        android:layout_marginTop="30dp"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip" >
+
+        <TextView
+            android:id="@+id/TextView03"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="이메일"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:typeface="sans" />
+
+        <EditText
+            android:id="@+id/edit_join_email"
+            android:layout_width="247dp"
+            android:layout_height="wrap_content"
+            android:ems="12"
+            android:gravity="center"
+            android:hint="이메일은 비밀번호 찾기와 ID로 사용됩니다."
+            android:inputType="textEmailAddress"
+            android:singleLine="true"
+            android:textSize="12sp"
+            android:typeface="sans" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/TextView01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="비밀번호"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:typeface="sans" />
+
+        <EditText
+            android:id="@+id/edit_join_pw"
+            android:layout_width="247dp"
+            android:layout_height="wrap_content"
+            android:ems="9"
+            android:gravity="center"
+            android:hint="영어 숫자조합 6~12개의 비밀번호 입력."
+            android:inputType="textPassword"
+            android:maxLength="12"
+            android:singleLine="true"
+            android:textSize="12sp"
+            android:typeface="sans" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/passwdtext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:typeface="sans" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="비밀번호 확인"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:typeface="sans" />
+
+        <EditText
+            android:id="@+id/edit_join_pwconfirm"
+            android:textSize="12sp"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:ems="9"
+            android:gravity="center"
+            android:hint="비밀번호 확인창 입니다."
+            android:inputType="textPassword"
+            android:maxLength="12"
+            android:singleLine="true"
+            android:typeface="sans" />
+
+
+        <TextView
+            android:id="@+id/passwdconfirmtext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:typeface="sans" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/TextView02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="이름"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:typeface="sans" />
+
+        <EditText
+            android:id="@+id/edit_join_name"
+            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="이름을 입력해주세요."
+            android:singleLine="true"
+            android:textSize="12sp"
+            android:typeface="sans" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="판매자로 등록하시겠습니까?"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:typeface="sans"
+            />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/seller_check" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/seller_form"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/Seller_TextView01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="회사명"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:typeface="sans" />
+
+            <EditText
+                android:id="@+id/Seller_edit_join_compname"
+                android:layout_marginLeft="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="13"
+                android:gravity="center"
+                android:hint="회사명을 입력해주세요."
+                android:singleLine="true"
+                android:textSize="12sp"
+                android:typeface="sans" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/Seller_TextView02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="사업자 번호"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:typeface="sans" />
+
+            <EditText
+                android:id="@+id/Seller_edit_join_compnum"
+                android:layout_marginLeft="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="12"
+                android:gravity="center"
+                android:hint="사업자 번호를 입력해주세요."
+                android:singleLine="true"
+                android:textSize="12sp"
+                android:typeface="sans" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/Seller_TextView03"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="주소"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:typeface="sans" />
+
+            <EditText
+                android:id="@+id/Seller_edit_join_compadd"
+                android:layout_marginLeft="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="18"
+                android:gravity="center"
+                android:hint="주소를 입력해주세요."
+                android:singleLine="true"
+                android:textSize="12sp"
+                android:typeface="sans" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/Seller_TextView04"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="전화번호"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:typeface="sans" />
+
+            <EditText
+                android:id="@+id/Seller_edit_join_compphone"
+                android:layout_marginLeft="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="13"
+                android:gravity="center"
+                android:hint="대표 전화번호를 입력해주세요."
+                android:singleLine="true"
+                android:textSize="12sp"
+                android:typeface="sans" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_join_ok"
+        android:layout_width="140dip"
+        android:layout_marginTop="20dip"
+        android:layout_marginBottom="30dp"
+        android:layout_height="wrap_content"
+        android:text="회원가입하기"
+        android:background="@null"
+        android:textColor="#0099CC"
+        android:textSize="13dp"
+        android:typeface="sans" />
+
+</LinearLayout>
