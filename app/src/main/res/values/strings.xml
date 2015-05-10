@@ -44,5 +44,8 @@
         <item>바디/핸드</item>
         <item>남성화장품</item>
     </string-array>
+    <string name="title_activity_detail_deal">DetailDealActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 
 </resources>

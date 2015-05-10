@@ -9,5 +9,7 @@
 
     <color name ="category_background">#99a0ff7a</color>
 
+    <color name="tab_indicate">#ff295349</color>
+    <color name="tab_background">#99a0ff7a</color>
 
 </resources>

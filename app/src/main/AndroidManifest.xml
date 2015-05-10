@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.chocoroll.buyto" >
 
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,18 +17,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".SplashActivity" >
+        <activity android:name=".SplashActivity" >
         </activity>
-
-        <activity
-            android:name=".Login.LoginActivity" >
+        <activity android:name=".Login.LoginActivity" >
+        </activity>
+        <activity android:name=".Login.JoinActivity" >
         </activity>
         <activity
-            android:name=".Login.JoinActivity">
+            android:name=".DetailDeal.DetailDealActivity"
+            android:label="@string/title_activity_detail_deal" >
         </activity>
-
     </application>
 
 </manifest>

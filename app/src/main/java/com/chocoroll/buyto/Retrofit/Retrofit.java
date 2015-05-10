@@ -11,9 +11,9 @@ import com.google.gson.JsonObject;
 
 public interface Retrofit {
     public static final String ROOT = "http://buytogether.dothome.co.kr";
-    @POST("/login.php")
+    @POST("/login/login.php")
     public void login(@Body JsonObject info, Callback<String> callback);
-    @POST("/notice.php")
-    public void getNotice(Callback<JsonArray> callback);
+    @POST("/listview/categorylist.php")
+    public void getDealList(Callback<JsonArray> callback);
     
 }

@@ -6,14 +6,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
-import com.chocoroll.buyto.Model.Product;
+import com.chocoroll.buyto.Model.Deal;
 import com.chocoroll.buyto.R;
 
 import java.util.ArrayList;
@@ -24,7 +22,7 @@ public class HomeFragment extends Fragment {
     private ViewPager pager;
     private MyPagerAdapter adapter;
 
-    ArrayList<Product> pTodayList, pDealList, pWishList, pDdayList;
+    ArrayList<Deal> pTodayList, pDealList, pWishList, pDdayList;
 
 
 
@@ -41,24 +39,10 @@ public class HomeFragment extends Fragment {
 
 
 
-        pTodayList = new ArrayList<Product>();
-        pDealList =  new ArrayList<Product>();
-        pWishList =  new ArrayList<Product>();
-        pDdayList =  new ArrayList<Product>();
-
-        pTodayList.add(new Product("망고스틴","식품","과일","D-3",2));
-        pTodayList.add(new Product("망고스틴","식품","과일","D-3",2));
-
-        pDealList.add(new Product("망고스틴","식품","과일","D-3",2));
-        pDealList.add(new Product("망고스틴","식품","과일","D-3",2));
-        pDealList.add(new Product("망고스틴","식품","과일","D-3",2));
-
-        pWishList.add(new Product("망고스틴","식품","과일","D-3",2));
-        pWishList.add(new Product("망고스틴","식품","과일","D-3",2));
-        pWishList.add(new Product("망고스틴","식품","과일","D-3",2));
-
-        pDdayList.add(new Product("망고스틴","식품","과일","D-3",2));
-        pDdayList.add(new Product("망고스틴","식품","과일","D-3",2));
+        pTodayList = new ArrayList<Deal>();
+        pDealList =  new ArrayList<Deal>();
+        pWishList =  new ArrayList<Deal>();
+        pDdayList =  new ArrayList<Deal>();
 
         pager = (ViewPager)v.findViewById(R.id.pager);
 

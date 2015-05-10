@@ -10,16 +10,15 @@ import android.widget.TextView;
 import com.chocoroll.buyto.R;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 /**
  * Created by RA on 2015-04-24.
  */
-public class ProductAdapter extends ArrayAdapter<Product> {
-    private ArrayList<Product> items;
+public class DealAdapter extends ArrayAdapter<Deal> {
+    private ArrayList<Deal> items;
     private Context context;
 
-    public ProductAdapter(Context context, int textViewResourceId, ArrayList<Product> items) {
+    public DealAdapter(Context context, int textViewResourceId, ArrayList<Deal> items) {
         super(context, textViewResourceId, items);
         this.items = items;
         this.context = context;
@@ -30,12 +29,12 @@ public class ProductAdapter extends ArrayAdapter<Product> {
             LayoutInflater vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = vi.inflate(R.layout.model_product, null);
         }
-        Product p = items.get(position);
+        Deal p = items.get(position);
         if (p != null) {
             String str = "["+p.getbCategory()+"/"+p.getsCategory()+"]  "+p.getName();
             ((TextView)  v.findViewById(R.id.txt_name)).setText(str);
             ((TextView) v.findViewById(R.id.txt_dday)).setText(p.getDday());
-            ((TextView)  v.findViewById(R.id.txt_people)).setText(String.valueOf(p.getCount()));
+            ((TextView)  v.findViewById(R.id.txt_people)).setText(String.valueOf(p.getCurCount()+"/"+p.getMaxCount()));
         }
         return v;
     }

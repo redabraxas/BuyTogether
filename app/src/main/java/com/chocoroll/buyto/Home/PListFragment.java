@@ -1,18 +1,19 @@
 package com.chocoroll.buyto.Home;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import com.chocoroll.buyto.Model.Product;
-import com.chocoroll.buyto.Model.ProductAdapter;
+import com.chocoroll.buyto.DetailDeal.DetailDealActivity;
+import com.chocoroll.buyto.Model.Deal;
+import com.chocoroll.buyto.Model.DealAdapter;
 import com.chocoroll.buyto.R;
 
 import java.util.ArrayList;
@@ -24,16 +25,16 @@ public class PListFragment extends Fragment {
 
 
     String page, title;
-    ArrayList<Product> pList;
-    ProductAdapter mAdapter;
+    ArrayList<Deal> pList;
+    DealAdapter mAdapter;
 
-    public PListFragment(ArrayList<Product> pList){
+    public PListFragment(ArrayList<Deal> pList){
         this.pList =pList;
     }
 
 
     public PListFragment(){
-        this.pList = new ArrayList<Product>();
+        this.pList = new ArrayList<Deal>();
     }
 
 
@@ -65,7 +66,7 @@ public class PListFragment extends Fragment {
         // Inflate the layout for this fragment
         View v =  inflater.inflate(R.layout.fragment_list, container, false);
         ListView listView = (ListView) v.findViewById(R.id.plistView);
-        mAdapter= new ProductAdapter(getActivity(), R.layout.model_product, pList);
+        mAdapter= new DealAdapter(getActivity(), R.layout.model_product, pList);
 
 
         listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
@@ -73,6 +74,15 @@ public class PListFragment extends Fragment {
         listView.setDividerHeight(3);
 
         listView.setAdapter(mAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Deal item =(Deal)mAdapter.getItem(i);
+                Intent intent = new Intent(getActivity(), DetailDealActivity.class);
+                intent.putExtra("product",item);
+                startActivity(intent);
+            }
+        }) ;
 
         return v;
     }

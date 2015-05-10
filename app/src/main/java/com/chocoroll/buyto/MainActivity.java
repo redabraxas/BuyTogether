@@ -1,5 +1,9 @@
 package com.chocoroll.buyto;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -9,6 +13,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
@@ -17,8 +22,15 @@ import android.widget.TextView;
 import com.chocoroll.buyto.AllDeal.AllDealFragment;
 import com.chocoroll.buyto.Login.JoinActivity;
 import com.chocoroll.buyto.Login.LoginActivity;
+import com.chocoroll.buyto.Retrofit.Retrofit;
 import com.chocoroll.buyto.WishDeal.WishDealFragment;
+import com.google.gson.JsonObject;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 
 public class MainActivity extends FragmentActivity implements AllDealFragment.AllDealListner, WishDealFragment.WishDealListner{
@@ -28,13 +40,21 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
     TabHost tabs;
     TextView titleURL ;
 
+    public static Context mContext;
+
     public static final int LOGOUTUSER = 0;
     public static final int USER = 1;
     public static final int SELLER = 2;
     public static final int ADMIN = 3;
-    private String userid;
+    private String userid="";
     private int loginmode=0;
 
+    public String getUserId(){
+        return userid;
+    }
+    public void setUserId(String id){
+        userid= id;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +62,7 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
         setContentView(R.layout.activity_main);
         Intent intent = new Intent(this, SplashActivity.class);
         startActivity(intent);
-
+        mContext = this;
 
 
         slidingMenu = new SlidingMenu(this);
@@ -69,18 +89,102 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
         // 자동로그인에 체크가 되어있따면
         SharedPreferences setting = getSharedPreferences("setting", MODE_PRIVATE);
         if(setting.getBoolean("auto_login", false)){
-
-            userid = setting.getString("id","");
-            loginmode = setting.getInt("loginmode",0);
-            //setLoginmode();
+            userid = setting.getString("id", "");
+            String passwd = setting.getString("pw","");
+            JsonObject info = new JsonObject();
+            info.addProperty("id", userid);
+            info.addProperty("pw", passwd);
+            Login(info);
 
         }else{
             menu_setting(LOGOUTUSER);
         }
 
 
+    }
+    private void Login(final JsonObject info){
 
 
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+
+                    RestAdapter restAdapter = new RestAdapter.Builder()
+                            .setEndpoint(Retrofit.ROOT)  //call your base url
+                            .build();
+                    Retrofit sendreport = restAdapter.create(Retrofit.class); //this is how retrofit create your api
+                    sendreport.login(info, new Callback<String>() {
+                        @Override
+                        public void success(String result, Response response) {
+
+                            if(result.equals("failed")){
+
+                                new AlertDialog.Builder(MainActivity.this).setMessage("아이디가 변경되었으니 다시 로그인 해주세요")
+                                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                dialog.dismiss();
+
+                                            }
+                                        }).show();
+
+                            }else if(result.equals("passwd_failed")){
+
+                                new AlertDialog.Builder(MainActivity.this).setMessage("비밀번호가 변경되었으니 다시 로그인 해주세요.")
+                                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                dialog.dismiss();
+
+                                            }
+                                        }).show();
+
+                            }else{
+
+
+                                if(result.equals("1"))
+                                {
+                                   menu_setting(MainActivity.USER);
+                                }
+                                else if(result.equals("2"))
+                                {
+                                   menu_setting(MainActivity.USER);
+                                }
+                                else if(result.equals("3"))
+                                {
+                                    menu_setting(MainActivity.SELLER);
+                                }else if(result.equals("4")){
+                                    menu_setting(MainActivity.ADMIN);
+                                }
+                            }
+
+                        }
+
+                        @Override
+                        public void failure(RetrofitError retrofitError) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                            builder.setTitle("네트워크 에러")        // 제목 설정
+                                    .setMessage("네트워크를 확인해주세요.")        // 메세지 설정
+                                    .setCancelable(false)        // 뒤로 버튼 클릭시 취소 가능 설정
+                                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                        // 확인 버튼 클릭시 설정
+                                        public void onClick(DialogInterface dialog, int whichButton) {
+                                            finish();
+
+                                        }
+                                    });
+
+                            AlertDialog dialog = builder.create();    // 알림창 객체 생성
+                            dialog.show();    // 알림창 띄우기
+
+                        }
+                    });
+                }
+                catch (Throwable ex) {
+
+                }
+            }
+        }).start();
 
     }
 
@@ -140,7 +244,7 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
         }
     }
 
-    void menu_setting(int position){
+    public void menu_setting(int position){
 
 
         // 레이아웃 적용하기
@@ -166,6 +270,7 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
         // 공통 메뉴
         LinearLayout menu_all = (LinearLayout) findViewById(R.id.menu_all);
         LinearLayout menu_wish = (LinearLayout) findViewById(R.id.menu_wish);
+
 
 
         // 모든 딜 보기
@@ -227,6 +332,7 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
 
 
         }else{
+            ((TextView)findViewById(R.id.menu_hi)).setText("환영합니다, "+userid+"님!");
             LinearLayout menu_make = (LinearLayout) findViewById(R.id.menu_make);
             LinearLayout menu_bookmark = (LinearLayout) findViewById(R.id.menu_bookmark);
             TextView txtPush = (TextView) findViewById(R.id.textPush);
