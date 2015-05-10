@@ -14,6 +14,6 @@ public interface Retrofit {
     @POST("/login/login.php")
     public void login(@Body JsonObject info, Callback<String> callback);
     @POST("/listview/categorylist.php")
-    public void getDealList(Callback<JsonArray> callback);
+    public void getDealList(@Body JsonObject info, Callback<JsonArray> callback);
     
 }

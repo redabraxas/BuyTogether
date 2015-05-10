@@ -16,6 +16,7 @@
     <string name="small_category_prompt">소분류</string>
 
     <string-array name="big_category_arrays">
+        <item>전체보기</item>
         <item>패션/잡화</item>
         <item>뷰티</item>
         <item>식품</item>
@@ -28,6 +29,7 @@
     </string-array>
 
     <string-array name="small_category_arrays_fashion">
+        <item>전체보기</item>
         <item>여성의류</item>
         <item>남성의류</item>
         <item>아동</item>
@@ -37,6 +39,7 @@
     </string-array>
 
     <string-array name="small_category_arrays_beauty">
+        <item>전체보기</item>
         <item>기초화장품</item>
         <item>클렌징</item>
         <item>메이크업</item>
@@ -44,8 +47,46 @@
         <item>바디/핸드</item>
         <item>남성화장품</item>
     </string-array>
+
+    <string-array name="small_category_arrays_food">
+        <item>전체보기</item>
+        <item>농/수/축산식품</item>
+        <item>가공식품</item>
+        <item>음료/간식</item>
+        <item>건강/다이어트식품</item>
+        <item>유아동식품</item>
+    </string-array>
+
+
+    <string-array name="small_category_arrays_living">
+        <item>전체보기</item>
+        <item>주방용품</item>
+        <item>위생/세안/욕실용품</item>
+        <item>청소/세탁/세제</item>
+        <item>수납/공구/생활잡화</item>
+        <item>건강생활용품</item>
+    </string-array>
+
+    <string-array name="small_category_arrays_furniture">
+        <item>전체보기</item>
+        <item>침실/수납가구</item>
+        <item>거실/주방가구</item>
+        <item>유아동/학생가구</item>
+        <item>침구/카펫/커튼</item>
+        <item>인테리어소품</item>
+    </string-array>
+
+    <string-array name="small_category_arrays_digital">
+        <item>전체보기</item>
+        <item>컴퓨터/게임</item>
+        <item>카메라/빔</item>
+        <item>디지털/악세사리</item>
+        <item>TV/오디오</item>
+        <item>생활가전</item>
+        <item>주방가전</item>
+    </string-array>
+
     <string name="title_activity_detail_deal">DetailDealActivity</string>
 
-    <string name="hello_world">Hello world!</string>
 
 </resources>

@@ -2,6 +2,7 @@ package com.chocoroll.buyto.AllDeal;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -36,6 +37,8 @@ import retrofit.client.Response;
 public class AllDealFragment extends Fragment {
 
 
+    ProgressDialog dialog;
+
     ArrayList<Deal> pList;
     DealAdapter mAdapter;
     ListView listView;
@@ -68,22 +71,47 @@ public class AllDealFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                ArrayAdapter<CharSequence> adapter;
+                ArrayAdapter<CharSequence> adapter = null;
                 String item = spinnerB.getSelectedItem().toString();
-                if (item.equals("패션/잡화")) {
 
+                if (item.equals("패션/잡화")) {
                     adapter= ArrayAdapter.createFromResource(getActivity(), R.array.small_category_arrays_fashion,
                             android.R.layout.simple_spinner_item);
-
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    spinnerS.setAdapter(adapter);
-                }else{
+                }else if(item.equals("뷰티")){
                     adapter= ArrayAdapter.createFromResource(getActivity(), R.array.small_category_arrays_beauty,
                             android.R.layout.simple_spinner_item);
-
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    spinnerS.setAdapter(adapter);
+                }else if(item.equals("식품")){
+                    adapter= ArrayAdapter.createFromResource(getActivity(), R.array.small_category_arrays_food,
+                            android.R.layout.simple_spinner_item);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                }else if(item.equals("주방/생활용품")){
+                    adapter= ArrayAdapter.createFromResource(getActivity(), R.array.small_category_arrays_living,
+                            android.R.layout.simple_spinner_item);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                }else if(item.equals("가구/홈데코")){
+                    adapter= ArrayAdapter.createFromResource(getActivity(), R.array.small_category_arrays_furniture,
+                            android.R.layout.simple_spinner_item);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                }else if(item.equals("가전/디지털")){
+                    adapter= ArrayAdapter.createFromResource(getActivity(), R.array.small_category_arrays_digital,
+                            android.R.layout.simple_spinner_item);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                }else{
+                    // 전체보기인 경우
+
+                    dialog = new ProgressDialog(getActivity());
+                    dialog.setMessage("딜 리스트를 받아오는 중입니다...");
+                    dialog.setIndeterminate(true);
+                    dialog.setCancelable(false);
+                    dialog.show();
+                    getDealList("전체보기","전체보기");
                 }
+
+
+                spinnerS.setAdapter(adapter);
+
             }
 
             @Override
@@ -92,8 +120,26 @@ public class AllDealFragment extends Fragment {
             }
         });
 
+        spinnerS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                dialog = new ProgressDialog(getActivity());
+                dialog.setMessage("딜 리스트를 받아오는 중입니다...");
+                dialog.setIndeterminate(true);
+                dialog.setCancelable(false);
+                dialog.show();
 
-        getDealList("","");
+                String item = spinnerS.getSelectedItem().toString();
+                getDealList(spinnerB.getSelectedItem().toString(),item);
+                Log.e("sitem",item);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
 
         pList = new ArrayList<Deal>();
         pList.add(new Deal("망고스틴", "식품", "과일", "D-3", "2","10", "seller","1000"));
@@ -133,6 +179,9 @@ public class AllDealFragment extends Fragment {
 
     void getDealList(String bCategory, String sCategory){
 
+        final JsonObject info = new JsonObject();
+        info.addProperty("bCategory",bCategory);
+        info.addProperty("sCategory",sCategory);
 
         new Thread(new Runnable() {
             public void run() {
@@ -142,10 +191,12 @@ public class AllDealFragment extends Fragment {
                             .setEndpoint(Retrofit.ROOT)  //call your base url
                             .build();
                     Retrofit sendreport = restAdapter.create(Retrofit.class); //this is how retrofit create your api
-                    sendreport.getDealList(new Callback<JsonArray>() {
+                    sendreport.getDealList(info,new Callback<JsonArray>() {
 
                         @Override
                         public void success(JsonArray jsonElements, Response response) {
+
+                            dialog.dismiss();
 
                             for(int i=0; i<jsonElements.size(); i++) {
                                 JsonObject deal = (JsonObject) jsonElements.get(i);
@@ -154,13 +205,16 @@ public class AllDealFragment extends Fragment {
                                 String dday = (deal.get("limitDate")).getAsString();
 
                                 pList.add(new Deal(name, "식품", "과일", dday, "2", "10", "seller",price));
-                                listView.setAdapter(mAdapter);
 
                             }
+
+                            listView.setAdapter(mAdapter);
                         }
 
                         @Override
                         public void failure(RetrofitError retrofitError) {
+                            dialog.dismiss();
+                            Log.e("error",retrofitError.getCause().toString());
                             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                             builder.setTitle("네트워크가 불안정합니다.")        // 제목 설정
                                     .setMessage("네트워크를 확인해주세요")        // 메세지 설정

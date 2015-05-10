@@ -82,16 +82,6 @@ public class DetailDealActivity extends FragmentActivity {
 
     }
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public void onBackPressed() {
-
-        if (slidingDrawer.isOpened()) {
-            slidingDrawer.close ();
-        } else {
-            super.onBackPressed();
-        }
-    }
 
 
     public class MyPagerAdapter extends FragmentPagerAdapter {
