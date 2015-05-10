@@ -11,6 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="내용"
+        android:textSize="15dp"
+        android:textColor="#000000"
         android:id="@+id/answer_content" />
 
     <RelativeLayout
@@ -25,6 +27,8 @@
             android:layout_height="wrap_content"
             android:text="날짜"
             android:id="@+id/answer_date"
+            android:textColor="#000000"
+            android:textSize="10dp"
             android:layout_gravity="center_horizontal"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"

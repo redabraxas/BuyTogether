@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:padding="10dp">
+
+
+        <ListView
+            android:id="@+id/answer_list"
+            android:layout_width="match_parent"
+            android:layout_height="342dp"
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            android:divider="#336c97cf"
+            android:dividerHeight="1dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#33a9a9a9"
+            android:padding="10dip" />
+
+        <RelativeLayout
+            android:id="@+id/seller_answer_box"
+            android:layout_width="match_parent"
+            android:layout_height="100dp" >
+
+            <EditText
+                android:id="@+id/answer_content_this"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@+id/answer_ok"
+                android:background="#FFFFFF"
+                android:ems="10"
+                android:hint="답변을 입력하세요..."
+                android:inputType="textMultiLine"
+                android:typeface="sans" />
+
+            <Button
+                android:id="@+id/answer_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:text="작성"
+                android:background="@null"
+                android:textColor="#0099CC"
+                android:textSize="13dp"
+                android:typeface="sans" />
+        </RelativeLayout>
+
+
+
+</LinearLayout>

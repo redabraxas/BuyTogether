@@ -36,9 +36,6 @@ import java.util.ArrayList;
  */
 public class DealQnaFragemnt extends Fragment {
 
-    public interface QnaListner{
-        public void clickSlidingDrawer();
-    }
 
     ArrayList<Qna> qList;
     QnaAdapter mAdapter;
@@ -52,7 +49,7 @@ public class DealQnaFragemnt extends Fragment {
     @SuppressLint("ValidFragment")
     public DealQnaFragemnt(String seller, String dealNum) {
         // Required empty public constructor
-        this.seller = "";
+        this.seller = "asdf";
         this.dealNum = dealNum;
     }
 
@@ -107,16 +104,7 @@ public class DealQnaFragemnt extends Fragment {
         return v;
     }
 
-    public void setAnswerList(String qnaNum){
 
-        ArrayList<Answer> answerlist = new ArrayList<Answer>();
-        answerlist.add((new Answer("23","asdf","!234")));
-        ListView m_ListView=(ListView) getActivity().findViewById(R.id.answer_list);
-        AnswerAdapter m_Adapter=new AnswerAdapter(getActivity(), R.layout.model_answer, answerlist);
-        m_ListView.setAdapter(m_Adapter);
-
-        ((QnaListner)getActivity()).clickSlidingDrawer();
-    }
 
 
     @Override
@@ -136,10 +124,6 @@ public class DealQnaFragemnt extends Fragment {
         String num = dealNum;
 
 
-
-    }
-
-    void sendAnswer(String content){
 
     }
 
@@ -167,7 +151,9 @@ public class DealQnaFragemnt extends Fragment {
                 ((Button)v.findViewById(R.id.qna_showAnswer)).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                       setAnswerList(p.getNum());
+
+                        AnswerDialog dialog = new AnswerDialog(getActivity(),p.getNum(),seller, p.getWriter());
+                        dialog.show();
                     }
                 });
             }
@@ -176,32 +162,6 @@ public class DealQnaFragemnt extends Fragment {
     }
 
 
-
-
-    public class AnswerAdapter extends ArrayAdapter<Answer>{
-        private ArrayList<Answer> items;
-        private Context context;
-
-        public AnswerAdapter(Context context, int textViewResourceId, ArrayList<Answer> items) {
-            super(context, textViewResourceId, items);
-            this.items = items;
-            this.context = context;
-        }
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View v = convertView;
-            if (v == null) {
-                LayoutInflater vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                v = vi.inflate(R.layout.model_qna, null);
-            }
-            final Answer p = items.get(position);
-            if (p != null) {
-                ((TextView)  v.findViewById(R.id.answer_date)).setText(p.getDate());
-                ((TextView) v.findViewById(R.id.answer_content)).setText(p.getContent());
-
-            }
-            return v;
-        }
-    }
 
 
 }

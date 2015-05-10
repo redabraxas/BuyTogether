@@ -34,6 +34,7 @@ import retrofit.client.Response;
 
 
 public class MainActivity extends FragmentActivity implements AllDealFragment.AllDealListner, WishDealFragment.WishDealListner{
+    ProgressDialog dialog;
 
     // 안녕하세요~~~
     private SlidingMenu slidingMenu;
@@ -89,6 +90,15 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
         // 자동로그인에 체크가 되어있따면
         SharedPreferences setting = getSharedPreferences("setting", MODE_PRIVATE);
         if(setting.getBoolean("auto_login", false)){
+
+            dialog = new ProgressDialog(MainActivity.this);
+            dialog.setMessage("로그인 정보를 받아오는 중입니다...");
+            dialog.setIndeterminate(true);
+            dialog.setCancelable(false);
+            dialog.show();
+
+
+
             userid = setting.getString("id", "");
             String passwd = setting.getString("pw","");
             JsonObject info = new JsonObject();
@@ -116,7 +126,7 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
                     sendreport.login(info, new Callback<String>() {
                         @Override
                         public void success(String result, Response response) {
-
+                            dialog.dismiss();
                             if(result.equals("failed")){
 
                                 new AlertDialog.Builder(MainActivity.this).setMessage("아이디가 변경되었으니 다시 로그인 해주세요")
@@ -162,6 +172,7 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
 
                         @Override
                         public void failure(RetrofitError retrofitError) {
+                            dialog.dismiss();
                             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                             builder.setTitle("네트워크 에러")        // 제목 설정
                                     .setMessage("네트워크를 확인해주세요.")        // 메세지 설정

@@ -28,7 +28,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 public class LoginActivity extends Activity {
-
+    ProgressDialog dialog;
     String id;
     String passwd;
     /** Called when the activity is first created. */
@@ -106,7 +106,7 @@ public class LoginActivity extends Activity {
                     info.addProperty("id", id);
                     info.addProperty("pw", passwd);
 
-                    ProgressDialog dialog = new ProgressDialog(LoginActivity.this);
+                    dialog = new ProgressDialog(LoginActivity.this);
                     dialog.setMessage("로그인 정보를 받아오는 중입니다...");
                     dialog.setIndeterminate(true);
                     dialog.setCancelable(false);
@@ -132,6 +132,7 @@ public class LoginActivity extends Activity {
                             @Override
                             public void success(String result, Response response) {
 
+                                dialog.dismiss();
                                 if(result.equals("failed")){
 
                                     new AlertDialog.Builder(LoginActivity.this).setMessage("아이디를 다시 확인해주세요.")
@@ -191,6 +192,7 @@ public class LoginActivity extends Activity {
 
                             @Override
                             public void failure(RetrofitError retrofitError) {
+                                dialog.dismiss();
                                 AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                                 builder.setTitle("네트워크 에러")        // 제목 설정
                                         .setMessage("네트워크를 확인해주세요.")        // 메세지 설정

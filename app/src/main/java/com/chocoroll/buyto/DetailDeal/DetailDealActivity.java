@@ -24,7 +24,7 @@ import com.chocoroll.buyto.MainActivity;
 import com.chocoroll.buyto.Model.Deal;
 import com.chocoroll.buyto.R;
 
-public class DetailDealActivity extends FragmentActivity implements DealQnaFragemnt.QnaListner{
+public class DetailDealActivity extends FragmentActivity {
 
     private Deal product;
     private PagerSlidingTabStrip tabs;
@@ -43,7 +43,7 @@ public class DetailDealActivity extends FragmentActivity implements DealQnaFrage
 
         // 기본 정보 셋팅
         product = getIntent().getParcelableExtra("product");
-        String str = "["+product.getbCategory()+"/"+product.getsCategory()+"]  "+product.getName();
+        String str = "[" + product.getbCategory() + "/" + product.getsCategory() + "]  " + product.getName();
         ((TextView) findViewById(R.id.txt_name)).setText(str);
         ((TextView) findViewById(R.id.txt_dday)).setText(product.getDday());
         ((TextView) findViewById(R.id.txt_people)).setText(String.valueOf(product.getCurCount() + "/" + product.getMaxCount()));
@@ -61,7 +61,7 @@ public class DetailDealActivity extends FragmentActivity implements DealQnaFrage
 
 
         // 찜 버튼
-        Button btnKeep = (Button)findViewById(R.id.btn_keep);
+        Button btnKeep = (Button) findViewById(R.id.btn_keep);
         btnKeep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,7 +71,7 @@ public class DetailDealActivity extends FragmentActivity implements DealQnaFrage
 
 
         // 신청 버튼
-        Button btnBook = (Button)findViewById(R.id.btn_book);
+        Button btnBook = (Button) findViewById(R.id.btn_book);
         btnBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,48 +80,7 @@ public class DetailDealActivity extends FragmentActivity implements DealQnaFrage
         });
 
 
-        // 답변
-
-        // 답변보기셋팅
-        slideHandleButton = (Button) findViewById(R.id.slideHandleButton);
-        slidingDrawer = (SlidingDrawer) findViewById(R.id.SlidingDrawer);
-        slidingDrawer.bringToFront();
-        slidingDrawer.setOnDrawerOpenListener(new SlidingDrawer.OnDrawerOpenListener() {
-            @Override
-            public void onDrawerOpened() {
-            }
-        });
-
-        slidingDrawer.setOnDrawerCloseListener(new SlidingDrawer.OnDrawerCloseListener() {
-            @Override
-            public void onDrawerClosed() {
-            }
-        });
-        // 답변 달기는 셀러만 답변할 수 있다.
-        LinearLayout answerbox = (LinearLayout)findViewById(R.id.seller_answer_box);
-
-        if(((MainActivity)MainActivity.mContext).getUserId().equals(product.getSeller())){
-            replyAnswer = (Button) findViewById(R.id.answer_ok);
-            replyAnswer.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    String content = ((EditText) findViewById(R.id.answer_content_this)).getText().toString();
-                    //DealQnaFragemnt fragemnt = new DealQnaFragemnt();
-                    //fragemnt.sendAnswer(content);
-                }
-            });
-        }else{
-            answerbox.setVisibility(View.INVISIBLE);
-        }
     }
-
-    @Override
-    public void clickSlidingDrawer() {
-        slidingDrawer.performClick();
-    }
-
-
 
     @SuppressWarnings("deprecation")
     @Override
