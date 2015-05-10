@@ -315,7 +315,7 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
             menu_login.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    slidingMenu.showContent(true);
                     Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                     startActivity(intent);
                 }
@@ -325,6 +325,7 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
             menu_regist.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    slidingMenu.showContent(true);
                     Intent intent = new Intent(MainActivity.this, JoinActivity.class);
                     startActivity(intent);
                 }
@@ -333,14 +334,17 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
 
         }else{
             ((TextView)findViewById(R.id.menu_hi)).setText("환영합니다, "+userid+"님!");
+
             LinearLayout menu_make = (LinearLayout) findViewById(R.id.menu_make);
             LinearLayout menu_bookmark = (LinearLayout) findViewById(R.id.menu_bookmark);
+            LinearLayout menu_logout = (LinearLayout) findViewById(R.id.menu_logout);
+
             TextView txtPush = (TextView) findViewById(R.id.textPush);
             // 딜 만들기
             menu_make.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    slidingMenu.showContent(true);
                 }
             });
 
@@ -350,11 +354,37 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
             menu_bookmark.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    slidingMenu.showContent(true);
                 }
             });
 
             txtPush.setText("현재 도착한 알림이 없습니다.");
+
+            // 로그아웃
+            menu_logout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    slidingMenu.showContent(true);
+                    removeAllStack();
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    ft.commit();
+                    userid="";
+                    loginmode=MainActivity.LOGOUTUSER;
+
+                    SharedPreferences setting1 = getSharedPreferences("setting", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = setting1.edit();
+
+                    editor.remove("id");
+                    editor.remove("loginmode");
+                    editor.remove("auto_login");
+                    editor.clear();
+                    editor.commit();
+
+                    menu_setting(LOGOUTUSER);
+
+                }
+            });
+
 
 
 
