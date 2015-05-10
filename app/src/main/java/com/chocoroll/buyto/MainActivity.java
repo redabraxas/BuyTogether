@@ -15,6 +15,8 @@ import android.widget.TabHost;
 import android.widget.TextView;
 
 import com.chocoroll.buyto.AllDeal.AllDealFragment;
+import com.chocoroll.buyto.Login.JoinActivity;
+import com.chocoroll.buyto.Login.LoginActivity;
 import com.chocoroll.buyto.WishDeal.WishDealFragment;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
@@ -73,7 +75,7 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
             //setLoginmode();
 
         }else{
-            menu_setting(ADMIN);
+            menu_setting(LOGOUTUSER);
         }
 
 
@@ -202,13 +204,15 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
 
         if(position == LOGOUTUSER){
             LinearLayout menu_login = (LinearLayout) findViewById(R.id.menu_login);
-            LinearLayout menu_regist = (LinearLayout) findViewById(R.id.menu_regist);
+            LinearLayout menu_regist = (LinearLayout) findViewById(R.id.menu_join);
 
             // 로그인
             menu_login.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(intent);
                 }
             });
 
@@ -216,7 +220,8 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
             menu_regist.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    Intent intent = new Intent(MainActivity.this, JoinActivity.class);
+                    startActivity(intent);
                 }
             });
 
