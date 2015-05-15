@@ -27,6 +27,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -38,14 +39,11 @@ import retrofit.client.Response;
  */
 public class DealQnaFragemnt extends Fragment {
 
-    public interface dealQnaListner{
-        public void addQnaList();
-    }
-
     ProgressDialog dialog;
 
     ArrayList<Qna> qnaList =  new ArrayList<Qna>();
     QnaAdapter mAdapter;
+    ListView listView;
 
     String seller;
     String dealNum;
@@ -55,11 +53,10 @@ public class DealQnaFragemnt extends Fragment {
     }
 
     @SuppressLint("ValidFragment")
-    public DealQnaFragemnt(String seller, String dealNum, ArrayList<Qna> qnaList) {
+    public DealQnaFragemnt(String seller, String dealNum) {
         // Required empty public constructor
-        this.seller = "asdf";
+        this.seller = seller;
         this.dealNum = dealNum;
-        this.qnaList = qnaList;
     }
 
 
@@ -112,13 +109,15 @@ public class DealQnaFragemnt extends Fragment {
         });
 
         // 리스트뷰 셋팅
-        ListView listView = (ListView) v.findViewById(R.id.listViewQna);
+        listView = (ListView) v.findViewById(R.id.listViewQna);
         mAdapter= new QnaAdapter(getActivity(), R.layout.model_qna, qnaList);
 
         listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         listView.setDivider(new ColorDrawable(Color.LTGRAY));
         listView.setDividerHeight(3);
         listView.setAdapter(mAdapter);
+
+        getQnaList();
 
 
 
@@ -178,7 +177,7 @@ public class DealQnaFragemnt extends Fragment {
                                             // 확인 버튼 클릭시 설정
                                             public void onClick(DialogInterface dialog, int whichButton) {
 
-                                                ((dealQnaListner)getActivity()).addQnaList();
+                                                getQnaList();
                                             }
                                         });
 
@@ -266,6 +265,84 @@ public class DealQnaFragemnt extends Fragment {
             return v;
         }
     }
+
+
+
+    void getQnaList(){
+
+        qnaList.clear();
+
+        dialog = new ProgressDialog(getActivity());
+        dialog.setMessage("딜 정보를 받아오는 중입니다...");
+        dialog.setIndeterminate(true);
+        dialog.setCancelable(false);
+        dialog.show();
+
+        final JsonObject info = new JsonObject();
+        info.addProperty("pronum", dealNum);
+
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+
+                    RestAdapter restAdapter = new RestAdapter.Builder()
+                            .setEndpoint(Retrofit.ROOT)  //call your base url
+                            .build();
+                    Retrofit retrofit = restAdapter.create(Retrofit.class); //this is how retrofit create your api
+                    retrofit.getQnaList(info, new Callback<JsonArray>() {
+
+                        @Override
+                        public void success(JsonArray jsonElements, Response response) {
+
+                            dialog.dismiss();
+
+
+                            for (int i = 0; i < jsonElements.size(); i++) {
+                                JsonObject deal = (JsonObject) jsonElements.get(i);
+                                String num = (deal.get("num")).getAsString();
+                                String writer = (deal.get("writer")).getAsString();
+                                String date = (deal.get("date")).getAsString();
+                                String content = (deal.get("content")).getAsString();
+                                String answerCount = (deal.get("answerCount")).getAsString();
+
+                                qnaList.add(new Qna(num, writer, date, content, answerCount));
+
+                            }
+
+
+                            Collections.reverse(qnaList);
+                            listView.setAdapter(mAdapter);
+
+
+                        }
+
+                        @Override
+                        public void failure(RetrofitError retrofitError) {
+                            dialog.dismiss();
+                            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                            builder.setTitle("네트워크가 불안정합니다.")        // 제목 설정
+                                    .setMessage("네트워크를 확인해주세요")        // 메세지 설정
+                                    .setCancelable(false)        // 뒤로 버튼 클릭시 취소 가능 설정
+                                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                        // 확인 버튼 클릭시 설정
+                                        public void onClick(DialogInterface dialog, int whichButton) {
+                                        }
+                                    });
+
+                            AlertDialog dialog = builder.create();    // 알림창 객체 생성
+                            dialog.show();    // 알림창 띄우기
+
+                        }
+                    });
+                }
+                catch (Throwable ex) {
+
+                }
+            }
+        }).start();
+
+    }
+
 
 
 

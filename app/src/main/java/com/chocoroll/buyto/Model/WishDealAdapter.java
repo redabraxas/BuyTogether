@@ -12,13 +12,13 @@ import com.chocoroll.buyto.R;
 import java.util.ArrayList;
 
 /**
- * Created by RA on 2015-04-24.
+ * Created by RA on 2015-05-15.
  */
-public class DealAdapter extends ArrayAdapter<Deal> {
-    private ArrayList<Deal> items;
+public class WishDealAdapter  extends ArrayAdapter<WishDeal> {
+    private ArrayList<WishDeal> items;
     private Context context;
 
-    public DealAdapter(Context context, int textViewResourceId, ArrayList<Deal> items) {
+    public WishDealAdapter(Context context, int textViewResourceId, ArrayList<WishDeal> items) {
         super(context, textViewResourceId, items);
         this.items = items;
         this.context = context;
@@ -27,14 +27,14 @@ public class DealAdapter extends ArrayAdapter<Deal> {
         View v = convertView;
         if (v == null) {
             LayoutInflater vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = vi.inflate(R.layout.model_deal, null);
+            v = vi.inflate(R.layout.model_wishdeal, null);
         }
-        Deal p = items.get(position);
+        WishDeal p = items.get(position);
         if (p != null) {
             String str = "["+p.getbCategory()+"/"+p.getsCategory()+"]  "+p.getName();
             ((TextView)  v.findViewById(R.id.txt_name)).setText(str);
-            ((TextView) v.findViewById(R.id.txt_dday)).setText(p.getDday());
-            ((TextView)  v.findViewById(R.id.txt_people)).setText(String.valueOf(p.getBook()+"/"+p.getMaxBook()));
+            ((TextView)  v.findViewById(R.id.txt_wish)).setText(p.getWish());
+
         }
         return v;
     }

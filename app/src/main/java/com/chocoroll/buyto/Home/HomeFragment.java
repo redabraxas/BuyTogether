@@ -2,6 +2,7 @@ package com.chocoroll.buyto.Home;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chocoroll.buyto.Model.Deal;
+import com.chocoroll.buyto.Model.WishDeal;
 import com.chocoroll.buyto.R;
 import com.chocoroll.buyto.Retrofit.Retrofit;
 import com.google.gson.JsonArray;
@@ -30,10 +32,13 @@ import retrofit.client.Response;
 
 public class HomeFragment extends Fragment {
 
+    ProgressDialog dialog;
+
     private ViewPager pager;
     private MyPagerAdapter adapter;
 
-    ArrayList<Deal> pTodayList, pDealList, pWishList, pDdayList;
+    ArrayList<Deal> pTodayList, pDealList, pDdayList;
+    ArrayList<WishDeal> pWishList;
 
 
 
@@ -52,7 +57,7 @@ public class HomeFragment extends Fragment {
 
         pTodayList = new ArrayList<Deal>();
         pDealList =  new ArrayList<Deal>();
-        pWishList =  new ArrayList<Deal>();
+        pWishList =  new ArrayList<WishDeal>();
         pDdayList =  new ArrayList<Deal>();
 
         pager = (ViewPager)v.findViewById(R.id.pager);
@@ -64,6 +69,8 @@ public class HomeFragment extends Fragment {
                 .getDisplayMetrics());
         pager.setPageMargin(pageMargin);
         pager.setAdapter(adapter);
+
+        getOpenDateList();
 
         return v;
     }
@@ -99,16 +106,16 @@ public class HomeFragment extends Fragment {
         @Override
         public android.support.v4.app.Fragment getItem(int position) {
 
-
+            PListFragment pListFragment = new PListFragment();
             switch (position){
                 case 0:
-                    return new PListFragment(pTodayList);
+                    return  pListFragment.newInstanceDeal(pTodayList);
                 case 1:
-                    return new PListFragment(pDealList);
+                    return  pListFragment.newInstanceDeal(pDealList);
                 case 2:
-                    return new PListFragment(pWishList);
+                    return  pListFragment.newInstanceWishDeal(pWishList);
                 case 3:
-                    return new PListFragment(pDdayList);
+                    return  pListFragment.newInstanceDeal(pDdayList);
                 default:
                     return null;
             }
@@ -139,6 +146,12 @@ public class HomeFragment extends Fragment {
 
     void getOpenDateList(){
 
+        dialog = new ProgressDialog(getActivity());
+        dialog.setMessage("딜들을 가져오는 중입니다...");
+        dialog.setIndeterminate(true);
+        dialog.setCancelable(false);
+        dialog.show();
+
         new Thread(new Runnable() {
             public void run() {
                 try {
@@ -152,14 +165,13 @@ public class HomeFragment extends Fragment {
                         @Override
                         public void success(JsonArray jsonElements, Response response) {
 
-
                             for(int i=0; i<jsonElements.size(); i++) {
                                 JsonObject deal = (JsonObject) jsonElements.get(i);
                                 String num = (deal.get("proNum")).getAsString();
                                 String name = (deal.get("proName")).getAsString();
                                 String price = (deal.get("proPrice")).getAsString();
 
-                                String bCategory = (deal.get("bicCategory")).getAsString();
+                                String bCategory = (deal.get("bigCategory")).getAsString();
                                 String sCategory = (deal.get("smallCategory")).getAsString();
 
                                 String dday = (deal.get("limitDate")).getAsString();
@@ -179,12 +191,14 @@ public class HomeFragment extends Fragment {
                                 pTodayList.add(new Deal(num, name,price, bCategory, sCategory, dday, maxBook, keep,book, comment, seller, phone, state));
 
                             }
+
+                            getBestDealList();
                         }
 
                         @Override
                         public void failure(RetrofitError retrofitError) {
+                            dialog.dismiss();
 
-                            Log.e("error", retrofitError.getCause().toString());
                             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                             builder.setTitle("네트워크가 불안정합니다.")        // 제목 설정
                                     .setMessage("네트워크를 확인해주세요")        // 메세지 설정
@@ -192,6 +206,7 @@ public class HomeFragment extends Fragment {
                                     .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                         // 확인 버튼 클릭시 설정
                                         public void onClick(DialogInterface dialog, int whichButton) {
+                                            getActivity().finish();
                                         }
                                     });
 
@@ -227,14 +242,13 @@ public class HomeFragment extends Fragment {
                         @Override
                         public void success(JsonArray jsonElements, Response response) {
 
-
                             for(int i=0; i<jsonElements.size(); i++) {
                                 JsonObject deal = (JsonObject) jsonElements.get(i);
                                 String num = (deal.get("proNum")).getAsString();
                                 String name = (deal.get("proName")).getAsString();
                                 String price = (deal.get("proPrice")).getAsString();
 
-                                String bCategory = (deal.get("bicCategory")).getAsString();
+                                String bCategory = (deal.get("bigCategory")).getAsString();
                                 String sCategory = (deal.get("smallCategory")).getAsString();
 
                                 String dday = (deal.get("limitDate")).getAsString();
@@ -254,6 +268,9 @@ public class HomeFragment extends Fragment {
                                 pDdayList.add(new Deal(num, name,price, bCategory, sCategory, dday, maxBook, keep,book, comment, seller, phone, state));
 
                             }
+
+                            dialog.dismiss();
+                            pager.setAdapter(adapter);
                         }
 
                         @Override
@@ -267,6 +284,7 @@ public class HomeFragment extends Fragment {
                                     .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                         // 확인 버튼 클릭시 설정
                                         public void onClick(DialogInterface dialog, int whichButton) {
+                                            getActivity().finish();
                                         }
                                     });
 
@@ -306,35 +324,25 @@ public class HomeFragment extends Fragment {
 
                             for(int i=0; i<jsonElements.size(); i++) {
                                 JsonObject deal = (JsonObject) jsonElements.get(i);
-                                String num = (deal.get("proNum")).getAsString();
+                                String num = (deal.get("wishNum")).getAsString();
                                 String name = (deal.get("proName")).getAsString();
-                                String price = (deal.get("proPrice")).getAsString();
 
-                                String bCategory = (deal.get("bicCategory")).getAsString();
-                                String sCategory = (deal.get("smallCategory")).getAsString();
+                                String bCategory = (deal.get("bCategoryWish")).getAsString();
+                                String sCategory = (deal.get("sCategoryWish")).getAsString();
 
-                                String dday = (deal.get("limitDate")).getAsString();
-                                String maxBook = (deal.get("maxBook")).getAsString();
+                                String wish = (deal.get("wishPeopleCount")).getAsString();
 
-                                String keep = (deal.get("keepCount")).getAsString();
-                                String book = (deal.get("bookCount")).getAsString();
-
-                                String comment = (deal.get("proComment")).getAsString();
-
-                                String seller = (deal.get("sellerID")).getAsString();
-                                String phone = (deal.get("phone")).getAsString();
-
-                                String state = (deal.get("state")).getAsString();
-
-                                pWishList.add(new Deal(num, name,price, bCategory, sCategory, dday, maxBook, keep,book, comment, seller, phone, state));
+                                pWishList.add(new WishDeal(num, name, bCategory, sCategory, wish));
 
                             }
+
+
+                            getLimitDateList();
                         }
 
                         @Override
                         public void failure(RetrofitError retrofitError) {
 
-                            Log.e("error", retrofitError.getCause().toString());
                             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                             builder.setTitle("네트워크가 불안정합니다.")        // 제목 설정
                                     .setMessage("네트워크를 확인해주세요")        // 메세지 설정
@@ -342,6 +350,7 @@ public class HomeFragment extends Fragment {
                                     .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                         // 확인 버튼 클릭시 설정
                                         public void onClick(DialogInterface dialog, int whichButton) {
+                                            getActivity().finish();
                                         }
                                     });
 
@@ -377,14 +386,13 @@ public class HomeFragment extends Fragment {
                         @Override
                         public void success(JsonArray jsonElements, Response response) {
 
-
                             for(int i=0; i<jsonElements.size(); i++) {
                                 JsonObject deal = (JsonObject) jsonElements.get(i);
                                 String num = (deal.get("proNum")).getAsString();
                                 String name = (deal.get("proName")).getAsString();
                                 String price = (deal.get("proPrice")).getAsString();
 
-                                String bCategory = (deal.get("bicCategory")).getAsString();
+                                String bCategory = (deal.get("bigCategory")).getAsString();
                                 String sCategory = (deal.get("smallCategory")).getAsString();
 
                                 String dday = (deal.get("limitDate")).getAsString();
@@ -404,12 +412,14 @@ public class HomeFragment extends Fragment {
                                 pDealList.add(new Deal(num, name,price, bCategory, sCategory, dday, maxBook, keep,book, comment, seller, phone, state));
 
                             }
+                            getBestWishList();
+
                         }
 
                         @Override
                         public void failure(RetrofitError retrofitError) {
 
-                            Log.e("error", retrofitError.getCause().toString());
+                            dialog.dismiss();
                             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                             builder.setTitle("네트워크가 불안정합니다.")        // 제목 설정
                                     .setMessage("네트워크를 확인해주세요")        // 메세지 설정
@@ -417,6 +427,7 @@ public class HomeFragment extends Fragment {
                                     .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                         // 확인 버튼 클릭시 설정
                                         public void onClick(DialogInterface dialog, int whichButton) {
+                                            getActivity().finish();
                                         }
                                     });
 

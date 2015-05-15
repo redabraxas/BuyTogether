@@ -19,10 +19,10 @@ public interface Retrofit {
     public void getOpenDateList(Callback<JsonArray> callback);
     @POST("/listview/limitdatelist.php")
     public void getLimitDateList(Callback<JsonArray> callback);
-    @POST("/listview/bestdeallist.php")
+    @POST("/listview/bestdeal.php")
     public void getBestDealList(Callback<JsonArray> callback);
-    @POST("/listview/bestwishlist.php")
-    public void getBestWishList( Callback<JsonArray> callback);
+    @POST("/listview/bestwish.php")
+    public void getBestWishList(Callback<JsonArray> callback);
 
     // 카테고리 별 딜 리스트
     @POST("/listview/categorylist.php")

@@ -144,7 +144,7 @@ public class AllDealFragment extends Fragment {
         pList = new ArrayList<Deal>();
 
         listView = (ListView) v.findViewById(R.id.productlistView);
-        mAdapter= new DealAdapter(getActivity(), R.layout.model_product, pList);
+        mAdapter= new DealAdapter(getActivity(), R.layout.model_deal, pList);
 
         listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         listView.setDivider(new ColorDrawable(Color.LTGRAY));

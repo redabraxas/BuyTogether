@@ -36,7 +36,7 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class DetailDealActivity extends FragmentActivity implements DealQnaFragemnt.dealQnaListner{
+public class DetailDealActivity extends FragmentActivity{
 
     ProgressDialog dialog;
     private Deal product;
@@ -44,7 +44,6 @@ public class DetailDealActivity extends FragmentActivity implements DealQnaFrage
     private ViewPager pager;
     private MyPagerAdapter adapter;
 
-    private ArrayList<Qna> qnaList = new ArrayList<Qna>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +66,8 @@ public class DetailDealActivity extends FragmentActivity implements DealQnaFrage
         final int pageMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 3, getResources()
                 .getDisplayMetrics());
         pager.setPageMargin(pageMargin);
-
+        pager.setAdapter(adapter);
+        tabs.setViewPager(pager);
 
         // 찜 버튼
         Button btnKeep = (Button) findViewById(R.id.btn_keep);
@@ -121,13 +121,6 @@ public class DetailDealActivity extends FragmentActivity implements DealQnaFrage
             }
         });
 
-        getQnaList();
-
-    }
-
-    @Override
-    public void addQnaList() {
-        getQnaList();
 
     }
 
@@ -154,7 +147,7 @@ public class DetailDealActivity extends FragmentActivity implements DealQnaFrage
                 case 1:
                     return new SellerInfoFragemnt();
                 case 2:
-                    return new DealQnaFragemnt(product.getSeller(),product.getNum(), qnaList);
+                    return new DealQnaFragemnt(product.getSeller(),product.getNum());
             }
 
             return null;
@@ -240,84 +233,6 @@ public class DetailDealActivity extends FragmentActivity implements DealQnaFrage
     }
 
 
-
-
-    void getQnaList(){
-
-        qnaList.clear();
-
-        dialog = new ProgressDialog(DetailDealActivity.this);
-        dialog.setMessage("딜 정보를 받아오는 중입니다...");
-        dialog.setIndeterminate(true);
-        dialog.setCancelable(false);
-        dialog.show();
-
-        final JsonObject info = new JsonObject();
-        info.addProperty("pronum", product.getNum());
-
-        new Thread(new Runnable() {
-            public void run() {
-                try {
-
-                    RestAdapter restAdapter = new RestAdapter.Builder()
-                            .setEndpoint(Retrofit.ROOT)  //call your base url
-                            .build();
-                    Retrofit retrofit = restAdapter.create(Retrofit.class); //this is how retrofit create your api
-                    retrofit.getQnaList(info, new Callback<JsonArray>() {
-
-                        @Override
-                        public void success(JsonArray jsonElements, Response response) {
-
-                            dialog.dismiss();
-
-
-                            for (int i = 0; i < jsonElements.size(); i++) {
-                                JsonObject deal = (JsonObject) jsonElements.get(i);
-                                String num = (deal.get("num")).getAsString();
-                                String writer = (deal.get("writer")).getAsString();
-                                String date = (deal.get("date")).getAsString();
-                                String content = (deal.get("content")).getAsString();
-                                String answerCount = (deal.get("answerCount")).getAsString();
-
-                                qnaList.add(new Qna(num, writer, date, content, answerCount));
-
-                            }
-
-
-                            Collections.reverse(qnaList);
-                            pager.setAdapter(adapter);
-                            tabs.setViewPager(pager);
-
-                        }
-
-                        @Override
-                        public void failure(RetrofitError retrofitError) {
-                            dialog.dismiss();
-                            AlertDialog.Builder builder = new AlertDialog.Builder(DetailDealActivity.this);
-                            builder.setTitle("네트워크가 불안정합니다.")        // 제목 설정
-                                    .setMessage("네트워크를 확인해주세요")        // 메세지 설정
-                                    .setCancelable(false)        // 뒤로 버튼 클릭시 취소 가능 설정
-                                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                                        // 확인 버튼 클릭시 설정
-                                        public void onClick(DialogInterface dialog, int whichButton) {
-                                        }
-                                    });
-
-                            AlertDialog dialog = builder.create();    // 알림창 객체 생성
-                            dialog.show();    // 알림창 띄우기
-
-                        }
-                    });
-                }
-                catch (Throwable ex) {
-
-                }
-            }
-        }).start();
-
-    }
-
-
     void sendBookDeal(){
         dialog = new ProgressDialog(DetailDealActivity.this);
         dialog.setMessage("딜을 신청하는 중입니다...");
@@ -343,7 +258,7 @@ public class DetailDealActivity extends FragmentActivity implements DealQnaFrage
                         public void success(String result, Response response) {
 
                             dialog.dismiss();
-                            Log.e("result: ",result);
+                            Log.e("result: ",result.toString());
 
                             if(result.equals("success")){
                                 AlertDialog.Builder builder = new AlertDialog.Builder(DetailDealActivity.this);
@@ -434,7 +349,7 @@ public class DetailDealActivity extends FragmentActivity implements DealQnaFrage
 
                             dialog.dismiss();
 
-                            Log.e("result: ",result);
+                            Log.e("result: ",result.toString());
                             if(result.equals("success")){
                                 AlertDialog.Builder builder = new AlertDialog.Builder(DetailDealActivity.this);
                                 builder.setTitle("성공")        // 제목 설정
@@ -469,7 +384,7 @@ public class DetailDealActivity extends FragmentActivity implements DealQnaFrage
                         @Override
                         public void failure(RetrofitError retrofitError) {
                             dialog.dismiss();
-                            Log.e("error", retrofitError.getCause().toString());
+
                             AlertDialog.Builder builder = new AlertDialog.Builder(DetailDealActivity.this);
                             builder.setTitle("네트워크가 불안정합니다.")        // 제목 설정
                                     .setMessage("네트워크를 확인해주세요")        // 메세지 설정
@@ -477,7 +392,6 @@ public class DetailDealActivity extends FragmentActivity implements DealQnaFrage
                                     .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                         // 확인 버튼 클릭시 설정
                                         public void onClick(DialogInterface dialog, int whichButton) {
-                                            finish();
                                         }
                                     });
 
