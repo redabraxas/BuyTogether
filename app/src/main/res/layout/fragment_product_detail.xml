@@ -13,7 +13,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/productImage"
+            android:id="@+id/detailDealImage"
             android:layout_gravity="center_horizontal" />
 
 
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:text=""
             android:textColor="#000000"
-            android:id="@+id/textView"
+            android:id="@+id/seller_comment"
             android:layout_gravity="center_horizontal" />
 
         </LinearLayout>

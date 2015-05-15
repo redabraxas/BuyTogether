@@ -180,6 +180,8 @@ public class HomeFragment extends Fragment {
                                 String keep = (deal.get("keepCount")).getAsString();
                                 String book = (deal.get("bookCount")).getAsString();
 
+                                String thumbnail = (deal.get("thumbnail")).getAsString();
+                                String detailView = (deal.get("detailView")).getAsString();
                                 String comment = (deal.get("proComment")).getAsString();
 
                                 String seller = (deal.get("sellerID")).getAsString();
@@ -188,8 +190,8 @@ public class HomeFragment extends Fragment {
                                 String state = (deal.get("state")).getAsString();
 
 
-                                pTodayList.add(new Deal(num, name,price, bCategory, sCategory, dday, maxBook, keep,book, comment, seller, phone, state));
-
+                                pTodayList.add(new Deal(num, name,price, bCategory, sCategory, dday, maxBook, keep,book, thumbnail, detailView,
+                                        comment, seller, phone, state));
                             }
 
                             getBestDealList();
@@ -257,6 +259,8 @@ public class HomeFragment extends Fragment {
                                 String keep = (deal.get("keepCount")).getAsString();
                                 String book = (deal.get("bookCount")).getAsString();
 
+                                String thumbnail = (deal.get("thumbnail")).getAsString();
+                                String detailView = (deal.get("detailView")).getAsString();
                                 String comment = (deal.get("proComment")).getAsString();
 
                                 String seller = (deal.get("sellerID")).getAsString();
@@ -265,8 +269,8 @@ public class HomeFragment extends Fragment {
                                 String state = (deal.get("state")).getAsString();
 
 
-                                pDdayList.add(new Deal(num, name,price, bCategory, sCategory, dday, maxBook, keep,book, comment, seller, phone, state));
-
+                                pDdayList.add(new Deal(num, name,price, bCategory, sCategory, dday, maxBook, keep,book, thumbnail, detailView,
+                                        comment, seller, phone, state));
                             }
 
                             dialog.dismiss();
@@ -332,7 +336,10 @@ public class HomeFragment extends Fragment {
 
                                 String wish = (deal.get("wishPeopleCount")).getAsString();
 
-                                pWishList.add(new WishDeal(num, name, bCategory, sCategory, wish));
+                                String thumbnail = (deal.get("thumbnail")).getAsString();
+                                String detailView = (deal.get("detailView")).getAsString();
+
+                                pWishList.add(new WishDeal(num, name, bCategory, sCategory, wish, thumbnail, detailView));
 
                             }
 
@@ -401,6 +408,8 @@ public class HomeFragment extends Fragment {
                                 String keep = (deal.get("keepCount")).getAsString();
                                 String book = (deal.get("bookCount")).getAsString();
 
+                                String thumbnail = (deal.get("thumbnail")).getAsString();
+                                String detailView = (deal.get("detailView")).getAsString();
                                 String comment = (deal.get("proComment")).getAsString();
 
                                 String seller = (deal.get("sellerID")).getAsString();
@@ -409,8 +418,8 @@ public class HomeFragment extends Fragment {
                                 String state = (deal.get("state")).getAsString();
 
 
-                                pDealList.add(new Deal(num, name,price, bCategory, sCategory, dday, maxBook, keep,book, comment, seller, phone, state));
-
+                                pDealList.add(new Deal(num, name,price, bCategory, sCategory, dday, maxBook, keep,book, thumbnail, detailView,
+                                        comment, seller, phone, state));
                             }
                             getBestWishList();
 

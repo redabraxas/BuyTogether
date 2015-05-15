@@ -212,6 +212,8 @@ public class AllDealFragment extends Fragment {
                                 String keep = (deal.get("keepCount")).getAsString();
                                 String book = (deal.get("bookCount")).getAsString();
 
+                                String thumbnail = (deal.get("thumbnail")).getAsString();
+                                String detailView = (deal.get("detailView")).getAsString();
                                 String comment = (deal.get("proComment")).getAsString();
 
                                 String seller = (deal.get("sellerID")).getAsString();
@@ -220,7 +222,8 @@ public class AllDealFragment extends Fragment {
                                 String state = (deal.get("state")).getAsString();
 
 
-                                pList.add(new Deal(num, name,price, bCategory, sCategory, dday, maxBook, keep,book, comment, seller, phone, state));
+                                pList.add(new Deal(num, name,price, bCategory, sCategory, dday, maxBook, keep,book, thumbnail, detailView,
+                                        comment, seller, phone, state));
 
                             }
 

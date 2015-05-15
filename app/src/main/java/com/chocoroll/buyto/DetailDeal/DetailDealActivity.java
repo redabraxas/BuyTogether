@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
@@ -17,7 +20,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.SlidingDrawer;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.astuetz.PagerSlidingTabStrip;
@@ -25,11 +28,12 @@ import com.chocoroll.buyto.MainActivity;
 import com.chocoroll.buyto.Model.Deal;
 import com.chocoroll.buyto.R;
 import com.chocoroll.buyto.Retrofit.Retrofit;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.io.BufferedInputStream;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -39,7 +43,7 @@ import retrofit.client.Response;
 public class DetailDealActivity extends FragmentActivity{
 
     ProgressDialog dialog;
-    private Deal product;
+    static private Deal product;
     private PagerSlidingTabStrip tabs;
     private ViewPager pager;
     private MyPagerAdapter adapter;
@@ -171,6 +175,7 @@ public class DetailDealActivity extends FragmentActivity{
     }
 
 
+
     // 물건 정보 보여주는 프레그먼트
 
     static public class ProductInfoFragemnt extends Fragment {
@@ -185,9 +190,42 @@ public class DetailDealActivity extends FragmentActivity{
                                  Bundle savedInstanceState) {
             // Inflate the layout for this fragment
             View v = inflater.inflate(R.layout.fragment_product_detail, container, false);
+            ((TextView)v.findViewById(R.id.seller_comment)).setText(product.getComment());
+
+            new DownloadImageTask((ImageView) v.findViewById(R.id.detailDealImage))
+                    .execute(product.getDetailView());
+
+
 
             return v;
         }
+
+
+        private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+            ImageView bmImage;
+
+            public DownloadImageTask(ImageView bmImage) {
+                this.bmImage = bmImage;
+            }
+
+            protected Bitmap doInBackground(String... urls) {
+                String urldisplay = urls[0];
+                Bitmap mIcon11 = null;
+                try {
+                    InputStream in = new java.net.URL(urldisplay).openStream();
+                    mIcon11 = BitmapFactory.decodeStream(in);
+                } catch (Exception e) {
+                    Log.e("Error", e.getMessage());
+                    e.printStackTrace();
+                }
+                return mIcon11;
+            }
+
+            protected void onPostExecute(Bitmap result) {
+                bmImage.setImageBitmap(result);
+            }
+        }
+
 
 
         @Override
@@ -216,6 +254,9 @@ public class DetailDealActivity extends FragmentActivity{
                                  Bundle savedInstanceState) {
             // Inflate the layout for this fragment
             View v = inflater.inflate(R.layout.fragment_seller_detail, container, false);
+
+            ((TextView)v.findViewById(R.id.txt_sellerName)).setText(product.getName());
+            ((TextView)v.findViewById(R.id.txt_sellerNum)).setText(product.getPhone());
 
             return v;
         }

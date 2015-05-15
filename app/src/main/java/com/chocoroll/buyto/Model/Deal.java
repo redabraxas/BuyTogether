@@ -26,7 +26,7 @@ public class Deal implements Parcelable{
     String book;
 
     // 로고이미지, 상세이미지, 판매자 코멘트
-    String thumnail;
+    String thumbnail;
     String detailView;
     String comment;
 
@@ -43,7 +43,9 @@ public class Deal implements Parcelable{
     }
 
     public Deal(String num, String name, String price, String bCategory, String sCategory,
-                String dday, String maxBook, String keep, String book, String comment, String seller, String phone, String state){
+                String dday, String maxBook, String keep, String book,
+                String thumbnail, String detailView, String comment,
+                String seller, String phone, String state){
         this.num  = num;
         this.name = name;
         this.price= price;
@@ -57,6 +59,8 @@ public class Deal implements Parcelable{
         this.keep = keep;
         this.book = book;
 
+        this.thumbnail = thumbnail;
+        this.detailView =detailView;
         this.comment = comment;
 
         this.seller= seller;
@@ -81,6 +85,18 @@ public class Deal implements Parcelable{
 
     public String getComment() {
         return comment;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
+    public String getDetailView() {
+        return detailView;
     }
 
     public String getState() {
@@ -108,6 +124,8 @@ public class Deal implements Parcelable{
         parcel.writeString(keep);
         parcel.writeString(book);
 
+        parcel.writeString(thumbnail);
+        parcel.writeString(detailView);
         parcel.writeString(comment);
 
         parcel.writeString(seller);
@@ -131,6 +149,8 @@ public class Deal implements Parcelable{
         keep = in.readString();
         book = in.readString();
 
+        thumbnail=in.readString();
+        detailView=in.readString();
         comment =in.readString();
 
         seller = in.readString();
