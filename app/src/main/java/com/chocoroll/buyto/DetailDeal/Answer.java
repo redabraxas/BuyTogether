@@ -7,12 +7,13 @@ public class Answer {
     String num;
     String content;
     String date;
+    String writer;
 
-    Answer(String num, String date, String content){
+    Answer(String num, String writer, String date, String content){
         this.num = num;
         this.date = date;
         this.content = content;
-
+        this.writer =writer;
     }
 
     public String getContent() {
@@ -25,5 +26,9 @@ public class Answer {
 
     public String getNum() {
         return num;
+    }
+
+    public String getWriter() {
+        return writer;
     }
 }

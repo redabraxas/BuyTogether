@@ -34,7 +34,7 @@ public class DealAdapter extends ArrayAdapter<Deal> {
             String str = "["+p.getbCategory()+"/"+p.getsCategory()+"]  "+p.getName();
             ((TextView)  v.findViewById(R.id.txt_name)).setText(str);
             ((TextView) v.findViewById(R.id.txt_dday)).setText(p.getDday());
-            ((TextView)  v.findViewById(R.id.txt_people)).setText(String.valueOf(p.getCurCount()+"/"+p.getMaxCount()));
+            ((TextView)  v.findViewById(R.id.txt_people)).setText(String.valueOf(p.getBook()+"/"+p.getMaxBook()));
         }
         return v;
     }

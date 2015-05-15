@@ -7,32 +7,65 @@ import android.os.Parcelable;
  * Created by RA on 2015-04-24.
  */
 public class Deal implements Parcelable{
+
+    // 상품번호, 이름, 가격
     String num;
     String name;
+    String price;
+
+    // 카테고리
     String bCategory;
     String sCategory;
-    String dday;
-    String curCount;
-    String maxCount;
 
-    String price;
+    // 마감날짜, 최대인원
+    String dday;
+    String maxBook;
+
+    // keep, book 수
+    String keep;
+    String book;
+
+    // 로고이미지, 상세이미지, 판매자 코멘트
+    String thumnail;
+    String detailView;
+    String comment;
+
+    // 판매자 정보
     String seller;
+    String phone;
+
+    // 상태
+    String state;
 
 
     public Deal(Parcel in) {
         readFromParcel(in);
     }
 
-    public Deal(String name, String bCategory, String sCategory, String dday, String curCount, String maxCount,String seller,String price){
+    public Deal(String num, String name, String price, String bCategory, String sCategory,
+                String dday, String maxBook, String keep, String book, String comment, String seller, String phone, String state){
         this.num  = num;
         this.name = name;
+        this.price= price;
+
         this.bCategory = bCategory;
         this.sCategory = sCategory;
+
         this.dday = dday;
-        this.curCount = curCount;
-        this.maxCount=maxCount;
+        this.maxBook = maxBook;
+
+        this.keep = keep;
+        this.book = book;
+
+        this.comment = comment;
+
         this.seller= seller;
-        this.price= price;
+        this.phone =phone;
+
+        this.state = state;
+
+
+
 
     }
 
@@ -41,10 +74,18 @@ public class Deal implements Parcelable{
     public String getbCategory(){ return bCategory; }
     public String getsCategory(){ return sCategory; }
     public String getDday(){ return dday; }
-    public String getCurCount(){ return curCount; }
-    public String getMaxCount(){ return maxCount; }
+    public String getBook(){ return book; }
+    public String getMaxBook(){ return maxBook; }
     public String getSeller(){ return seller; }
     public String getPrice() {return price;}
+
+    public String getComment() {
+        return comment;
+    }
+
+    public String getState() {
+        return state;
+    }
 
     @Override
     public int describeContents() {
@@ -56,25 +97,47 @@ public class Deal implements Parcelable{
 
         parcel.writeString(num);
         parcel.writeString(name);
+        parcel.writeString(price);
+
         parcel.writeString(bCategory);
         parcel.writeString(sCategory);
+
         parcel.writeString(dday);
-        parcel.writeString(curCount);
-        parcel.writeString(maxCount);
+        parcel.writeString(maxBook);
+
+        parcel.writeString(keep);
+        parcel.writeString(book);
+
+        parcel.writeString(comment);
+
         parcel.writeString(seller);
-        parcel.writeString(price);
+        parcel.writeString(phone);
+
+        parcel.writeString(state);
+
     }
 
     private void readFromParcel(Parcel in){
         num = in.readString();
         name = in.readString();
+        price=in.readString();
+
         bCategory = in.readString();
         sCategory = in.readString();
+
         dday = in.readString();
-        curCount = in.readString();
-        maxCount = in.readString();
+        maxBook = in.readString();
+
+        keep = in.readString();
+        book = in.readString();
+
+        comment =in.readString();
+
         seller = in.readString();
-        price=in.readString();
+        phone = in.readString();
+
+        state = in.readString();
+
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {

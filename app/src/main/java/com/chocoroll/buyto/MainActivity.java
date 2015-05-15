@@ -53,6 +53,7 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
     public String getUserId(){
         return userid;
     }
+    public int getLoginmode() { return loginmode; }
     public void setUserId(String id){
         userid= id;
     }
@@ -261,14 +262,18 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
         // 레이아웃 적용하기
         switch (position){
             case LOGOUTUSER:
+                loginmode = LOGOUTUSER;
                 slidingMenu.setMenu(R.layout.slide_menu_logoutuser);
                 break;
             case USER:
+                loginmode = USER;
                 slidingMenu.setMenu(R.layout.slide_menu_user);
                 break;
             case SELLER:
+                loginmode = SELLER;
                 break;
             case ADMIN:
+                loginmode = ADMIN;
                 slidingMenu.setMenu(R.layout.slide_menu_admin);
                 break;
 

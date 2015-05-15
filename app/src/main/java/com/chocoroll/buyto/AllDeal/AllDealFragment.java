@@ -142,7 +142,6 @@ public class AllDealFragment extends Fragment {
 
 
         pList = new ArrayList<Deal>();
-        pList.add(new Deal("망고스틴", "식품", "과일", "D-3", "2","10", "seller","1000"));
 
         listView = (ListView) v.findViewById(R.id.productlistView);
         mAdapter= new DealAdapter(getActivity(), R.layout.model_product, pList);
@@ -190,8 +189,8 @@ public class AllDealFragment extends Fragment {
                     RestAdapter restAdapter = new RestAdapter.Builder()
                             .setEndpoint(Retrofit.ROOT)  //call your base url
                             .build();
-                    Retrofit sendreport = restAdapter.create(Retrofit.class); //this is how retrofit create your api
-                    sendreport.getDealList(info,new Callback<JsonArray>() {
+                    Retrofit retrofit = restAdapter.create(Retrofit.class); //this is how retrofit create your api
+                    retrofit.getDealList(info,new Callback<JsonArray>() {
 
                         @Override
                         public void success(JsonArray jsonElements, Response response) {
@@ -200,11 +199,28 @@ public class AllDealFragment extends Fragment {
 
                             for(int i=0; i<jsonElements.size(); i++) {
                                 JsonObject deal = (JsonObject) jsonElements.get(i);
+                                String num = (deal.get("proNum")).getAsString();
                                 String name = (deal.get("proName")).getAsString();
                                 String price = (deal.get("proPrice")).getAsString();
-                                String dday = (deal.get("limitDate")).getAsString();
 
-                                pList.add(new Deal(name, "식품", "과일", dday, "2", "10", "seller",price));
+                                String bCategory = (deal.get("bigCategory")).getAsString();
+                                String sCategory = (deal.get("smallCategory")).getAsString();
+
+                                String dday = (deal.get("limitDate")).getAsString();
+                                String maxBook = (deal.get("maxBook")).getAsString();
+
+                                String keep = (deal.get("keepCount")).getAsString();
+                                String book = (deal.get("bookCount")).getAsString();
+
+                                String comment = (deal.get("proComment")).getAsString();
+
+                                String seller = (deal.get("sellerID")).getAsString();
+                                String phone = (deal.get("phone")).getAsString();
+
+                                String state = (deal.get("state")).getAsString();
+
+
+                                pList.add(new Deal(num, name,price, bCategory, sCategory, dday, maxBook, keep,book, comment, seller, phone, state));
 
                             }
 
