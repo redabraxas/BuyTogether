@@ -79,10 +79,10 @@ public class DetailDealActivity extends FragmentActivity{
             @Override
             public void onClick(View view) {
 
-                if(product.getState().equals(3)){
+                if(((MainActivity)MainActivity.mContext).getLoginmode() ==0){
                     AlertDialog.Builder builder = new AlertDialog.Builder(DetailDealActivity.this);
-                    builder.setTitle("이미 마감된 딜입니다.")        // 제목 설정
-                            .setMessage("찜이 불가합니다.")        // 메세지 설정
+                    builder.setTitle("접근 불가")        // 제목 설정
+                            .setMessage("로그인한 유저만 이용이 가능합니다.")        // 메세지 설정
                             .setCancelable(false)        // 뒤로 버튼 클릭시 취소 가능 설정
                             .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                 // 확인 버튼 클릭시 설정
@@ -93,8 +93,24 @@ public class DetailDealActivity extends FragmentActivity{
                     AlertDialog dialog = builder.create();    // 알림창 객체 생성
                     dialog.show();    // 알림창 띄우기
                 }else{
-                    sendKeepDeal();
+                    if(product.getState().equals(3)){
+                        AlertDialog.Builder builder = new AlertDialog.Builder(DetailDealActivity.this);
+                        builder.setTitle("이미 마감된 딜입니다.")        // 제목 설정
+                                .setMessage("찜이 불가합니다.")        // 메세지 설정
+                                .setCancelable(false)        // 뒤로 버튼 클릭시 취소 가능 설정
+                                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                    // 확인 버튼 클릭시 설정
+                                    public void onClick(DialogInterface dialog, int whichButton) {
+                                    }
+                                });
+
+                        AlertDialog dialog = builder.create();    // 알림창 객체 생성
+                        dialog.show();    // 알림창 띄우기
+                    }else{
+                        sendKeepDeal();
+                    }
                 }
+
             }
         });
 
@@ -105,10 +121,10 @@ public class DetailDealActivity extends FragmentActivity{
             @Override
             public void onClick(View view) {
 
-                if(product.getState().equals(3)){
+                if(((MainActivity)MainActivity.mContext).getLoginmode() ==0){
                     AlertDialog.Builder builder = new AlertDialog.Builder(DetailDealActivity.this);
-                    builder.setTitle("이미 마감된 딜입니다.")        // 제목 설정
-                            .setMessage("신청이 불가합니다.")        // 메세지 설정
+                    builder.setTitle("접근 불가")        // 제목 설정
+                            .setMessage("로그인한 유저만 이용이 가능합니다.")        // 메세지 설정
                             .setCancelable(false)        // 뒤로 버튼 클릭시 취소 가능 설정
                             .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                 // 확인 버튼 클릭시 설정
@@ -118,10 +134,25 @@ public class DetailDealActivity extends FragmentActivity{
 
                     AlertDialog dialog = builder.create();    // 알림창 객체 생성
                     dialog.show();    // 알림창 띄우기
-                }else{
-                    sendBookDeal();
-                }
+                }else {
+                    if (product.getState().equals(3)) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(DetailDealActivity.this);
+                        builder.setTitle("이미 마감된 딜입니다.")        // 제목 설정
+                                .setMessage("신청이 불가합니다.")        // 메세지 설정
+                                .setCancelable(false)        // 뒤로 버튼 클릭시 취소 가능 설정
+                                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                    // 확인 버튼 클릭시 설정
+                                    public void onClick(DialogInterface dialog, int whichButton) {
+                                    }
+                                });
 
+                        AlertDialog dialog = builder.create();    // 알림창 객체 생성
+                        dialog.show();    // 알림창 띄우기
+                    } else {
+                        BookDialog bookDialog = new BookDialog(DetailDealActivity.this, product.getNum(), ((MainActivity) MainActivity.mContext).getUserId());
+                        bookDialog.show();
+                    }
+                }
             }
         });
 
@@ -272,95 +303,6 @@ public class DetailDealActivity extends FragmentActivity{
             super.onDetach();
         }
     }
-
-
-    void sendBookDeal(){
-        dialog = new ProgressDialog(DetailDealActivity.this);
-        dialog.setMessage("딜을 신청하는 중입니다...");
-        dialog.setIndeterminate(true);
-        dialog.setCancelable(false);
-        dialog.show();
-
-        final JsonObject info = new JsonObject();
-        info.addProperty("id", ((MainActivity)(MainActivity.mContext)).getUserId());
-        info.addProperty("dealNum", product.getNum());
-
-        new Thread(new Runnable() {
-            public void run() {
-                try {
-
-                    RestAdapter restAdapter = new RestAdapter.Builder()
-                            .setEndpoint(Retrofit.ROOT)  //call your base url
-                            .build();
-                    Retrofit retrofit = restAdapter.create(Retrofit.class); //this is how retrofit create your api
-                    retrofit.sendBookDeal(info, new Callback<String>() {
-
-                        @Override
-                        public void success(String result, Response response) {
-
-                            dialog.dismiss();
-                            Log.e("result: ",result.toString());
-
-                            if(result.equals("success")){
-                                AlertDialog.Builder builder = new AlertDialog.Builder(DetailDealActivity.this);
-                                builder.setTitle("성공")        // 제목 설정
-                                        .setMessage("이 딜의 신청이 완료되었습니다.")        // 메세지 설정
-                                        .setCancelable(false)        // 뒤로 버튼 클릭시 취소 가능 설정
-                                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                                            // 확인 버튼 클릭시 설정
-                                            public void onClick(DialogInterface dialog, int whichButton) {
-
-                                            }
-                                        });
-                                AlertDialog dialog = builder.create();    // 알림창 객체 생성
-                                dialog.show();    // 알림창 띄우기
-
-                            }else if(result.equals("failed")){
-                                AlertDialog.Builder builder = new AlertDialog.Builder(DetailDealActivity.this);
-                                builder.setTitle("실패")        // 제목 설정
-                                        .setMessage("이미 딜을 신청하셨습니다.")        // 메세지 설정
-                                        .setCancelable(false)        // 뒤로 버튼 클릭시 취소 가능 설정
-                                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                                            // 확인 버튼 클릭시 설정
-                                            public void onClick(DialogInterface dialog, int whichButton) {
-
-                                            }
-                                        });
-                                AlertDialog dialog = builder.create();    // 알림창 객체 생성
-                                dialog.show();    // 알림창 띄우기
-                            }
-
-
-                        }
-
-                        @Override
-                        public void failure(RetrofitError retrofitError) {
-                            dialog.dismiss();
-
-                            AlertDialog.Builder builder = new AlertDialog.Builder(DetailDealActivity.this);
-                            builder.setTitle("네트워크가 불안정합니다.")        // 제목 설정
-                                    .setMessage("네트워크를 확인해주세요")        // 메세지 설정
-                                    .setCancelable(false)        // 뒤로 버튼 클릭시 취소 가능 설정
-                                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                                        // 확인 버튼 클릭시 설정
-                                        public void onClick(DialogInterface dialog, int whichButton) {
-                                        }
-                                    });
-
-                            AlertDialog dialog = builder.create();    // 알림창 객체 생성
-                            dialog.show();    // 알림창 띄우기
-
-                        }
-                    });
-                }
-                catch (Throwable ex) {
-
-                }
-            }
-        }).start();
-
-    }
-
 
 
 

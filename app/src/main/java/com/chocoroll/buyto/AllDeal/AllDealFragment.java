@@ -131,7 +131,6 @@ public class AllDealFragment extends Fragment {
 
                 String item = spinnerS.getSelectedItem().toString();
                 getDealList(spinnerB.getSelectedItem().toString(),item);
-                Log.e("sitem",item);
             }
 
             @Override
@@ -196,6 +195,7 @@ public class AllDealFragment extends Fragment {
                         public void success(JsonArray jsonElements, Response response) {
 
                             dialog.dismiss();
+                            pList.clear();
 
                             for(int i=0; i<jsonElements.size(); i++) {
                                 JsonObject deal = (JsonObject) jsonElements.get(i);

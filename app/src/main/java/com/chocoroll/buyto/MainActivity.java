@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
@@ -370,7 +371,14 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
             menu_bookmark.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    slidingMenu.showContent(true);
+
+                    ListView listView = (ListView) findViewById(R.id.listViewBookmark);
+                    if(listView.getVisibility() == View.VISIBLE){
+                        listView.setVisibility(View.GONE);
+                    }else{
+                        listView.setVisibility(View.VISIBLE);
+                    }
+
                 }
             });
 
