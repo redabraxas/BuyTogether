@@ -272,6 +272,7 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
                 break;
             case SELLER:
                 loginmode = SELLER;
+                slidingMenu.setMenu(R.layout.slide_menu_seller);
                 break;
             case ADMIN:
                 loginmode = ADMIN;
@@ -413,6 +414,14 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
 
 
             if(position == SELLER){
+
+                LinearLayout menu_seller = (LinearLayout) findViewById(R.id.menu_seller);
+                menu_seller.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                });
 
             }else  if(position == ADMIN){
 

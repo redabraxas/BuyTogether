@@ -233,7 +233,7 @@ public class AllDealFragment extends Fragment {
                         @Override
                         public void failure(RetrofitError retrofitError) {
                             dialog.dismiss();
-                            Log.e("error",retrofitError.getCause().toString());
+
                             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                             builder.setTitle("네트워크가 불안정합니다.")        // 제목 설정
                                     .setMessage("네트워크를 확인해주세요")        // 메세지 설정
