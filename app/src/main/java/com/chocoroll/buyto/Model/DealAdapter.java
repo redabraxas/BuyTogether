@@ -14,10 +14,7 @@ import android.widget.TextView;
 
 import com.chocoroll.buyto.R;
 
-import java.io.BufferedInputStream;
 import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 
 /**

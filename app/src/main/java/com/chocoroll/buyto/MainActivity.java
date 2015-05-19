@@ -13,7 +13,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -23,6 +22,7 @@ import android.widget.TextView;
 import com.chocoroll.buyto.AllDeal.AllDealFragment;
 import com.chocoroll.buyto.Login.JoinActivity;
 import com.chocoroll.buyto.Login.LoginActivity;
+import com.chocoroll.buyto.MakeDeal.MakeDealActivity;
 import com.chocoroll.buyto.Retrofit.Retrofit;
 import com.chocoroll.buyto.WishDeal.WishDealFragment;
 import com.google.gson.JsonObject;
@@ -363,6 +363,8 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
                 @Override
                 public void onClick(View view) {
                     slidingMenu.showContent(true);
+                    Intent intent = new Intent(MainActivity.this, MakeDealActivity.class);
+                    startActivity(intent);
                 }
             });
 

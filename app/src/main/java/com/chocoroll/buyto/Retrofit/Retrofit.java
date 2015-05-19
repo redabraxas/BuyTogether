@@ -1,13 +1,11 @@
 package com.chocoroll.buyto.Retrofit;
 
-import retrofit.Callback;
-import retrofit.http.Body;
-import retrofit.http.GET;
-import retrofit.http.POST;
-import retrofit.http.Path;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+
+import retrofit.Callback;
+import retrofit.http.Body;
+import retrofit.http.POST;
 
 public interface Retrofit {
     public static final String ROOT = "http://buytogether.dothome.co.kr";
@@ -44,6 +42,9 @@ public interface Retrofit {
     @POST("/qna/enrollAnswer.php")
     public void sendAnswer(@Body JsonObject info, Callback<String> callback);
 
+    // Deal만들기
+    @POST("/uploads/UploadDeal2.php")
+    public void UploadDeal(@Body JsonObject info, Callback<String> callback);
 
 
 }

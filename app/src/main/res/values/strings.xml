@@ -87,6 +87,51 @@
         <item>주방가전</item>
     </string-array>
 
+    <string-array name="bank">
+        <item>신한</item>
+        <item>우리</item>
+        <item>국민</item>
+        <item>우체국</item>
+        <item>농협</item>
+        <item>하나</item>
+        <item>외환</item>
+        <item>기업</item>
+        <item>SC</item>
+    </string-array>
+
+
+
+    <string-array name="number">
+        <item>010</item>
+        <item>011</item>
+        <item>016</item>
+        <item>017</item>
+        <item>018</item>
+        <item>019</item>
+        <item>02</item>
+        <item>031</item>
+        <item>032</item>
+        <item>033</item>
+        <item>041</item>
+        <item>042</item>
+        <item>043</item>
+        <item>044</item>
+        <item>051</item>
+        <item>052</item>
+        <item>053</item>
+        <item>054</item>
+        <item>055</item>
+        <item>061</item>
+        <item>062</item>
+        <item>063</item>
+        <item>064</item>
+        <item>0502</item>
+        <item>0503</item>
+        <item>0504</item>
+        <item>0505</item>
+        <item>070</item>
+        <item>080</item>
+    </string-array>
     <string name="title_activity_detail_deal">DetailDealActivity</string>
 
 
