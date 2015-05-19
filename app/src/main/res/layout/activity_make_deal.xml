@@ -591,6 +591,7 @@
                 android:orientation="horizontal" >
 
                 <Button
+                    android:layout_margin="10dp"
                     android:id="@+id/uploadButton"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
@@ -602,6 +603,7 @@
                     android:typeface="sans" />
 
                 <Button
+                    android:layout_margin="10dp"
                     android:id="@+id/report_cancelbt"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"

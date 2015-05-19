@@ -14,6 +14,7 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -41,7 +42,7 @@ import retrofit.client.Response;
 
 public class MakeDealActivity extends Activity implements OnClickListener {
 
-    private Button uploadButton, btnselectpic, btnselectpic1;
+    private Button uploadButton, btnselectpic, btnselectpic1,cancelButton;
     private ImageView imageview;
     private ImageView imageview1;
     private int serverResponseCode = 0;
@@ -80,14 +81,14 @@ public class MakeDealActivity extends Activity implements OnClickListener {
         btnselectpic1 = (Button) findViewById(R.id.button_selectpic1);
         imageview = (ImageView) findViewById(R.id.imageView_pic);
         imageview1 = (ImageView) findViewById(R.id.imageView_pic1);
-
+        cancelButton = (Button) findViewById(R.id.report_cancelbt);
          user_email =
               ((MainActivity)MainActivity.mContext).getUserId();
 
         btnselectpic.setOnClickListener(this);
         btnselectpic1.setOnClickListener(this);
         uploadButton.setOnClickListener(this);
-
+        cancelButton.setOnClickListener(this);
 
         //// Date Picker : 시작 ////
         //(1) main.xml의 레이아수에 배치된 날짜 입력을 위한 TextView 인식
@@ -268,7 +269,6 @@ public class MakeDealActivity extends Activity implements OnClickListener {
 
     }
 
-
     @Override
     public void onClick(View arg0) {
 
@@ -285,11 +285,16 @@ public class MakeDealActivity extends Activity implements OnClickListener {
             intent1.setAction(Intent.ACTION_GET_CONTENT);
             startActivityForResult(Intent.createChooser(intent1, "Complete action using"), 2);
         }
+        else if( arg0 == cancelButton){
+            finish();
+        }
         else if (arg0 == uploadButton) {
+
 
             ldialog = ProgressDialog.show(MakeDealActivity.this, "", "Uploading file...", true);
             new Thread(new Runnable() {
                 public void run() {
+
 
                     JsonObject Uploadinfo = new JsonObject();
 
@@ -308,6 +313,7 @@ public class MakeDealActivity extends Activity implements OnClickListener {
                     Uploadinfo.addProperty("account",bank+" "+((EditText)findViewById(R.id.account)).getText().toString());
                     Uploadinfo.addProperty("seller_id",user_email);
 
+
                     Bitmap thumbnail;
                     BitmapFactory.Options option=new BitmapFactory.Options();
                     option.inSampleSize=2;
@@ -319,6 +325,7 @@ public class MakeDealActivity extends Activity implements OnClickListener {
 
                     thumbnail.recycle();
                     thumbnail=null;
+
 
                     Uploadinfo.addProperty("thumbnail",s);
 
@@ -334,6 +341,12 @@ public class MakeDealActivity extends Activity implements OnClickListener {
 
                     detailView.recycle();
                     detailView=null;
+
+                    if(TextUtils.isEmpty(s)){
+
+
+                    }
+
 
                     Uploadinfo.addProperty("detailView",s);
 
