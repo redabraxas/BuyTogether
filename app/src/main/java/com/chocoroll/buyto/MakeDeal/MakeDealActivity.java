@@ -48,6 +48,8 @@ public class MakeDealActivity extends Activity implements OnClickListener {
     private int serverResponseCode = 0;
     private ProgressDialog ldialog = null;
 
+    private AlertDialog dialog2 = null;
+
     private String imagepath = null;
     private String imagepath1 = null;
     private String B_category = null;
@@ -68,6 +70,7 @@ public class MakeDealActivity extends Activity implements OnClickListener {
     static final int DATE_DIALOG_ID = 0;
 
     private String user_email=null;
+
 
 
     @Override
@@ -290,7 +293,45 @@ public class MakeDealActivity extends Activity implements OnClickListener {
         }
         else if (arg0 == uploadButton) {
 
+            if(imagepath==null||imagepath1==null
+                    ||B_category==null||S_category==null||
+                    ((EditText)findViewById(R.id.pro_name)).getText().toString()==null||
+                    ((EditText)findViewById(R.id.pro_price)).getText().toString()==null||
+                    ((EditText)findViewById(R.id.account)).getText().toString()==null||
+                    ((EditText)findViewById(R.id.member)).getText().toString()==null||
+                    ((EditText)findViewById(R.id.phone2)).getText().toString()==null||
+                    ((EditText)findViewById(R.id.phone3)).getText().toString()==null
+                    ) //null check (site와 상품코멘트는 생략가능)
+            {
+                dialog2 = new AlertDialog.Builder(MakeDealActivity.this).setMessage("양식을 모두 입력해주세요.")
+                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
 
+                            }
+                        }).show();
+                TextView textView = (TextView) dialog2.findViewById(android.R.id.message);
+                Typeface face=Typeface.SANS_SERIF;
+                textView.setTypeface(face);
+            }
+
+            else if(((EditText)findViewById(R.id.pro_name)).getText().toString().length()>20){
+                dialog2 = new AlertDialog.Builder(MakeDealActivity.this).setMessage("상품 이름은 20자 미만이여야 합니다.")
+                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+
+                            }
+                        }).show();
+                TextView textView = (TextView) dialog2.findViewById(android.R.id.message);
+                Typeface face=Typeface.SANS_SERIF;
+                textView.setTypeface(face);
+
+            }
+
+            else{
             ldialog = ProgressDialog.show(MakeDealActivity.this, "", "Uploading file...", true);
             new Thread(new Runnable() {
                 public void run() {
@@ -385,7 +426,7 @@ public class MakeDealActivity extends Activity implements OnClickListener {
                     });
                 }
             }).start();
-        }
+        }}
 
     }
 
