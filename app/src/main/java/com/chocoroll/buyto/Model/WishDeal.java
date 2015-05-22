@@ -22,14 +22,13 @@ public class WishDeal implements Parcelable {
 
     // 로고이미지, 상세이미지, 판매자 코멘트
     String thumbnail;
-    String detailView;
     String comment;
 
     public WishDeal(Parcel in) {
         readFromParcel(in);
     }
 
-    public WishDeal(String num, String name, String bCategory, String sCategory, String wish, String thumbnail, String detailView){
+    public WishDeal(String num, String name, String bCategory, String sCategory, String wish, String thumbnail, String comment){
         this.num  = num;
         this.name = name;
 
@@ -39,7 +38,7 @@ public class WishDeal implements Parcelable {
         this.wish = wish;
 
         this.thumbnail = thumbnail;
-        this.detailView = detailView;
+        this.comment = comment;
 
     }
 
@@ -52,8 +51,8 @@ public class WishDeal implements Parcelable {
         return wish;
     }
 
-    public String getDetailView() {
-        return detailView;
+    public String getComment() {
+        return comment;
     }
 
     public String getThumbnail() {
@@ -77,7 +76,7 @@ public class WishDeal implements Parcelable {
         parcel.writeString(wish);
 
         parcel.writeString(thumbnail);
-        parcel.writeString(detailView);
+        parcel.writeString(comment);
     }
 
     private void readFromParcel(Parcel in){
@@ -90,7 +89,7 @@ public class WishDeal implements Parcelable {
         wish = in.readString();
 
         thumbnail=in.readString();
-        detailView=in.readString();
+        comment=in.readString();
 
     }
 

@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -24,7 +25,7 @@ import com.chocoroll.buyto.Login.JoinActivity;
 import com.chocoroll.buyto.Login.LoginActivity;
 import com.chocoroll.buyto.MakeDeal.MakeDealActivity;
 import com.chocoroll.buyto.Retrofit.Retrofit;
-import com.chocoroll.buyto.WishDeal.WishDealFragment;
+import com.chocoroll.buyto.AllDeal.WishDealFragment;
 import com.google.gson.JsonObject;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 

@@ -25,6 +25,9 @@ public interface Retrofit {
     // 카테고리 별 딜 리스트
     @POST("/listview/categorylist.php")
     public void getDealList(@Body JsonObject info, Callback<JsonArray> callback);
+    // 카테고리 별 딜 리스트
+    @POST("/listview/wishDealCategoryList.php")
+    public void getWishDealList(@Body JsonObject info, Callback<JsonArray> callback);
 
     // 신청(book), 찜(keep)
     @POST("/zzimwish/bookdeal.php")
