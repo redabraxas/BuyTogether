@@ -45,6 +45,8 @@ public interface Retrofit {
     // Deal만들기
     @POST("/uploads/UploadDeal2.php")
     public void UploadDeal(@Body JsonObject info, Callback<String> callback);
+    @POST("/wish_uploads/UploadWishDeal.php")
+    public void UploadWishDeal(@Body JsonObject info, Callback<String> callback);
 
 
 }
