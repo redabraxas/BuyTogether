@@ -24,6 +24,7 @@ import com.chocoroll.buyto.AllDeal.AllDealFragment;
 import com.chocoroll.buyto.Login.JoinActivity;
 import com.chocoroll.buyto.Login.LoginActivity;
 import com.chocoroll.buyto.MakeDeal.MakeDealActivity;
+import com.chocoroll.buyto.Mine.MyInfoFragment;
 import com.chocoroll.buyto.Retrofit.Retrofit;
 import com.chocoroll.buyto.AllDeal.WishDealFragment;
 import com.google.gson.JsonObject;
@@ -357,6 +358,7 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
             LinearLayout menu_make = (LinearLayout) findViewById(R.id.menu_make);
             LinearLayout menu_bookmark = (LinearLayout) findViewById(R.id.menu_bookmark);
             LinearLayout menu_logout = (LinearLayout) findViewById(R.id.menu_logout);
+            LinearLayout menu_myInfo = (LinearLayout) findViewById(R.id.menu_myinfo);
 
             TextView txtPush = (TextView) findViewById(R.id.textPush);
             // 딜 만들기
@@ -414,6 +416,21 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
             });
 
 
+            // 내 정보 수정
+            menu_myInfo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    slidingMenu.showContent(true);
+
+                    removeAllStack();
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.container, new MyInfoFragment());
+                    ft.setTransition(FragmentTransaction.TRANSIT_NONE);
+                    ft.addToBackStack(null);
+                    ft.commit();
+                }
+            });
 
 
             if(position == SELLER){

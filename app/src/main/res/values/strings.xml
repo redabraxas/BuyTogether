@@ -133,6 +133,10 @@
         <item>080</item>
     </string-array>
     <string name="title_activity_detail_deal">DetailDealActivity</string>
+    <string name="title_activity_find">FindActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_find_pw">FindPWActivity</string>
 
 
 </resources>
