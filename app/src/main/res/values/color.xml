@@ -12,4 +12,7 @@
     <color name="tab_indicate">#ff295349</color>
     <color name="tab_background">#99a0ff7a</color>
 
+    <color name="seller">#99ff002d</color>
+    <color name="user">#99faff00</color>
+
 </resources>

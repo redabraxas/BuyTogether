@@ -1,4 +1,4 @@
-package com.chocoroll.buyto.Retrofit;
+package com.chocoroll.buyto.Extra;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -51,5 +51,26 @@ public interface Retrofit {
     @POST("/wish_uploads/UploadWishDeal.php")
     public void UploadWishDeal(@Body JsonObject info, Callback<String> callback);
 
+    // 판메자 메뉴
+    @POST("/seller/sellerDealList.php") // 판매자의 딜 리스트
+    public void getSellerDealList(@Body JsonObject info, Callback<JsonArray> callback);
+    @POST("/seller/sellerDeposit12.php")    // 판매자의 딜 신청 유저들 리스트
+    public void getDepositList(@Body JsonObject info, Callback<JsonArray> callback);
+    @POST("/seller/sellerDepositCheck.php") // 입금 확인
+    public void sendDepositCheck(@Body JsonObject info, Callback<String> callback);
+
+    // 관리자메뉴
+    @POST("/seller/sellerDepositCheck.php") // 관리자에게 딜 승인/거절 리스트
+    public void getAdminDealList(Callback<JsonArray> callback);
+    @POST("/seller/sellerDepositCheck.php") // 관리자에게 판매자 승인/거절 리스트
+    public void getAdminSellerList(Callback<JsonArray> callback);
+    @POST("/seller/sellerDepositCheck.php") // 딜 승인
+    public void sendDealOK(@Body JsonObject info, Callback<String> callback);
+    @POST("/seller/sellerDepositCheck.php") // 딜 거절
+    public void sendDealNO(@Body JsonObject info, Callback<String> callback);
+    @POST("/seller/sellerDepositCheck.php") // 판매자 승인
+    public void sendsSellerOK(@Body JsonObject info, Callback<String> callback);
+    @POST("/seller/sellerDepositCheck.php") // 판매자 거절
+    public void sendSellerNO(@Body JsonObject info, Callback<String> callback);
 
 }

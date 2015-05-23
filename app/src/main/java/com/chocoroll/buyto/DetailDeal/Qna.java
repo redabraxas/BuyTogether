@@ -10,6 +10,8 @@ public class Qna {
     String content;
     String answerCount;
 
+    String dealNum;
+
     Qna(String num, String writer, String date, String content, String answerCount){
         this.num = num;
         this.writer = writer;

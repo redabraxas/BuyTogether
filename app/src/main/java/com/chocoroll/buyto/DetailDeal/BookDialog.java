@@ -6,25 +6,13 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
-import com.chocoroll.buyto.MainActivity;
 import com.chocoroll.buyto.R;
-import com.chocoroll.buyto.Retrofit.Retrofit;
-import com.google.gson.JsonArray;
+import com.chocoroll.buyto.Extra.Retrofit;
 import com.google.gson.JsonObject;
-
-import java.util.ArrayList;
-import java.util.Collections;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;

@@ -18,7 +18,7 @@ import android.view.ViewGroup;
 import com.chocoroll.buyto.Model.Deal;
 import com.chocoroll.buyto.Model.WishDeal;
 import com.chocoroll.buyto.R;
-import com.chocoroll.buyto.Retrofit.Retrofit;
+import com.chocoroll.buyto.Extra.Retrofit;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 

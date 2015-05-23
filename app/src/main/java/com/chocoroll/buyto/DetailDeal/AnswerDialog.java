@@ -13,14 +13,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chocoroll.buyto.MainActivity;
 import com.chocoroll.buyto.R;
-import com.chocoroll.buyto.Retrofit.Retrofit;
+import com.chocoroll.buyto.Extra.Retrofit;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 

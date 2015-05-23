@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -20,13 +19,15 @@ import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import com.chocoroll.buyto.Admin.AdminFragment;
 import com.chocoroll.buyto.AllDeal.AllDealFragment;
 import com.chocoroll.buyto.Login.JoinActivity;
 import com.chocoroll.buyto.Login.LoginActivity;
 import com.chocoroll.buyto.MakeDeal.MakeDealActivity;
 import com.chocoroll.buyto.Mine.MyInfoFragment;
-import com.chocoroll.buyto.Retrofit.Retrofit;
+import com.chocoroll.buyto.Extra.Retrofit;
 import com.chocoroll.buyto.AllDeal.WishDealFragment;
+import com.chocoroll.buyto.Seller.SellerFragment;
 import com.google.gson.JsonObject;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
@@ -439,6 +440,14 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
                 menu_seller.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        slidingMenu.showContent(true);
+
+                        removeAllStack();
+                        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                        ft.replace(R.id.container, new SellerFragment());
+                        ft.setTransition(FragmentTransaction.TRANSIT_NONE);
+                        ft.addToBackStack(null);
+                        ft.commit();
 
                     }
                 });
@@ -450,6 +459,14 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
                 menu_amdin.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        slidingMenu.showContent(true);
+
+                        removeAllStack();
+                        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                        ft.replace(R.id.container, new AdminFragment());
+                        ft.setTransition(FragmentTransaction.TRANSIT_NONE);
+                        ft.addToBackStack(null);
+                        ft.commit();
 
                     }
                 });

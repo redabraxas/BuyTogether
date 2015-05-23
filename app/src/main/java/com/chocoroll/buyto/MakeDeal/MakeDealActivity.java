@@ -28,7 +28,7 @@ import android.widget.TextView;
 
 import com.chocoroll.buyto.MainActivity;
 import com.chocoroll.buyto.R;
-import com.chocoroll.buyto.Retrofit.Retrofit;
+import com.chocoroll.buyto.Extra.Retrofit;
 import com.google.gson.JsonObject;
 
 import java.io.ByteArrayOutputStream;

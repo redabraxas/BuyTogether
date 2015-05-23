@@ -27,13 +27,10 @@ import com.astuetz.PagerSlidingTabStrip;
 import com.chocoroll.buyto.MainActivity;
 import com.chocoroll.buyto.Model.Deal;
 import com.chocoroll.buyto.R;
-import com.chocoroll.buyto.Retrofit.Retrofit;
+import com.chocoroll.buyto.Extra.Retrofit;
 import com.google.gson.JsonObject;
 
-import java.io.BufferedInputStream;
 import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;

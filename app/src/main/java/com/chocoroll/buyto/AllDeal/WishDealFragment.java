@@ -19,12 +19,10 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.chocoroll.buyto.DetailDeal.DetailDealActivity;
-import com.chocoroll.buyto.Model.Deal;
-import com.chocoroll.buyto.Model.DealAdapter;
 import com.chocoroll.buyto.Model.WishDeal;
 import com.chocoroll.buyto.Model.WishDealAdapter;
 import com.chocoroll.buyto.R;
-import com.chocoroll.buyto.Retrofit.Retrofit;
+import com.chocoroll.buyto.Extra.Retrofit;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
