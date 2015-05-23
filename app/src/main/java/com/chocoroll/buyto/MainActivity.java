@@ -24,6 +24,7 @@ import com.chocoroll.buyto.AllDeal.AllDealFragment;
 import com.chocoroll.buyto.Login.JoinActivity;
 import com.chocoroll.buyto.Login.LoginActivity;
 import com.chocoroll.buyto.MakeDeal.MakeDealActivity;
+import com.chocoroll.buyto.Mine.DealStateFragment;
 import com.chocoroll.buyto.Mine.MyInfoFragment;
 import com.chocoroll.buyto.Extra.Retrofit;
 import com.chocoroll.buyto.AllDeal.WishDealFragment;
@@ -434,6 +435,23 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
             });
 
 
+            // 나의 딜/위시딜 상태
+            LinearLayout menu_mydeal = (LinearLayout) findViewById(R.id.menu_mydeal);
+            menu_mydeal.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    slidingMenu.showContent(true);
+
+                    removeAllStack();
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.container, new DealStateFragment());
+                    ft.setTransition(FragmentTransaction.TRANSIT_NONE);
+                    ft.addToBackStack(null);
+                    ft.commit();
+
+                }
+            });
+
             if(position == SELLER){
 
                 LinearLayout menu_seller = (LinearLayout) findViewById(R.id.menu_seller);
@@ -455,6 +473,7 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
             }else  if(position == ADMIN){
 
 
+                // 관리자 메뉴
                 LinearLayout menu_amdin = (LinearLayout) findViewById(R.id.menu_amdin);
                 menu_amdin.setOnClickListener(new View.OnClickListener() {
                     @Override
