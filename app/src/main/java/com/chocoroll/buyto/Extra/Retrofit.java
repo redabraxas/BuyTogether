@@ -73,4 +73,7 @@ public interface Retrofit {
     @POST("/seller/sellerDepositCheck.php") // 판매자 거절
     public void sendSellerNO(@Body JsonObject info, Callback<String> callback);
 
+    // 나의 딜/위시딜 상태
+    @POST("/seller/sellerDepositCheck.php") // 판매자 거절
+    public void getDealStateList(@Body JsonObject info, Callback<JsonArray> callback);
 }
