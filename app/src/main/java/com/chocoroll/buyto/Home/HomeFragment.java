@@ -420,7 +420,10 @@ public class HomeFragment extends Fragment {
 
                                 pDealList.add(new Deal(num, name,price, bCategory, sCategory, dday, maxBook, keep,book, thumbnail, detailView,
                                         comment, seller, phone, state));
+
+                                Log.e("deal",name);
                             }
+                            Log.e("deal","deal null");
                             getBestWishList();
 
                         }
