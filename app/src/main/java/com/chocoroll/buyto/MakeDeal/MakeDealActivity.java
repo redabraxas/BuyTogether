@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -26,9 +27,9 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.chocoroll.buyto.Extra.Retrofit;
 import com.chocoroll.buyto.MainActivity;
 import com.chocoroll.buyto.R;
-import com.chocoroll.buyto.Extra.Retrofit;
 import com.google.gson.JsonObject;
 
 import java.io.ByteArrayOutputStream;
@@ -459,11 +460,26 @@ public class MakeDealActivity extends Activity implements OnClickListener {
         }
     }
 
-    public String getPath(Uri uri) {
-        String[] projection = {MediaStore.Images.Media.DATA};
-        Cursor cursor = managedQuery(uri, projection, null, null, null);
+
+
+    private String getPath(Uri uri){
+
+        String [] projection = {MediaStore.Images.Media.DATA};
+
+        CursorLoader cursorLoader = new CursorLoader(
+                getApplicationContext(),
+                uri,
+                projection,
+                null,   //selection
+                null,   //selectionArgs
+                null   //sortOrder
+        );
+
+        Cursor cursor = cursorLoader.loadInBackground();
+
         int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
         cursor.moveToFirst();
+
         return cursor.getString(column_index);
     }
 

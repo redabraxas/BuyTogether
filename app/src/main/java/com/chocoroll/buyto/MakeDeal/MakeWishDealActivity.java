@@ -12,6 +12,7 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.content.CursorLoader;
 import android.util.Base64;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,9 +24,9 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.chocoroll.buyto.Extra.Retrofit;
 import com.chocoroll.buyto.MainActivity;
 import com.chocoroll.buyto.R;
-import com.chocoroll.buyto.Extra.Retrofit;
 import com.google.gson.JsonObject;
 
 import java.io.ByteArrayOutputStream;
@@ -293,12 +294,27 @@ public class MakeWishDealActivity extends Activity implements OnClickListener {
 
     }
 
-    public String getPath(Uri uri) {
-        String[] projection = {MediaStore.Images.Media.DATA};
-        Cursor cursor = managedQuery(uri, projection, null, null, null);
+
+    protected String getPath(Uri uri){
+
+        String [] projection = {MediaStore.Images.Media.DATA};
+
+        CursorLoader cursorLoader = new CursorLoader(
+                getApplicationContext(),
+                uri,
+                projection,
+                null,   //selection
+                null,   //selectionArgs
+                null   //sortOrder
+        );
+
+        Cursor cursor = cursorLoader.loadInBackground();
+
         int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
         cursor.moveToFirst();
+
         return cursor.getString(column_index);
+
     }
 
     @Override
