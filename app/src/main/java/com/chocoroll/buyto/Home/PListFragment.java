@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.chocoroll.buyto.DetailDeal.DetailDealActivity;
+import com.chocoroll.buyto.DetailDeal.WishDealDialog;
 import com.chocoroll.buyto.Model.Deal;
 import com.chocoroll.buyto.Model.DealAdapter;
 import com.chocoroll.buyto.Model.WishDeal;
@@ -94,10 +95,9 @@ public class PListFragment extends Fragment {
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                    WishDeal item =(WishDeal)mWishAdapter.getItem(i);
-//                    Intent intent = new Intent(getActivity(), DetailDealActivity.class);
-//                    intent.putExtra("product",item);
-//                    startActivity(intent);
+                    WishDeal wishdeal = (WishDeal)adapterView.getItemAtPosition(i);
+                    WishDealDialog dialog = new WishDealDialog(getActivity(), wishdeal);
+                    dialog.show();
                 }
             }) ;
 

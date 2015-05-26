@@ -40,6 +40,9 @@ public interface Retrofit {
     public void sendBookDeal(@Body JsonObject info, Callback<String> callback);
     @POST("/zzimwish/keepdeal.php")
     public void sendKeepDeal(@Body JsonObject info, Callback<String> callback);
+    @POST("/zzimwish/wish.php")
+    public void Wish(@Body JsonObject info, Callback<String> callback);
+
 
     // 질문,답변
     @POST("/listview/detailquestion.php")

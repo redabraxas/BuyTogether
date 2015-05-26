@@ -3,8 +3,8 @@ package com.chocoroll.buyto.AllDeal;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -18,11 +18,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 
-import com.chocoroll.buyto.DetailDeal.DetailDealActivity;
+import com.chocoroll.buyto.DetailDeal.WishDealDialog;
+import com.chocoroll.buyto.Extra.Retrofit;
 import com.chocoroll.buyto.Model.WishDeal;
 import com.chocoroll.buyto.Model.WishDealAdapter;
 import com.chocoroll.buyto.R;
-import com.chocoroll.buyto.Extra.Retrofit;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
@@ -42,6 +42,8 @@ public class WishDealFragment extends Fragment {
     ArrayList<WishDeal> pList;
     WishDealAdapter mAdapter;
     ListView listView;
+
+    private Context context;
 
 
     public interface WishDealListner{
@@ -152,13 +154,16 @@ public class WishDealFragment extends Fragment {
         listView.setDividerHeight(3);
 
         listView.setAdapter(mAdapter);
+
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                WishDeal item =(WishDeal)mAdapter.getItem(i);
-                Intent intent = new Intent(getActivity(), DetailDealActivity.class);
-                intent.putExtra("product",item);
-                startActivity(intent);
+
+                WishDeal wishdeal = (WishDeal)adapterView.getItemAtPosition(i);
+                WishDealDialog dialog = new WishDealDialog(getActivity(), wishdeal);
+                dialog.show();
+
             }
         }) ;
         getWishDealList("전체보기", "전체보기");
