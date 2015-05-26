@@ -92,16 +92,20 @@ public class PListFragment extends Fragment {
 
             mWishAdapter= new WishDealAdapter(getActivity(), R.layout.model_wishdeal, pWishList);
 
+
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    WishDeal wishdeal = (WishDeal)adapterView.getItemAtPosition(i);
+
+                    WishDeal wishdeal = (WishDeal)mWishAdapter.getItem(i);
                     WishDealDialog dialog = new WishDealDialog(getActivity(), wishdeal);
                     dialog.show();
                 }
             }) ;
 
+
             listView.setAdapter(mWishAdapter);
+
         }
 
 
