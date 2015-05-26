@@ -46,14 +46,6 @@ public class LoginActivity extends Activity {
         });
 
 
-        Button findId = (Button) findViewById(R.id.login_findid);
-        findId.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-//                Intent intent = new Intent(LoginActivity.this, FindIdActivity.class);
-//                startActivity(intent);
-            }
-        });
-
         Button findPw = (Button) findViewById(R.id.login_findpasswd);
         findPw.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

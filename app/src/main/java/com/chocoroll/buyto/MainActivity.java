@@ -21,13 +21,13 @@ import android.widget.TextView;
 
 import com.chocoroll.buyto.Admin.AdminFragment;
 import com.chocoroll.buyto.AllDeal.AllDealFragment;
+import com.chocoroll.buyto.AllDeal.WishDealFragment;
+import com.chocoroll.buyto.Extra.Retrofit;
 import com.chocoroll.buyto.Login.JoinActivity;
 import com.chocoroll.buyto.Login.LoginActivity;
 import com.chocoroll.buyto.MakeDeal.MakeDealActivity;
 import com.chocoroll.buyto.Mine.DealStateFragment;
 import com.chocoroll.buyto.Mine.MyInfoFragment;
-import com.chocoroll.buyto.Extra.Retrofit;
-import com.chocoroll.buyto.AllDeal.WishDealFragment;
 import com.chocoroll.buyto.Seller.SellerFragment;
 import com.google.gson.JsonObject;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;

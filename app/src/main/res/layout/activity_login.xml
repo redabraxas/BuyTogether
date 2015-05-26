@@ -6,6 +6,34 @@
     android:background="#ffffff">
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/main_color">
+
+        <LinearLayout
+            android:layout_gravity="center"
+            android:layout_marginLeft="12dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent">
+            <TextView
+                android:id="@+id/title_bar_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textSize="18dp"
+                android:textColor="#ffffff"
+                android:typeface="sans"
+                android:text=" >  LOGIN"
+                android:textStyle="bold"/>
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -27,46 +55,67 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:textColor="#6B6B6B"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
-                        android:text = "ID : "
+                        android:text = "I D  :  "
                         android:typeface="sans"
                         android:textSize="18dp"
                         android:layout_gravity="center"/>
                     <EditText
                         android:id="@+id/login_id"
-                        android:layout_width="190dp"
+                        android:layout_width="150dp"
                         android:layout_height="35dp"
                         android:maxLength="12"
                         android:singleLine="true"
-                        android:typeface="sans" />
+                        android:typeface="sans"
+                        android:background="@null"/>
 
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginLeft="43dp"
+                    android:layout_width="150dp"
+                    android:layout_height="1dp"
+                    android:background="@color/main_color"
+                    android:orientation="vertical" >
                 </LinearLayout>
 
                 <LinearLayout
+                    android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
 
                     <TextView
+                        android:textColor="#6B6B6B"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
-                        android:text = "PW : "
+                        android:text = "P W  :  "
                         android:textSize="18dp"
                         android:typeface="sans"
                         android:layout_gravity="center"/>
 
                     <EditText
                         android:id="@+id/login_passwd"
-                        android:layout_width="180dp"
+                        android:layout_width="150dp"
                         android:layout_height="35dp"
                         android:inputType="textPassword"
                         android:maxLength="12"
                         android:singleLine="true"
-                        android:typeface="sans" />
+                        android:typeface="sans"
+                        android:background="@null"/>
 
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_marginLeft="53dp"
+                    android:layout_width="150dp"
+                    android:layout_height="1dp"
+                    android:background="@color/main_color"
+                    android:orientation="vertical" >
+                </LinearLayout>
+
             </LinearLayout>
 
             <Button
@@ -74,9 +123,11 @@
                 android:layout_width="60dp"
                 android:layout_height="fill_parent"
                 android:layout_marginLeft="10dp"
-                android:text="로그인"
+                android:text="LOGIN"
                 android:textSize="15dp"
                 android:textStyle="bold"
+                android:background="@null"
+                android:textColor="#A0DDB1"
                 android:typeface="sans" />
         </LinearLayout>
 
@@ -85,12 +136,14 @@
             android:id="@+id/auto_login"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:text="자동 로그인"
+            android:text=" 자동 로그인"
+            android:textSize="15dp"
             android:layout_gravity="center"
-            android:textColor="#000000"
+            android:textColor="#6B6B6B"
             android:typeface="sans" />
 
-        <RelativeLayout
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp" >
@@ -98,23 +151,40 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:layout_alignParentLeft="true"
                 android:text="함께 구매하실래요?"
-                android:textColor="#000000"
-                android:textSize="10dp"
-                android:typeface="sans" />
+                android:textColor="#6B6B6B"
+                android:textSize="14dp"
+                android:typeface="sans"
+                android:gravity="center"/>
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
             <Button
                 android:id="@+id/login_joinbt"
                 android:layout_width="80dp"
                 android:layout_height="30dp"
-                android:layout_alignParentRight="true"
-                android:text="회원가입"
-                android:textSize="8dp"
+                android:layout_marginLeft="90dp"
+                android:text="JOIN US"
+                android:textStyle="bold"
+                android:background="@null"
+                android:textSize="14dp"
+                android:textColor="#6B6B6B"
                 android:typeface="sans" />
-        </RelativeLayout>
+                <LinearLayout
+                    android:layout_marginLeft="102dp"
+                    android:layout_width="60dp"
+                    android:layout_height="1dp"
+                    android:background="@color/main_color"
+                    android:orientation="vertical" >
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
 
-        <RelativeLayout
+
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp" >
@@ -122,45 +192,37 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:layout_alignParentLeft="true"
-                android:text="아이디를 잊으셧나요?"
-                android:textColor="#000000"
-                android:textSize="10dp"
-                android:typeface="sans" />
+                android:text="비밀번호를 잊으셨나요?"
+                android:textColor="#6B6B6B"
+                android:textSize="14dp"
+                android:typeface="sans"
+                android:gravity="center"/>
 
-            <Button
-                android:id="@+id/login_findid"
-                android:layout_width="80dp"
-                android:layout_height="30dp"
-                android:layout_alignParentRight="true"
-                android:text="아이디 찾기"
-                android:textSize="8dp"
-                android:typeface="sans" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp" >
-
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_alignParentLeft="true"
-                android:text="비밀번호를 잊으셧나요?"
-                android:textColor="#000000"
-                android:textSize="10dp"
-                android:typeface="sans" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <Button
+                    android:id="@+id/login_findpasswd"
+                    android:layout_width="80dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="67dp"
+                    android:text="FIND PW"
+                    android:textStyle="bold"
+                    android:background="@null"
+                    android:textSize="14dp"
+                    android:textColor="#6B6B6B"
+                    android:typeface="sans" />
+                <LinearLayout
+                    android:layout_marginLeft="79dp"
+                    android:layout_width="60dp"
+                    android:layout_height="1dp"
+                    android:background="@color/main_color"
+                    android:orientation="vertical" >
+                </LinearLayout>
 
-            <Button
-                android:id="@+id/login_findpasswd"
-                android:layout_width="80dp"
-                android:layout_height="30dp"
-                android:layout_alignParentRight="true"
-                android:text="비밀번호 찾기"
-                android:textSize="8dp"
-                android:typeface="sans" />
-        </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>

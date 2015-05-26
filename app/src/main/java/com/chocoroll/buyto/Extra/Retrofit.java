@@ -11,6 +11,12 @@ public interface Retrofit {
     public static final String ROOT = "http://buytogether.dothome.co.kr";
     @POST("/login/login.php")
     public void login(@Body JsonObject info, Callback<String> callback);
+    @POST("/login/join.php")
+    public void join(@Body JsonObject info, Callback<String> callback);
+    @POST("/login/ch_passwd.php")
+    public void ch_passwd(@Body JsonObject info, Callback<String> callback);
+    @POST("/login/find_passwd.php")
+    public void find_passwd(@Body JsonObject info, Callback<String> callback);
 
     // 메인화면의 네가지 딜 리스트
     @POST("/listview/opendatelist.php")

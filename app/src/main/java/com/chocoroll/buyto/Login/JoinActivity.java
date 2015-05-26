@@ -25,7 +25,14 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.chocoroll.buyto.Extra.Retrofit;
 import com.chocoroll.buyto.R;
+import com.google.gson.JsonObject;
+
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 //
 //import com.astuetz.PagerSlidingTabStrip;
 //import com.example.hangang.R;
@@ -132,71 +139,72 @@ public class JoinActivity extends Activity {
 
 
 
-//                else
-//                {
-//                    dialog = new ProgressDialog(JoinActivity.this);
-//                    dialog.setMessage("회원가입 요청중입니다...");
-//                    dialog.setIndeterminate(true);
-//                    dialog.setCancelable(false);
-//                    dialog.show();
-//                    TextView textView = (TextView) dialog.findViewById(android.R.id.message);
-//                    Typeface face=Typeface.SANS_SERIF;
-//                    textView.setTypeface(face);
-//                    new Thread(new Runnable() {
-//                        public void run() {
-//                            try {
-//                                JsonObject info=new JsonObject();
-//                                info.addProperty("id", id);
-//                                info.addProperty("passwd", passwd);
-//                                info.addProperty("name", name);
-//                                info.addProperty("email", email);
-//                                RestAdapter restAdapter = new RestAdapter.Builder()
-//                                        .setEndpoint(Retrofit.ROOT)  //call your base url
-//                                        .build();
-//                                Retrofit join = restAdapter.create(Retrofit.class); //this is how retrofit create your api
-//                                join.join(info,new Callback<String>() {
-//                                    @Override
-//                                    public void success(String result, Response response) {
-//                                        dialog.dismiss();
-//                                        if(result.equals("Success"))
-//                                            finish();
-//                                        else
-//                                        {
-//                                            AlertDialog dialog2 = new AlertDialog.Builder(JoinActivity.this).setMessage("알수 없는 이유로 회원가입에 실패하였습니다.")
-//                                                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-//                                                        @Override
-//                                                        public void onClick(DialogInterface dia, int which) {
-//                                                            dia.dismiss();
-//                                                        }
-//                                                    }).show();
-//                                            TextView textView = (TextView) dialog2.findViewById(android.R.id.message);
-//                                            Typeface face=Typeface.SANS_SERIF;
-//                                            textView.setTypeface(face);
-//                                        }
-//                                    }
-//
-//                                    @Override
-//                                    public void failure(RetrofitError retrofitError) {
-//                                        dialog.dismiss();
-//                                        AlertDialog dialog2 = new AlertDialog.Builder(JoinActivity.this).setMessage("네트워크 상태를 확인해주세요.")
-//                                                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-//                                                    @Override
-//                                                    public void onClick(DialogInterface dia, int which) {
-//                                                        dia.dismiss();
-//                                                    }
-//                                                }).show();
-//                                        TextView textView = (TextView) dialog2.findViewById(android.R.id.message);
-//                                        Typeface face=Typeface.SANS_SERIF;
-//                                        textView.setTypeface(face);
-//                                    }
-//                                });
-//                            }
-//                            catch (Throwable ex) {
-//                                ex.printStackTrace();
-//                            }
-//                        }
-//                    }).start();
-//                }
+              else
+              {
+                  dialog = new ProgressDialog(JoinActivity.this);
+                  dialog.setMessage("회원가입 요청중입니다...");
+                  dialog.setIndeterminate(true);
+                  dialog.setCancelable(false);
+                  dialog.show();
+                  TextView textView = (TextView) dialog.findViewById(android.R.id.message);
+                  Typeface face=Typeface.SANS_SERIF;
+                  textView.setTypeface(face);
+                  new Thread(new Runnable() {
+                      public void run() {
+
+                           try {
+                               JsonObject info=new JsonObject();
+                               info.addProperty("id", id);
+                                info.addProperty("passwd", passwd);
+                               info.addProperty("name", name);
+                                info.addProperty("email", email);
+                          RestAdapter restAdapter = new RestAdapter.Builder()
+                                       .setEndpoint(Retrofit.ROOT)  //call your base url
+                                       .build();
+                              Retrofit join = restAdapter.create(Retrofit.class); //this is how retrofit create your api
+                              join.join(info,new Callback<String>() {
+                                  @Override
+                                   public void success(String result, Response response) {
+                                       dialog.dismiss();
+                                       if(result.equals("Success"))
+                                          finish();
+                                      else
+                                      {
+                                           AlertDialog dialog2 = new AlertDialog.Builder(JoinActivity.this).setMessage("알수 없는 이유로 회원가입에 실패하였습니다.")
+                                                  .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                                       @Override
+                                                      public void onClick(DialogInterface dia, int which) {
+                                                           dia.dismiss();
+                                                        }
+                                                  }).show();
+                                           TextView textView = (TextView) dialog2.findViewById(android.R.id.message);
+                                           Typeface face=Typeface.SANS_SERIF;
+                                           textView.setTypeface(face);
+                                        }
+                                   }
+
+                                   @Override
+                                    public void failure(RetrofitError retrofitError) {
+                                        dialog.dismiss();
+                                        AlertDialog dialog2 = new AlertDialog.Builder(JoinActivity.this).setMessage("네트워크 상태를 확인해주세요.")
+                                                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dia, int which) {
+                                                        dia.dismiss();
+                                                    }
+                                                }).show();
+                                        TextView textView = (TextView) dialog2.findViewById(android.R.id.message);
+                                        Typeface face=Typeface.SANS_SERIF;
+                                        textView.setTypeface(face);
+                                    }
+                                });
+                            }
+                            catch (Throwable ex) {
+                                ex.printStackTrace();
+                            }
+                        }
+                    }).start();
+                }
             }
         });
 
