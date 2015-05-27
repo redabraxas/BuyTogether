@@ -336,11 +336,10 @@ public class HomeFragment extends Fragment {
 
                                 String wish = (deal.get("wishPeopleCount")).getAsString();
 
+                                String comment = (deal.get("comment")).getAsString();
                                 String thumbnail = (deal.get("thumbnail")).getAsString();
-                                String detailView = (deal.get("detailView")).getAsString();
 
-                                pWishList.add(new WishDeal(num, name, bCategory, sCategory, wish, thumbnail, detailView));
-
+                                pWishList.add(new WishDeal(num, name, bCategory, sCategory, wish, thumbnail, comment));
                             }
 
 
