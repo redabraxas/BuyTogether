@@ -34,10 +34,6 @@
             android:label="@string/title_activity_detail_deal" >
         </activity>
         <activity
-            android:name=".Login.FindActivity"
-            android:label="@string/title_activity_find" >
-        </activity>
-        <activity
             android:name=".Login.FindPWActivity"
             android:label="@string/title_activity_find_pw" >
         </activity>
