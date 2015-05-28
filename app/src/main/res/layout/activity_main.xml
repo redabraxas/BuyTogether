@@ -25,17 +25,17 @@
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent">
-            <TextView
+
+            <com.chocoroll.buyto.Model.MyTextViewBold
                 android:id="@+id/title_bar_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:textSize="20dp"
                 android:textColor="#ffffff"
-                android:typeface="serif"
                 android:text="@string/app_name" />
 
-            <TextView
+            <com.chocoroll.buyto.Model.MyTextViewBold
                 android:id="@+id/title_url"
                 android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"

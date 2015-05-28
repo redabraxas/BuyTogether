@@ -17,7 +17,7 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
-    <style name="Mytheme" parent="android:Theme.Light">
+    <style name="Mytheme" parent="android:Theme.Holo.Light">
 
         <item name="android:windowNoTitle">true</item>
     </style>

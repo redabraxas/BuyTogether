@@ -59,7 +59,7 @@
                     android:background="@color/slide_tab_backgroud">
 
 
-                    <TextView
+                    <com.chocoroll.buyto.Model.MyTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="안녕하세요, 비회원님!"
@@ -88,7 +88,7 @@
                             android:src="@drawable/left_menu" />
 
 
-                        <TextView
+                        <com.chocoroll.buyto.Model.MyTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -119,7 +119,7 @@
                             android:src="@drawable/left_menu" />
 
 
-                        <TextView
+                        <com.chocoroll.buyto.Model.MyTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -160,7 +160,7 @@
                             android:src="@drawable/left_menu" />
 
 
-                        <TextView
+                        <com.chocoroll.buyto.Model.MyTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -190,7 +190,7 @@
                             android:src="@drawable/left_menu" />
 
 
-                        <TextView
+                        <com.chocoroll.buyto.Model.MyTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -219,7 +219,7 @@
                     android:gravity="center"
                     android:background="#ffcecece">
 
-                    <TextView
+                    <com.chocoroll.buyto.Model.MyTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="#000000"

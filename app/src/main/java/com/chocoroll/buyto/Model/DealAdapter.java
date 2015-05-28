@@ -1,10 +1,6 @@
 package com.chocoroll.buyto.Model;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +11,6 @@ import android.widget.TextView;
 import com.chocoroll.buyto.Extra.DownloadImageTask;
 import com.chocoroll.buyto.R;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 
 /**
@@ -42,8 +37,10 @@ public class DealAdapter extends ArrayAdapter<Deal> {
             new DownloadImageTask((ImageView) v.findViewById(R.id.thumbnailDeal))
                     .execute(p.getThumbnail());
 
-            String str = "["+p.getbCategory()+"/"+p.getsCategory()+"]  "+p.getName();
-            ((TextView)  v.findViewById(R.id.txt_name)).setText(str);
+            String str = "["+p.getbCategory()+"/"+p.getsCategory()+"]";
+
+            ((TextView)  v.findViewById(R.id.txt_category)).setText(str);
+            ((TextView) v.findViewById(R.id.txt_name)).setText(p.getName());
             ((TextView) v.findViewById(R.id.txt_dday)).setText(p.getDday());
             ((TextView)  v.findViewById(R.id.txt_people)).setText(String.valueOf(p.getBook()+"/"+p.getMaxBook()));
         }

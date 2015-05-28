@@ -7,25 +7,41 @@
     android:padding="10dp">
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         android:src="@drawable/example"
         android:id="@+id/wishDealThumbnail" />
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="22dp"
-            android:text="상품이름"
+        android:layout_height="match_parent">
+
+        <com.chocoroll.buyto.Model.MyTextViewBold
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="20dp"
+            android:layout_width="250dp"
+            android:layout_height="18dp"
+            android:textSize="18dp"
+            android:text="하"
+            android:lineSpacingMultiplier="1.4"
             android:layout_marginBottom="10dp"
-            android:textColor="#f1393939"
+            android:textColor="#787878"
+            android:id="@+id/txt_category"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <com.chocoroll.buyto.Model.MyTextView
+            android:layout_marginLeft="20dp"
+            android:layout_width="250dp"
+            android:layout_height="30dp"
+            android:textSize="16dp"
+            android:text="상품이름kkkkkkkkkkkkkkkkkkkk"
+            android:lineSpacingMultiplier="1.4"
+            android:layout_marginBottom="10dp"
+            android:textColor="#8C8C8C"
             android:id="@+id/txt_name"
-            android:layout_marginTop="10dp"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
@@ -34,19 +50,32 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center">
+            android:layout_height="wrap_content">
 
-            <TextView
+            <com.chocoroll.buyto.Model.MyTextView
+                android:paddingTop="3dp"
+                android:paddingBottom="1dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="17dp"
+                android:text="WISH"
+                android:layout_marginLeft="100dp"
+                android:textSize="15dp"
+                android:background="#E9B0B1"
+                android:paddingLeft="5dp"
+                android:textColor="#f1ffffff"/>
+
+            <com.chocoroll.buyto.Model.MyTextView
+                android:paddingTop="3dp"
+                android:paddingBottom="1dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
                 android:text="현재인원"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:id="@+id/txt_wish"
                 android:textColor="#f1ffffff"
-                android:background="#9981cf65" />
+                android:background="#E9B0B1" />
 
 
 

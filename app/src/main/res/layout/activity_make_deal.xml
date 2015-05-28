@@ -54,7 +54,8 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:id="@+id/spinner_big_category"
-                            android:spinnerMode="dropdown" />
+                            android:spinnerMode="dropdown"
+                            />
 
                         <Spinner
                             android:layout_weight="1"
@@ -517,7 +518,8 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:paddingBottom="10dp"/>
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -573,7 +575,8 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:paddingBottom="10dp"/>
 
             <LinearLayout
                 android:layout_width="fill_parent"

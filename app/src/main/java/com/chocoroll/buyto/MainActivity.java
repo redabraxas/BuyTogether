@@ -89,9 +89,8 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
                 slidingMenu.showMenu(true);
             }
         });
+
         titleURL = (TextView)findViewById(R.id.title_url);
-
-
 
         // 자동로그인에 체크가 되어있따면
         SharedPreferences setting = getSharedPreferences("setting", MODE_PRIVATE);
