@@ -30,6 +30,8 @@ public class LoginActivity extends Activity {
     ProgressDialog dialog;
     String id;
     String passwd;
+    String pushalarm;
+    String result;
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -124,6 +126,10 @@ public class LoginActivity extends Activity {
                             public void success(String result, Response response) {
 
                                 dialog.dismiss();
+
+//                                result = (jsonObject.get("level")).toString();
+//                                pushalarm = (jsonObject.get("pushalarm")).toString();
+
                                 if(result.equals("failed")){
 
                                     new AlertDialog.Builder(LoginActivity.this).setMessage("아이디를 다시 확인해주세요.")
@@ -159,6 +165,7 @@ public class LoginActivity extends Activity {
                                         editor.commit();
                                     }
 
+                                    ((MainActivity)MainActivity.mContext).setPushalarm(pushalarm);
 
                                     ((MainActivity)MainActivity.mContext).setUserId(id);
 

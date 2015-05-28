@@ -13,10 +13,12 @@ public interface Retrofit {
     public void login(@Body JsonObject info, Callback<String> callback);
     @POST("/login/join.php")
     public void join(@Body JsonObject info, Callback<String> callback);
-    @POST("/login/ch_passwd.php")
+    @POST("/login/ch_myinfo.php")//key값 passwd
     public void ch_passwd(@Body JsonObject info, Callback<String> callback);
-    @POST("/login/find_passwd.php")
+    @POST("/login/find_passwd.php")//key 값 "user_email" 받고, 없으면 failed 출력 + 현재 user의 비밀번호 발송한 임시 비밀번호로 변경
     public void find_passwd(@Body JsonObject info, Callback<String> callback);
+    @POST("/login/ch_push.php")//push alarm 정보 변경 (key값 "pushalarm")
+    public void pushalarm(@Body JsonObject info, Callback<String> callback);
 
     // 메인화면의 네가지 딜 리스트
     @POST("/listview/opendatelist.php")

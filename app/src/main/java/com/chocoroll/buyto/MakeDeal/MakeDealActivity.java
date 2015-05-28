@@ -316,8 +316,8 @@ public class MakeDealActivity extends Activity implements OnClickListener {
                 textView.setTypeface(face);
             }
 
-            else if(((EditText)findViewById(R.id.pro_name)).getText().toString().length()>20){
-                dialog2 = new AlertDialog.Builder(MakeDealActivity.this).setMessage("상품 이름은 20자 미만이여야 합니다.")
+            else if(((EditText)findViewById(R.id.pro_name)).getText().toString().length()>16){
+                dialog2 = new AlertDialog.Builder(MakeDealActivity.this).setMessage("상품 이름은 16자 미만이여야 합니다.")
                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

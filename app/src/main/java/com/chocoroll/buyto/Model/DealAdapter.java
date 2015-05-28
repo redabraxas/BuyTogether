@@ -38,7 +38,7 @@ public class DealAdapter extends ArrayAdapter<Deal> {
                     .execute(p.getThumbnail());
 
             String str = "["+p.getbCategory()+"/"+p.getsCategory()+"]";
-
+            ((TextView)v.findViewById(R.id.price)).setText(p.getPrice()+" 원");
             ((TextView)  v.findViewById(R.id.txt_category)).setText(str);
             ((TextView) v.findViewById(R.id.txt_name)).setText(p.getName());
             ((TextView) v.findViewById(R.id.txt_dday)).setText(p.getDday());

@@ -4,44 +4,48 @@
     android:layout_height="match_parent"
     android:background="#ffffff">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/scrollView"
-        android:layout_gravity="center_horizontal">
 
-        <ImageView
+        <LinearLayout
+            android:layout_margin="10dp"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/detailDealImage"
-            android:layout_gravity="center_horizontal" />
+            android:layout_height="wrap_content">
 
 
-    </ScrollView>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="판매자 코멘트:"
-            android:textColor="#000000"
-            android:textSize="15dp"
-            android:layout_gravity="center_horizontal" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/detailDealImage"
+                android:layout_gravity="center_horizontal" />
 
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textColor="#000000"
-            android:id="@+id/seller_comment"
-            android:layout_gravity="center_horizontal" />
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#ACACAC"
+                android:orientation="vertical"
+                android:layout_marginBottom="10dp">
+            </LinearLayout>
+
+            <com.chocoroll.buyto.Model.MyTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="오호호호호"
+                android:layout_marginBottom="30dp"
+                android:textColor="#7C7C7C"
+                android:id="@+id/seller_comment" />
+
+
 
         </LinearLayout>
+
+
+
+
+
+
+
 
 
 

@@ -13,7 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.chocoroll.buyto.Extra.Retrofit;
@@ -34,13 +36,14 @@ public class MyInfoFragment extends Fragment implements View.OnClickListener{
     public MyInfoFragment() {
         // Required empty public constructor
     }
-
+    Switch push;
     private ProgressDialog dialog;
     private boolean passwdvalid;
     private boolean passwdmatch;
     EditText edit_pw;
     EditText edit_pwconfirm;
     String passwd;
+    int check;
     private String regExpStr = "^([a-z]+[0-9]+[a-z0-9]*|[0-9]+[a-z]+[a-z0-9]*)$";
     Button upload;
     View v;
@@ -51,7 +54,7 @@ public class MyInfoFragment extends Fragment implements View.OnClickListener{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_my_info, container, false);
-
+        push = (Switch) v.findViewById(R.id.push);
         edit_pw = (EditText)v.findViewById(R.id.edit_pw);
         edit_pwconfirm = (EditText)v.findViewById(R.id.edit_pwconfirm);
 
@@ -64,6 +67,78 @@ public class MyInfoFragment extends Fragment implements View.OnClickListener{
 
         upload.setOnClickListener(this);
         // 비밀번호 변경!
+
+        push.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if(isChecked){
+                    check = 1;
+
+                }
+                else
+                    check = 0;
+
+
+                dialog = new ProgressDialog(getActivity());
+                dialog.setMessage("정보변경 요청중입니다...");
+                dialog.setIndeterminate(true);
+                dialog.setCancelable(false);
+                dialog.show();
+                TextView textView = (TextView) dialog.findViewById(android.R.id.message);
+                Typeface face=Typeface.SANS_SERIF;
+                textView.setTypeface(face);
+                new Thread(new Runnable() {
+                    public void run() {
+
+                        try {
+                            JsonObject info=new JsonObject();
+                            info.addProperty("pushalarm", check);
+                            RestAdapter restAdapter = new RestAdapter.Builder()
+                                    .setEndpoint(Retrofit.ROOT)  //call your base url
+                                    .build();
+                            Retrofit pushalarm = restAdapter.create(Retrofit.class); //this is how retrofit create your api
+                            pushalarm.pushalarm(info,new Callback<String>() {
+                                @Override
+                                public void success(String result, Response response) {
+                                    dialog.dismiss();
+
+                                    AlertDialog dialog2 = new AlertDialog.Builder(getActivity()).setMessage("비밀 번호 변경을 완료하였습니다.")
+                                            .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dia, int which) {
+                                                    dia.dismiss();
+                                                }
+                                            }).show();
+                                    TextView textView = (TextView) dialog2.findViewById(android.R.id.message);
+                                    Typeface face=Typeface.SANS_SERIF;
+                                    textView.setTypeface(face);
+                                }
+
+
+                                @Override
+                                public void failure(RetrofitError retrofitError) {
+                                    dialog.dismiss();
+                                    AlertDialog dialog2 = new AlertDialog.Builder(getActivity()).setMessage("네트워크 상태를 확인해주세요.")
+                                            .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dia, int which) {
+                                                    dia.dismiss();
+                                                }
+                                            }).show();
+                                    TextView textView = (TextView) dialog2.findViewById(android.R.id.message);
+                                    Typeface face=Typeface.SANS_SERIF;
+                                    textView.setTypeface(face);
+                                }
+                            });
+                        }
+                        catch (Throwable ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                }).start();
+
+            }
+        });
         return  v;
     }
 
@@ -87,7 +162,7 @@ public class MyInfoFragment extends Fragment implements View.OnClickListener{
         else
         {
             dialog = new ProgressDialog(this.getActivity());
-            dialog.setMessage("회원가입 요청중입니다...");
+            dialog.setMessage("정보변경 요청중입니다...");
             dialog.setIndeterminate(true);
             dialog.setCancelable(false);
             dialog.show();

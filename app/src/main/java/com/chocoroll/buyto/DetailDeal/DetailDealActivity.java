@@ -9,7 +9,6 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -19,15 +18,14 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.astuetz.PagerSlidingTabStrip;
+import com.chocoroll.buyto.Extra.Retrofit;
 import com.chocoroll.buyto.MainActivity;
 import com.chocoroll.buyto.Model.Deal;
 import com.chocoroll.buyto.R;
-import com.chocoroll.buyto.Extra.Retrofit;
 import com.google.gson.JsonObject;
 
 import java.io.InputStream;
@@ -54,11 +52,13 @@ public class DetailDealActivity extends FragmentActivity{
 
         // 기본 정보 셋팅
         product = getIntent().getParcelableExtra("product");
-        String str = "[" + product.getbCategory() + "/" + product.getsCategory() + "]  " + product.getName();
-        ((TextView) findViewById(R.id.txt_name)).setText(str);
+        String str = "> " + product.getbCategory() + " / " + product.getsCategory() ;
+        ((TextView) findViewById(R.id.txt_category)).setText(str);
+        ((TextView) findViewById(R.id.txt_name)).setText(product.getName());
         ((TextView) findViewById(R.id.txt_dday)).setText(product.getDday());
         ((TextView) findViewById(R.id.txt_people)).setText(String.valueOf(product.getBook() + "/" + product.getMaxBook()));
 
+        ((TextView)findViewById(R.id.price)).setText(product.getPrice()+" 원");
         tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         //tabs.setTextColor(Color.WHITE);
         pager = (ViewPager) findViewById(R.id.pager);
@@ -70,8 +70,9 @@ public class DetailDealActivity extends FragmentActivity{
         pager.setAdapter(adapter);
         tabs.setViewPager(pager);
 
+
         // 찜 버튼
-        Button btnKeep = (Button) findViewById(R.id.btn_keep);
+        TextView btnKeep = (TextView) findViewById(R.id.btn_keep);
         btnKeep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -113,7 +114,7 @@ public class DetailDealActivity extends FragmentActivity{
 
 
         // 신청 버튼
-        Button btnBook = (Button) findViewById(R.id.btn_book);
+        TextView btnBook = (TextView) findViewById(R.id.btn_book);
         btnBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

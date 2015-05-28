@@ -17,7 +17,7 @@
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent">
-            <TextView
+            <com.chocoroll.buyto.Model.MyTextViewBold
                 android:id="@+id/title_bar_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <TextView
+                    <com.chocoroll.buyto.Model.MyTextView
                         android:textColor="#6B6B6B"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
@@ -88,7 +88,7 @@
                     android:orientation="horizontal">
 
 
-                    <TextView
+                    <com.chocoroll.buyto.Model.MyTextView
                         android:textColor="#6B6B6B"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
@@ -148,7 +148,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp" >
 
-            <TextView
+            <com.chocoroll.buyto.Model.MyTextView
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:text="함께 구매하실래요?"
@@ -189,7 +189,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp" >
 
-            <TextView
+            <com.chocoroll.buyto.Model.MyTextView
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:text="비밀번호를 잊으셨나요?"

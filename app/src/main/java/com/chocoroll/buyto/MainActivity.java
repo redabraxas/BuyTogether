@@ -23,6 +23,7 @@ import com.chocoroll.buyto.Admin.AdminFragment;
 import com.chocoroll.buyto.AllDeal.AllDealFragment;
 import com.chocoroll.buyto.AllDeal.WishDealFragment;
 import com.chocoroll.buyto.Extra.Retrofit;
+import com.chocoroll.buyto.Home.HomeFragment;
 import com.chocoroll.buyto.Login.JoinActivity;
 import com.chocoroll.buyto.Login.LoginActivity;
 import com.chocoroll.buyto.MakeDeal.MakeDealActivity;
@@ -45,6 +46,7 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
     private SlidingMenu slidingMenu;
     TabHost tabs;
     TextView titleURL ;
+    TextView Home;
 
     public static Context mContext;
 
@@ -54,7 +56,12 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
     public static final int ADMIN = 3;
     private String userid="";
     private int loginmode=0;
+    private String result;
+    private String pushalarm;
+    private String push="";
 
+    public void setPushalarm(String push_alarm){ push = push_alarm;}
+    public String getPushalarm(){return push;}
     public String getUserId(){
         return userid;
     }
@@ -70,6 +77,20 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
         Intent intent = new Intent(this, SplashActivity.class);
         startActivity(intent);
         mContext = this;
+        Home = (TextView)findViewById(R.id.title_bar_img);
+        Home.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    slidingMenu.showContent(true);
+
+                    removeAllStack();
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.container, new HomeFragment());
+                    ft.setTransition(FragmentTransaction.TRANSIT_NONE);
+                    ft.addToBackStack(null);
+                    ft.commit();
+
+        }});
 
 
         slidingMenu = new SlidingMenu(this);
@@ -132,9 +153,13 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
                         @Override
                         public void success(String result, Response response) {
                             dialog.dismiss();
+//
+//                            result = (jsonObject.get("level")).toString();
+//                            pushalarm = (jsonObject.get("pushalarm")).toString();
+
                             if(result.equals("failed")){
 
-                                new AlertDialog.Builder(MainActivity.this).setMessage("아이디가 변경되었으니 다시 로그인 해주세요")
+                                new AlertDialog.Builder(MainActivity.this).setMessage("아이디를 확인하시고 다시 로그인 해주세요")
                                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
@@ -157,6 +182,7 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
                             }else{
 
 
+
                                 if(result.equals("1"))
                                 {
                                    menu_setting(MainActivity.USER);
@@ -174,6 +200,8 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
                             }
 
                         }
+
+
 
                         @Override
                         public void failure(RetrofitError retrofitError) {
