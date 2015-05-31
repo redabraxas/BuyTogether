@@ -29,7 +29,7 @@ public class DealStateAdapter extends ArrayAdapter<DealState> {
         View v = convertView;
         if (v == null) {
             LayoutInflater vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = vi.inflate(R.layout.model_deal, null);
+            v = vi.inflate(R.layout.model_deal_state, null);
         }
         DealState p = items.get(position);
         if (p != null) {

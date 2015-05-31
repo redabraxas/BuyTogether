@@ -13,6 +13,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.astuetz.PagerSlidingTabStrip;
@@ -182,6 +183,15 @@ public class AdminFragment extends Fragment {
                 mDealAdapter = new DealAdapter(getActivity(), R.layout.model_deal, dealList);
                 getAdminDealList();
 
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        Deal item =(Deal)mDealAdapter.getItem(i);
+                        PreDealDialog preDealDialog = new PreDealDialog(getActivity(), item);
+                        preDealDialog.show();
+                    }
+                });
+
             }else{
                 mSellerAdapter = new SellerAdapter(getActivity(), R.layout.model_seller, sellerList);
                 getAdminSellerList();
@@ -200,6 +210,7 @@ public class AdminFragment extends Fragment {
             dialog.setIndeterminate(true);
             dialog.setCancelable(false);
             dialog.show();
+
 
             new Thread(new Runnable() {
                 public void run() {
@@ -259,7 +270,6 @@ public class AdminFragment extends Fragment {
                                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                             // 확인 버튼 클릭시 설정
                                             public void onClick(DialogInterface dialog, int whichButton) {
-                                                getActivity().finish();
                                             }
                                         });
 
@@ -303,10 +313,10 @@ public class AdminFragment extends Fragment {
 
                                 for (int i = 0; i < jsonElements.size(); i++) {
                                     JsonObject deal = (JsonObject) jsonElements.get(i);
-                                    String id = (deal.get("id")).getAsString();
+                                    String id = (deal.get("userID")).getAsString();
                                     String sellerNum = (deal.get("sellerNum")).getAsString();
-                                    String phone = (deal.get("phone")).getAsString();
-                                    String address = (deal.get("address")).getAsString();
+                                    String phone = (deal.get("sellerPhone")).getAsString();
+                                    String address = (deal.get("sellerOffice")).getAsString();
 
                                     sellerList.add(new Seller(id,sellerNum,phone,address));
                                 }
@@ -316,7 +326,6 @@ public class AdminFragment extends Fragment {
 
                             @Override
                             public void failure(RetrofitError retrofitError) {
-
                                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                                 builder.setTitle("네트워크가 불안정합니다.")        // 제목 설정
                                         .setMessage("네트워크를 확인해주세요")        // 메세지 설정
@@ -324,7 +333,6 @@ public class AdminFragment extends Fragment {
                                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                             // 확인 버튼 클릭시 설정
                                             public void onClick(DialogInterface dialog, int whichButton) {
-                                                getActivity().finish();
                                             }
                                         });
 

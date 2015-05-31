@@ -71,20 +71,20 @@ public interface Retrofit {
     public void sendDepositCheck(@Body JsonObject info, Callback<String> callback);
 
     // 관리자메뉴
-    @POST("/seller/sellerDepositCheck.php") // 관리자에게 딜 승인/거절 리스트
+    @POST("/listview/dealState3List.php") // 관리자에게 딜 승인/거절 리스트
     public void getAdminDealList(Callback<JsonArray> callback);
-    @POST("/seller/sellerDepositCheck.php") // 관리자에게 판매자 승인/거절 리스트
+    @POST("/listview/sellerRequestList.php") // 관리자에게 판매자 승인/거절 리스트
     public void getAdminSellerList(Callback<JsonArray> callback);
-    @POST("/seller/sellerDepositCheck.php") // 딜 승인
-    public void sendDealOK(@Body JsonObject info, Callback<String> callback);
-    @POST("/seller/sellerDepositCheck.php") // 딜 거절
-    public void sendDealNO(@Body JsonObject info, Callback<String> callback);
-    @POST("/seller/sellerDepositCheck.php") // 판매자 승인
-    public void sendsSellerOK(@Body JsonObject info, Callback<String> callback);
-    @POST("/seller/sellerDepositCheck.php") // 판매자 거절
-    public void sendSellerNO(@Body JsonObject info, Callback<String> callback);
+    @POST("/seller/sellerDepositCheck.php") // 딜 승인/거절
+    public void sendDealResult(@Body JsonObject info, Callback<String> callback);
+    @POST("/seller/sellerRequestUp.php") // 판매자 승인/거절
+    public void sendsSellerResult(@Body JsonObject info, Callback<String> callback);
 
     // 나의 딜/위시딜 상태
-    @POST("/seller/sellerDepositCheck.php") // 판매자 거절
-    public void getDealStateList(@Body JsonObject info, Callback<JsonArray> callback);
+    @POST("/mydeal/showMyBookDeal.php") // 나의 신청딜 리스트를 가져옴
+    public void getDealBookStateList(@Body JsonObject info, Callback<JsonArray> callback);
+    @POST("/mydeal/showMyKeepDeal.php") // 나의 찜딜 리스트를 가져옴
+    public void getDealKeepStateList(@Body JsonObject info, Callback<JsonArray> callback);
+    @POST("/mydeal/showMyWishDeal.php") // 나의 위시딜 리스트를 가져옴
+    public void getDealWishStateList(@Body JsonObject info, Callback<JsonArray> callback);
 }

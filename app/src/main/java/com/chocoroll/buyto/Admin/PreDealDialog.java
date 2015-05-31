@@ -1,24 +1,22 @@
 package com.chocoroll.buyto.Admin;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.view.LayoutInflater;
+import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 
-import com.chocoroll.buyto.DetailDeal.DetailDealActivity;
-import com.chocoroll.buyto.Extra.DownloadImageTask;
+import com.chocoroll.buyto.DetailDeal.Answer;
 import com.chocoroll.buyto.Extra.Retrofit;
+import com.chocoroll.buyto.MainActivity;
 import com.chocoroll.buyto.Model.Deal;
 import com.chocoroll.buyto.R;
-import com.chocoroll.buyto.Seller.DepositFragment;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
@@ -31,58 +29,45 @@ import retrofit.client.Response;
 /**
  * Created by RA on 2015-05-23.
  */
+public class PreDealDialog extends Dialog {
 
-public class SellerAdapter extends ArrayAdapter<Seller> {
-    private ArrayList<Seller> items;
-    private Context context;
+    Deal deal;
+    Context context;
 
-    public SellerAdapter(Context context, int textViewResourceId, ArrayList<Seller> items) {
-        super(context, textViewResourceId, items);
-        this.items = items;
+    public PreDealDialog(Context context, Deal deal) {
+        super(context);
         this.context = context;
+        this.deal = deal;
     }
 
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View v = convertView;
-        if (v == null) {
-            LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = vi.inflate(R.layout.model_seller, null);
-        }
-        final Seller p = items.get(position);
-        if (p != null) {
 
-            ((TextView) v.findViewById(R.id.sellerID)).setText(p.getId());
-            ((TextView) v.findViewById(R.id.sellerNum)).setText("사업자번호: "+p.getSellerNum());
-            ((TextView) v.findViewById(R.id.sellerPhone)).setText("폰번호: " +p.getPhone());
-            ((TextView) v.findViewById(R.id.sellerOffice)).setText("사무실: "+p.getOffice());
-
-            ((Button) v.findViewById(R.id.btnOK)).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    sendsSellerResult(p.getId(), "ok");
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.dialog_predeal);
+        this.setTitle("딜 미리보기");
 
 
-                }
-            });
+        ((Button)findViewById(R.id.btnOK)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendDealResult("ok");
+            }
+        });
+
+        ((Button)findViewById(R.id.btnNO)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendDealResult("no");
+            }
+        });
 
 
-            ((Button) v.findViewById(R.id.btnNO)).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    sendsSellerResult(p.getId(), "no");
-
-
-                }
-            });
-
-
-        }
-        return v;
     }
 
-    void sendsSellerResult(String id, String result){
 
+
+    void sendDealResult(String result){
 
         final String str;
         if(result.equals("ok")){
@@ -93,13 +78,13 @@ public class SellerAdapter extends ArrayAdapter<Seller> {
 
 
         final ProgressDialog dialog = new ProgressDialog(context);
-        dialog.setMessage("판매자를 "+str+"하는 중입니다...");
+        dialog.setMessage("딜을 "+str+"하는 중입니다...");
         dialog.setIndeterminate(true);
         dialog.setCancelable(false);
         dialog.show();
 
         final JsonObject info = new JsonObject();
-        info.addProperty("id", id);
+        info.addProperty("dealNum", deal.getNum());
         info.addProperty("result", result);
 
 
@@ -111,7 +96,7 @@ public class SellerAdapter extends ArrayAdapter<Seller> {
                             .setEndpoint(Retrofit.ROOT)  //call your base url
                             .build();
                     Retrofit retrofit = restAdapter.create(Retrofit.class); //this is how retrofit create your api
-                    retrofit.sendsSellerResult(info, new Callback<String>() {
+                    retrofit.sendDealResult(info, new Callback<String>() {
 
                         @Override
                         public void success(String result, Response response) {
@@ -122,7 +107,7 @@ public class SellerAdapter extends ArrayAdapter<Seller> {
 
                             if(result.equals("success")){
                                 builder.setTitle("성공")        // 제목 설정
-                                        .setMessage("판매자를 "+str+"하셨습니다.")        // 메세지 설정
+                                        .setMessage("딜을 "+str+ "하셨습니다.")        // 메세지 설정
                                         .setCancelable(false)        // 뒤로 버튼 클릭시 취소 가능 설정
                                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                             // 확인 버튼 클릭시 설정
@@ -131,7 +116,7 @@ public class SellerAdapter extends ArrayAdapter<Seller> {
                                         });
 
                             }else{
-                                builder.setTitle("판매자 "+str+"을 실패하였습니다.")        // 제목 설정
+                                builder.setTitle("딜 "+str+"을 실패하였습니다.")        // 제목 설정
                                         .setMessage("네트워크를 확인해주세요")        // 메세지 설정
                                         .setCancelable(false)        // 뒤로 버튼 클릭시 취소 가능 설정
                                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
@@ -148,7 +133,6 @@ public class SellerAdapter extends ArrayAdapter<Seller> {
 
                         @Override
                         public void failure(RetrofitError retrofitError) {
-
                             dialog.dismiss();
                             AlertDialog.Builder builder = new AlertDialog.Builder(context);
                             builder.setTitle("네트워크가 불안정합니다.")        // 제목 설정
@@ -170,7 +154,6 @@ public class SellerAdapter extends ArrayAdapter<Seller> {
                 }
             }
         }).start();
-
     }
 
 }

@@ -12,6 +12,9 @@ public class DealState {
     String price;
 
     String stateNum;
+
+    String waiting;
+
     String deposit;
     String date;
 
@@ -26,6 +29,18 @@ public class DealState {
         this.deposit =deposit;
         this.date =date;
     }
+
+    public DealState(String dealNum, String dealName, String thumbnail, String bCategory, String sCategory, String price, String stateNum, String waiting){
+        this.dealNum = dealNum;
+        this.dealName =dealName;
+        this.thumbnail =thumbnail;
+        this.bCategory =bCategory;
+        this.sCategory = sCategory;
+        this.price=price;
+        this.stateNum =stateNum;
+        this.waiting =waiting;
+    }
+
 
     public String getbCategory() {
         return bCategory;
