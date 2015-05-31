@@ -11,8 +11,10 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -22,6 +24,7 @@ import android.widget.TextView;
 import com.chocoroll.buyto.Admin.AdminFragment;
 import com.chocoroll.buyto.AllDeal.AllDealFragment;
 import com.chocoroll.buyto.AllDeal.WishDealFragment;
+import com.chocoroll.buyto.DetailDeal.DetailDealActivity;
 import com.chocoroll.buyto.Extra.Retrofit;
 import com.chocoroll.buyto.Home.HomeFragment;
 import com.chocoroll.buyto.Login.JoinActivity;
@@ -29,9 +32,15 @@ import com.chocoroll.buyto.Login.LoginActivity;
 import com.chocoroll.buyto.MakeDeal.MakeDealActivity;
 import com.chocoroll.buyto.Mine.DealStateFragment;
 import com.chocoroll.buyto.Mine.MyInfoFragment;
+import com.chocoroll.buyto.Model.BookMark;
+import com.chocoroll.buyto.Model.BookMarkAdapter;
+import com.chocoroll.buyto.Model.Deal;
 import com.chocoroll.buyto.Seller.SellerFragment;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+
+import java.util.ArrayList;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -59,6 +68,9 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
     private String result;
     private String pushalarm;
     private String push="";
+
+    ArrayList<BookMark> bookMarkList= new ArrayList<BookMark>();
+    BookMarkAdapter bookMarkAdapter;
 
     public void setPushalarm(String push_alarm){ push = push_alarm;}
     public String getPushalarm(){return push;}
@@ -215,6 +227,83 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
                                         public void onClick(DialogInterface dialog, int whichButton) {
                                             finish();
 
+                                        }
+                                    });
+
+                            AlertDialog dialog = builder.create();    // 알림창 객체 생성
+                            dialog.show();    // 알림창 띄우기
+
+                        }
+                    });
+                }
+                catch (Throwable ex) {
+
+                }
+            }
+        }).start();
+
+    }
+
+   public void getBookMark(){
+
+        final JsonObject info = new JsonObject();
+        info.addProperty("id", userid);
+
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+
+                    RestAdapter restAdapter = new RestAdapter.Builder()
+                            .setEndpoint(Retrofit.ROOT)  //call your base url
+                            .build();
+                    Retrofit retrofit = restAdapter.create(Retrofit.class); //this is how retrofit create your api
+                    retrofit.getBookMarkList(info, new Callback<JsonArray>() {
+
+                        @Override
+                        public void success(JsonArray jsonElements, Response response) {
+
+                            dialog.dismiss();
+                            bookMarkList.clear();
+
+                            for (int i = 0; i < jsonElements.size(); i++) {
+                                JsonObject deal = (JsonObject) jsonElements.get(i);
+                                String bCategory = (deal.get("bigCategory")).getAsString();
+                                String sCategory = (deal.get("smallCategory")).getAsString();
+
+                                bookMarkList.add(new BookMark(bCategory, sCategory));
+
+                            }
+                            ListView listView = (ListView) findViewById(R.id.listViewBookmark);
+                            listView.setAdapter(bookMarkAdapter);
+                            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                                    slidingMenu.showContent(true);
+                                    BookMark item =(BookMark)bookMarkAdapter.getItem(i);
+
+                                    removeAllStack();
+                                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                                    ft.replace(R.id.container, new AllDealFragment(item));
+                                    ft.setTransition(FragmentTransaction.TRANSIT_NONE);
+                                    ft.addToBackStack(null);
+                                    ft.commit();
+                                }
+                            });
+
+                        }
+
+                        @Override
+                        public void failure(RetrofitError retrofitError) {
+                            dialog.dismiss();
+
+                            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                            builder.setTitle("네트워크가 불안정합니다.")        // 제목 설정
+                                    .setMessage("네트워크를 확인해주세요")        // 메세지 설정
+                                    .setCancelable(false)        // 뒤로 버튼 클릭시 취소 가능 설정
+                                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                        // 확인 버튼 클릭시 설정
+                                        public void onClick(DialogInterface dialog, int whichButton) {
                                         }
                                     });
 
@@ -403,9 +492,11 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
 
 
             // 즐겨찾는 메뉴 설정
+            bookMarkAdapter = new BookMarkAdapter(MainActivity.this, R.layout.model_bookmark,bookMarkList);
             menu_bookmark.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
 
                     ListView listView = (ListView) findViewById(R.id.listViewBookmark);
                     if(listView.getVisibility() == View.VISIBLE){
@@ -416,6 +507,10 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
 
                 }
             });
+
+
+
+            getBookMark();
 
             txtPush.setText("현재 도착한 알림이 없습니다.");
 

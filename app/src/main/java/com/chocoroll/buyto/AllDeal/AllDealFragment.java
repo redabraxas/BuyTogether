@@ -1,5 +1,6 @@
 package com.chocoroll.buyto.AllDeal;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -9,15 +10,19 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.chocoroll.buyto.DetailDeal.DetailDealActivity;
+import com.chocoroll.buyto.MainActivity;
+import com.chocoroll.buyto.Model.BookMark;
 import com.chocoroll.buyto.Model.Deal;
 import com.chocoroll.buyto.Model.DealAdapter;
 import com.chocoroll.buyto.R;
@@ -42,11 +47,20 @@ public class AllDealFragment extends Fragment {
     DealAdapter mAdapter;
     ListView listView;
 
+    BookMark bookMark=null;
+    int bookMarkIndex=0;
+
     public interface AllDealListner{
         void changeTitle(String str);
     }
     public AllDealFragment() {
         // Required empty public constructor
+    }
+
+    @SuppressLint("ValidFragment")
+    public AllDealFragment(BookMark bookMark) {
+        // Required empty public constructor
+        this.bookMark=bookMark;
     }
 
     @Override
@@ -65,51 +79,46 @@ public class AllDealFragment extends Fragment {
         final Spinner spinnerS = (Spinner)v.findViewById(R.id.spinner_small_category);
         final Spinner spinnerB = (Spinner)v.findViewById(R.id.spinner_big_category);
 
+        final ArrayAdapter<CharSequence>[] adapter = new ArrayAdapter[]{null};
         spinnerB.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                ArrayAdapter<CharSequence> adapter = null;
+
                 String item = spinnerB.getSelectedItem().toString();
 
                 if (item.equals("패션/잡화")) {
-                    adapter= ArrayAdapter.createFromResource(getActivity(), R.array.small_category_arrays_fashion,
+                    adapter[0] = ArrayAdapter.createFromResource(getActivity(), R.array.small_category_arrays_fashion,
                             android.R.layout.simple_spinner_item);
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 }else if(item.equals("뷰티")){
-                    adapter= ArrayAdapter.createFromResource(getActivity(), R.array.small_category_arrays_beauty,
+                    adapter[0] = ArrayAdapter.createFromResource(getActivity(), R.array.small_category_arrays_beauty,
                             android.R.layout.simple_spinner_item);
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 }else if(item.equals("식품")){
-                    adapter= ArrayAdapter.createFromResource(getActivity(), R.array.small_category_arrays_food,
+                    adapter[0] = ArrayAdapter.createFromResource(getActivity(), R.array.small_category_arrays_food,
                             android.R.layout.simple_spinner_item);
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 }else if(item.equals("주방/생활용품")){
-                    adapter= ArrayAdapter.createFromResource(getActivity(), R.array.small_category_arrays_living,
+                    adapter[0] = ArrayAdapter.createFromResource(getActivity(), R.array.small_category_arrays_living,
                             android.R.layout.simple_spinner_item);
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 }else if(item.equals("가구/홈데코")){
-                    adapter= ArrayAdapter.createFromResource(getActivity(), R.array.small_category_arrays_furniture,
+                    adapter[0] = ArrayAdapter.createFromResource(getActivity(), R.array.small_category_arrays_furniture,
                             android.R.layout.simple_spinner_item);
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 }else if(item.equals("가전/디지털")){
-                    adapter= ArrayAdapter.createFromResource(getActivity(), R.array.small_category_arrays_digital,
+                    adapter[0] = ArrayAdapter.createFromResource(getActivity(), R.array.small_category_arrays_digital,
                             android.R.layout.simple_spinner_item);
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
                 }else{
                     // 전체보기인 경우
-
-                    dialog = new ProgressDialog(getActivity());
-                    dialog.setMessage("딜 리스트를 받아오는 중입니다...");
-                    dialog.setIndeterminate(true);
-                    dialog.setCancelable(false);
-                    dialog.show();
                     getDealList("전체보기","전체보기");
                 }
 
 
-                spinnerS.setAdapter(adapter);
+                spinnerS.setAdapter(adapter[0]);
+
+                if(bookMark != null){
+                    spinnerS.setSelection(bookMarkIndex);
+                    bookMark = null;
+                }
 
             }
 
@@ -122,12 +131,7 @@ public class AllDealFragment extends Fragment {
         spinnerS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                dialog = new ProgressDialog(getActivity());
-                dialog.setMessage("딜 리스트를 받아오는 중입니다...");
-                dialog.setIndeterminate(true);
-                dialog.setCancelable(false);
-                dialog.show();
-
+                adapter[0].setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 String item = spinnerS.getSelectedItem().toString();
                 getDealList(spinnerB.getSelectedItem().toString(),item);
             }
@@ -138,6 +142,48 @@ public class AllDealFragment extends Fragment {
             }
         });
 
+        ((Button)v.findViewById(R.id.bookMark)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String bCategory = spinnerB.getSelectedItem().toString();
+                String sCategory =spinnerS.getSelectedItem().toString();
+                addBookMark(bCategory,sCategory);
+            }
+        });
+
+        if(bookMark != null){
+            String[] bicCategory = getResources().getStringArray(R.array.big_category_arrays);
+            for(int i=0; i<bicCategory.length; i++){
+                if(bicCategory[i].equals(bookMark.getbCategory())){
+                    spinnerB.setSelection(i);
+                    break;
+                }
+            }
+
+
+            String[] sCategory = new String[0];
+
+            if (bookMark.getbCategory().equals("패션/잡화")) {
+                sCategory = getResources().getStringArray(R.array.small_category_arrays_fashion);
+            }else if(bookMark.getbCategory().equals("뷰티")){
+                sCategory = getResources().getStringArray(R.array.small_category_arrays_beauty);
+            }else if(bookMark.getbCategory().equals("식품")){
+                sCategory = getResources().getStringArray(R.array.small_category_arrays_food);
+            }else if(bookMark.getbCategory().equals("주방/생활용품")){
+                sCategory = getResources().getStringArray(R.array.small_category_arrays_living);
+            }else if(bookMark.getbCategory().equals("가구/홈데코")){
+                sCategory = getResources().getStringArray(R.array.small_category_arrays_furniture);
+            }else if(bookMark.getbCategory().equals("가전/디지털")) {
+                sCategory = getResources().getStringArray(R.array.small_category_arrays_digital);
+            }
+
+            for(int i=0; i<sCategory.length; i++){
+                if(sCategory[i].equals(bookMark.getsCategory())){
+                    bookMarkIndex = i;
+                    break;
+                }
+            }
+        }
 
         pList = new ArrayList<Deal>();
 
@@ -162,6 +208,87 @@ public class AllDealFragment extends Fragment {
         return v;
     }
 
+    void addBookMark(String bCategory, String sCategory){
+
+        final JsonObject info = new JsonObject();
+        info.addProperty("id", ((MainActivity)MainActivity.mContext).getUserId());
+        info.addProperty("bigCategory",bCategory);
+        info.addProperty("smallCategory", sCategory);
+
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+
+                    RestAdapter restAdapter = new RestAdapter.Builder()
+                            .setEndpoint(Retrofit.ROOT)  //call your base url
+                            .build();
+                    Retrofit retrofit = restAdapter.create(Retrofit.class); //this is how retrofit create your api
+                    retrofit.addBookMark(info, new Callback<String>() {
+
+                        @Override
+                        public void success(String result, Response response) {
+
+                            dialog.dismiss();
+                            if(result.equals("success")){
+                                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                                builder.setTitle("즐겨찾기 추가 성공")        // 제목 설정
+                                        .setMessage("즐겨찾기를 추가하셨습니다.")        // 메세지 설정
+                                        .setCancelable(false)        // 뒤로 버튼 클릭시 취소 가능 설정
+                                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                            // 확인 버튼 클릭시 설정
+                                            public void onClick(DialogInterface dialog, int whichButton) {
+
+                                            }
+                                        });
+
+                                AlertDialog dialog = builder.create();    // 알림창 객체 생성
+                                dialog.show();    // 알림창 띄우기
+                            }else{
+                                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                                builder.setTitle("즐겨찾기 추가 실패")        // 제목 설정
+                                        .setMessage("이미 즐겨찾기 하신 카테고리입니다.")        // 메세지 설정
+                                        .setCancelable(false)        // 뒤로 버튼 클릭시 취소 가능 설정
+                                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                            // 확인 버튼 클릭시 설정
+                                            public void onClick(DialogInterface dialog, int whichButton) {
+                                            }
+                                        });
+
+                                AlertDialog dialog = builder.create();    // 알림창 객체 생성
+                                dialog.show();    // 알림창 띄우기
+                            }
+
+                        }
+
+                        @Override
+                        public void failure(RetrofitError retrofitError) {
+                            dialog.dismiss();
+
+                            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                            builder.setTitle("네트워크가 불안정합니다.")        // 제목 설정
+                                    .setMessage("네트워크를 확인해주세요")        // 메세지 설정
+                                    .setCancelable(false)        // 뒤로 버튼 클릭시 취소 가능 설정
+                                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                        // 확인 버튼 클릭시 설정
+                                        public void onClick(DialogInterface dialog, int whichButton) {
+                                        }
+                                    });
+
+                            AlertDialog dialog = builder.create();    // 알림창 객체 생성
+                            dialog.show();    // 알림창 띄우기
+
+                        }
+                    });
+                }
+                catch (Throwable ex) {
+
+                }
+            }
+        }).start();
+
+    }
+
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -175,6 +302,13 @@ public class AllDealFragment extends Fragment {
     }
 
     void getDealList(String bCategory, String sCategory){
+
+        dialog = new ProgressDialog(getActivity());
+        dialog.setMessage("딜 리스트를 받아오는 중입니다...");
+        dialog.setIndeterminate(true);
+        dialog.setCancelable(false);
+        dialog.show();
+
 
         final JsonObject info = new JsonObject();
         info.addProperty("bCategory",bCategory);

@@ -37,6 +37,13 @@
             android:id="@+id/spinner_small_category"
             android:prompt="@string/small_category_prompt"
             android:spinnerMode="dropdown" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="★"
+            android:background="@null"
+            android:id="@+id/bookMark"/>
     </LinearLayout>
 
 

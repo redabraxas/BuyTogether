@@ -11,9 +11,11 @@ package com.chocoroll.buyto.Login;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -27,6 +29,7 @@ import android.widget.TextView;
 
 import com.chocoroll.buyto.Extra.Retrofit;
 import com.chocoroll.buyto.R;
+import com.google.android.gcm.GCMRegistrar;
 import com.google.gson.JsonObject;
 
 import retrofit.Callback;
@@ -64,6 +67,11 @@ public class JoinActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join);
+
+
+        RegistPhoneID task1 = new RegistPhoneID();
+        task1.execute(JoinActivity.this);
+
         // TODO Auto-generated method stub
 //        final EditText edit_id = (EditText)findViewById(R.id.edit_join_id);
         final EditText edit_pw = (EditText)findViewById(R.id.edit_join_pw);
@@ -141,69 +149,13 @@ public class JoinActivity extends Activity {
 
               else
               {
-                  dialog = new ProgressDialog(JoinActivity.this);
-                  dialog.setMessage("회원가입 요청중입니다...");
-                  dialog.setIndeterminate(true);
-                  dialog.setCancelable(false);
-                  dialog.show();
-                  TextView textView = (TextView) dialog.findViewById(android.R.id.message);
-                  Typeface face=Typeface.SANS_SERIF;
-                  textView.setTypeface(face);
-                  new Thread(new Runnable() {
-                      public void run() {
 
-                           try {
-                               JsonObject info=new JsonObject();
-                               info.addProperty("id", id);
-                                info.addProperty("passwd", passwd);
-                               info.addProperty("name", name);
-                                info.addProperty("email", email);
-                          RestAdapter restAdapter = new RestAdapter.Builder()
-                                       .setEndpoint(Retrofit.ROOT)  //call your base url
-                                       .build();
-                              Retrofit join = restAdapter.create(Retrofit.class); //this is how retrofit create your api
-                              join.join(info,new Callback<String>() {
-                                  @Override
-                                   public void success(String result, Response response) {
-                                       dialog.dismiss();
-                                       if(result.equals("Success"))
-                                          finish();
-                                      else
-                                      {
-                                           AlertDialog dialog2 = new AlertDialog.Builder(JoinActivity.this).setMessage("알수 없는 이유로 회원가입에 실패하였습니다.")
-                                                  .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                                                       @Override
-                                                      public void onClick(DialogInterface dia, int which) {
-                                                           dia.dismiss();
-                                                        }
-                                                  }).show();
-                                           TextView textView = (TextView) dialog2.findViewById(android.R.id.message);
-                                           Typeface face=Typeface.SANS_SERIF;
-                                           textView.setTypeface(face);
-                                        }
-                                   }
 
-                                   @Override
-                                    public void failure(RetrofitError retrofitError) {
-                                        dialog.dismiss();
-                                        AlertDialog dialog2 = new AlertDialog.Builder(JoinActivity.this).setMessage("네트워크 상태를 확인해주세요.")
-                                                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(DialogInterface dia, int which) {
-                                                        dia.dismiss();
-                                                    }
-                                                }).show();
-                                        TextView textView = (TextView) dialog2.findViewById(android.R.id.message);
-                                        Typeface face=Typeface.SANS_SERIF;
-                                        textView.setTypeface(face);
-                                    }
-                                });
-                            }
-                            catch (Throwable ex) {
-                                ex.printStackTrace();
-                            }
-                        }
-                    }).start();
+                  RegistPhoneID task1 = new RegistPhoneID();
+                  task1.execute(JoinActivity.this);
+
+
+
                 }
             }
         });
@@ -228,6 +180,78 @@ public class JoinActivity extends Activity {
 
     }
 
+    void join(final String phoneID){
+        dialog = new ProgressDialog(JoinActivity.this);
+        dialog.setMessage("회원가입 요청중입니다...");
+        dialog.setIndeterminate(true);
+        dialog.setCancelable(false);
+        dialog.show();
+
+
+        TextView textView = (TextView) dialog.findViewById(android.R.id.message);
+        Typeface face=Typeface.SANS_SERIF;
+        textView.setTypeface(face);
+
+        final JsonObject info=new JsonObject();
+
+        info.addProperty("phoneID", phoneID);
+        info.addProperty("id", id);
+        info.addProperty("passwd", passwd);
+        info.addProperty("name", name);
+        info.addProperty("email", email);
+
+        new Thread(new Runnable() {
+            public void run() {
+
+                try {
+
+                    RestAdapter restAdapter = new RestAdapter.Builder()
+                            .setEndpoint(Retrofit.ROOT)  //call your base url
+                            .build();
+                    Retrofit join = restAdapter.create(Retrofit.class); //this is how retrofit create your api
+                    join.join(info,new Callback<String>() {
+                        @Override
+                        public void success(String result, Response response) {
+                            dialog.dismiss();
+                            if(result.equals("Success"))
+                                finish();
+                            else
+                            {
+                                AlertDialog dialog2 = new AlertDialog.Builder(JoinActivity.this).setMessage("알수 없는 이유로 회원가입에 실패하였습니다.")
+                                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dia, int which) {
+                                                dia.dismiss();
+                                            }
+                                        }).show();
+                                TextView textView = (TextView) dialog2.findViewById(android.R.id.message);
+                                Typeface face=Typeface.SANS_SERIF;
+                                textView.setTypeface(face);
+                            }
+                        }
+
+                        @Override
+                        public void failure(RetrofitError retrofitError) {
+                            dialog.dismiss();
+                            AlertDialog dialog2 = new AlertDialog.Builder(JoinActivity.this).setMessage("네트워크 상태를 확인해주세요.")
+                                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dia, int which) {
+                                            dia.dismiss();
+                                        }
+                                    }).show();
+                            TextView textView = (TextView) dialog2.findViewById(android.R.id.message);
+                            Typeface face=Typeface.SANS_SERIF;
+                            textView.setTypeface(face);
+                        }
+                    });
+                }
+                catch (Throwable ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }).start();
+    }
     public void onClickedButton(View v){
         setContentView(R.layout.activity_join);
         CheckBox checkbox = (CheckBox) findViewById(R.id.seller_check);
@@ -315,4 +339,42 @@ public class JoinActivity extends Activity {
         }
 
     };
+
+
+
+    // 처음 실행 시 기기 아이디를 등록한다!!
+    public class RegistPhoneID extends AsyncTask<Context , Integer , String> {
+
+        String PROJECT_ID = "988805512295";
+        @Override
+        protected String doInBackground(Context... params) {
+            // TODO Auto-generated method stub
+            String regId;
+
+            GCMRegistrar.checkDevice(params[0]);
+            GCMRegistrar.checkManifest(params[0]);
+
+            regId = GCMRegistrar.getRegistrationId(params[0]);
+
+            if (regId.equals("")) {
+                GCMRegistrar.register(params[0], PROJECT_ID);
+                regId = GCMRegistrar.getRegistrationId(params[0]);
+            }
+
+            return regId;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            // TODO Auto-generated method stub
+            super.onPostExecute(result);
+
+
+            //join(result);
+
+
+        }
+
+    }
+
 }
