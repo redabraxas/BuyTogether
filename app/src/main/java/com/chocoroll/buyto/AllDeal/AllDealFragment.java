@@ -230,6 +230,9 @@ public class AllDealFragment extends Fragment {
 
                             dialog.dismiss();
                             if(result.equals("success")){
+
+                                ((MainActivity)MainActivity.mContext).getBookMark();
+
                                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                                 builder.setTitle("즐겨찾기 추가 성공")        // 제목 설정
                                         .setMessage("즐겨찾기를 추가하셨습니다.")        // 메세지 설정
