@@ -24,7 +24,6 @@ import android.widget.TextView;
 import com.chocoroll.buyto.Admin.AdminFragment;
 import com.chocoroll.buyto.AllDeal.AllDealFragment;
 import com.chocoroll.buyto.AllDeal.WishDealFragment;
-import com.chocoroll.buyto.DetailDeal.DetailDealActivity;
 import com.chocoroll.buyto.Extra.Retrofit;
 import com.chocoroll.buyto.Home.HomeFragment;
 import com.chocoroll.buyto.Login.JoinActivity;
@@ -34,9 +33,9 @@ import com.chocoroll.buyto.Mine.DealStateFragment;
 import com.chocoroll.buyto.Mine.MyInfoFragment;
 import com.chocoroll.buyto.Model.BookMark;
 import com.chocoroll.buyto.Model.BookMarkAdapter;
-import com.chocoroll.buyto.Model.Deal;
 import com.chocoroll.buyto.Seller.SellerFragment;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
@@ -68,12 +67,17 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
     private String result;
     private String pushalarm;
     private String push="";
-
+    private String level;
     ArrayList<BookMark> bookMarkList= new ArrayList<BookMark>();
     BookMarkAdapter bookMarkAdapter;
 
     public void setPushalarm(String push_alarm){ push = push_alarm;}
-    public String getPushalarm(){return push;}
+    public boolean getPushalarm(){
+        if(push=="0")
+        return false;
+        else
+        return true;
+    }
     public String getUserId(){
         return userid;
     }
@@ -125,26 +129,27 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
 
         titleURL = (TextView)findViewById(R.id.title_url);
 
-        // 자동로그인에 체크가 되어있따면
-        SharedPreferences setting = getSharedPreferences("setting", MODE_PRIVATE);
-        if(setting.getBoolean("auto_login", false)){
-
-            dialog = new ProgressDialog(MainActivity.this);
-            dialog.setMessage("로그인 정보를 받아오는 중입니다...");
-            dialog.setIndeterminate(true);
-            dialog.setCancelable(false);
-            dialog.show();
-
-
-
-            userid = setting.getString("id", "");
-            String passwd = setting.getString("pw","");
-            JsonObject info = new JsonObject();
-            info.addProperty("id", userid);
-            info.addProperty("pw", passwd);
-            Login(info);
-
-        }else{
+//        // 자동로그인에 체크가 되어있따면
+//        SharedPreferences setting = getSharedPreferences("setting", MODE_PRIVATE);
+//        if(setting.getBoolean("auto_login", false)){
+//
+//            dialog = new ProgressDialog(MainActivity.this);
+//            dialog.setMessage("로그인 정보를 받아오는 중입니다...");
+//            dialog.setIndeterminate(true);
+//            dialog.setCancelable(false);
+//            dialog.show();
+//
+//
+//
+//            userid = setting.getString("id", "");
+//            String passwd = setting.getString("pw","");
+//            JsonObject info = new JsonObject();
+//            info.addProperty("id", userid);
+//            info.addProperty("pw", passwd);
+//            Login(info);
+//
+//        }else
+        {
             menu_setting(LOGOUTUSER);
         }
 
@@ -161,59 +166,57 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
                             .setEndpoint(Retrofit.ROOT)  //call your base url
                             .build();
                     Retrofit sendreport = restAdapter.create(Retrofit.class); //this is how retrofit create your api
-                    sendreport.login(info, new Callback<String>() {
+                    sendreport.login(info, new Callback<JsonElement>() {
                         @Override
-                        public void success(String result, Response response) {
+                        public void success(JsonElement element, Response response) {
                             dialog.dismiss();
-//
-//                            result = (jsonObject.get("level")).toString();
-//                            pushalarm = (jsonObject.get("pushalarm")).toString();
 
-                            if(result.equals("failed")){
+                            JsonObject jsonObject = element.getAsJsonObject();
+                            Log.e("result",jsonObject.toString());
+                            result = (jsonObject.get("result")).toString();
 
-                                new AlertDialog.Builder(MainActivity.this).setMessage("아이디를 확인하시고 다시 로그인 해주세요")
-                                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                dialog.dismiss();
+                            if (result.equals("success")) {
+                                level = (jsonObject.get("level")).getAsString();
+                                pushalarm = (jsonObject.get("pushalarm")).getAsString();
 
-                                            }
-                                        }).show();
+                                setUserId(userid);
+                                setPushalarm(pushalarm);
 
-                            }else if(result.equals("passwd_failed")){
-
-                                new AlertDialog.Builder(MainActivity.this).setMessage("비밀번호가 변경되었으니 다시 로그인 해주세요.")
-                                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                dialog.dismiss();
-
-                                            }
-                                        }).show();
-
-                            }else{
-
-
-
-                                if(result.equals("1"))
-                                {
-                                   menu_setting(MainActivity.USER);
-                                }
-                                else if(result.equals("2"))
-                                {
-                                   menu_setting(MainActivity.USER);
-                                }
-                                else if(result.equals("3"))
-                                {
+                                if (level.equals("1")) {
+                                    menu_setting(MainActivity.USER);
+                                } else if (level.equals("2")) {
+                                    menu_setting(MainActivity.USER);
+                                } else if (level.equals("3")) {
                                     menu_setting(MainActivity.SELLER);
-                                }else if(result.equals("4")){
+                                } else if (level.equals("4")) {
                                     menu_setting(MainActivity.ADMIN);
+                                } }
+                            else if (result.equals("id_fail")) {
+
+                                    new AlertDialog.Builder(MainActivity.this).setMessage("아이디를 확인하시고 다시 로그인 해주세요")
+                                            .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    dialog.dismiss();
+
+                                                }
+                                            }).show();
+
+                                } else if (result.equals("pw_fail")) {
+
+                                    new AlertDialog.Builder(MainActivity.this).setMessage("비밀번호가 변경되었으니 다시 로그인 해주세요.")
+                                            .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    dialog.dismiss();
+
+                                                }
+                                            }).show();
+
+
                                 }
-                            }
 
                         }
-
-
 
                         @Override
                         public void failure(RetrofitError retrofitError) {

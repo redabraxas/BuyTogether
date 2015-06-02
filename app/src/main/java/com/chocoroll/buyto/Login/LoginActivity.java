@@ -16,9 +16,10 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.chocoroll.buyto.Extra.Retrofit;
 import com.chocoroll.buyto.MainActivity;
 import com.chocoroll.buyto.R;
-import com.chocoroll.buyto.Extra.Retrofit;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import retrofit.Callback;
@@ -121,38 +122,25 @@ public class LoginActivity extends Activity {
                                 .setEndpoint(Retrofit.ROOT)  //call your base url
                                 .build();
                         Retrofit login = restAdapter.create(Retrofit.class); //this is how retrofit create your api
-                        login.login(info, new Callback<String>() {
+                        login.login(info, new Callback<JsonElement>() {
                             @Override
-                            public void success(String result, Response response) {
+                            public void success(JsonElement element, Response response) {
 
                                 dialog.dismiss();
+                                JsonObject jsonObject = element.getAsJsonObject();
 
-//                                result = (jsonObject.get("level")).toString();
-//                                pushalarm = (jsonObject.get("pushalarm")).toString();
 
-                                if(result.equals("failed")){
+                                pushalarm = (jsonObject.get("pushalarm")).toString();
 
-                                    new AlertDialog.Builder(LoginActivity.this).setMessage("아이디를 다시 확인해주세요.")
-                                            .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialog, int which) {
-                                                    dialog.dismiss();
+                                String level = (jsonObject.get("level")).toString();
 
-                                                }
-                                            }).show();
+                                String result = (jsonObject.get("result")).toString();
 
-                                }else if(result.equals("passwd_failed")){
 
-                                    new AlertDialog.Builder(LoginActivity.this).setMessage("비밀번호를 다시 확인해주세요.")
-                                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            dialog.dismiss();
 
-                                        }
-                                    }).show();
+                                if(result.equals("success")){
 
-                                }else{
+
                                     // 자동로그인에 체크가 되어있따면
                                     CheckBox check_auto = (CheckBox)findViewById(R.id.auto_login);
                                     if(check_auto.isChecked()){
@@ -163,27 +151,54 @@ public class LoginActivity extends Activity {
                                         editor.putString("pw",passwd);
                                         editor.putBoolean("auto_login", true);
                                         editor.commit();
-                                    }
 
-                                    ((MainActivity)MainActivity.mContext).setPushalarm(pushalarm);
 
-                                    ((MainActivity)MainActivity.mContext).setUserId(id);
+                                        ((MainActivity)MainActivity.mContext).setPushalarm(pushalarm);
 
-                                    if(result.equals("1"))
-                                    {
-                                        ((MainActivity)MainActivity.mContext).menu_setting(MainActivity.USER);
-                                    }
-                                    else if(result.equals("2"))
-                                    {
-                                        ((MainActivity)MainActivity.mContext).menu_setting(MainActivity.USER);
-                                    }
-                                    else if(result.equals("3"))
-                                    {
-                                        ((MainActivity)MainActivity.mContext).menu_setting(MainActivity.SELLER);
-                                    }else if(result.equals("4")){
-                                        ((MainActivity)MainActivity.mContext).menu_setting(MainActivity.ADMIN);
-                                    }
-                                    finish();
+                                        ((MainActivity)MainActivity.mContext).setUserId(id);
+
+                                        if(level.equals("1"))
+                                        {
+                                            ((MainActivity)MainActivity.mContext).menu_setting(MainActivity.USER);
+                                        }
+                                        else if(level.equals("2"))
+                                        {
+                                            ((MainActivity)MainActivity.mContext).menu_setting(MainActivity.USER);
+                                        }
+                                        else if(level.equals("3"))
+                                        {
+                                            ((MainActivity)MainActivity.mContext).menu_setting(MainActivity.SELLER);
+                                        }else if(level.equals("4")){
+                                            ((MainActivity)MainActivity.mContext).menu_setting(MainActivity.ADMIN);
+                                        }
+                                        finish();
+
+
+                                    }else if(result.equals("id_fail")){
+
+                                    new AlertDialog.Builder(LoginActivity.this).setMessage("아이디를 다시 확인해주세요.")
+                                            .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    dialog.dismiss();
+
+                                                }
+                                            }).show();
+
+                                }else{
+
+
+                                    new AlertDialog.Builder(LoginActivity.this).setMessage("비밀번호를 다시 확인해주세요.")
+                                            .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    dialog.dismiss();
+
+                                                }
+                                            }).show();
+
+                                }
+
                                 }
 
                             }

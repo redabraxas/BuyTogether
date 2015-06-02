@@ -19,6 +19,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.chocoroll.buyto.Extra.Retrofit;
+import com.chocoroll.buyto.MainActivity;
 import com.chocoroll.buyto.R;
 import com.google.gson.JsonObject;
 
@@ -61,6 +62,9 @@ public class MyInfoFragment extends Fragment implements View.OnClickListener{
         ((EditText)v.findViewById(R.id.edit_pwconfirm)).addTextChangedListener(MatchTextWatcher);
         ((EditText)v.findViewById(R.id.edit_pw)).addTextChangedListener(ValidtyTextWatcher);
 
+
+
+        push.setChecked(((MainActivity)MainActivity.mContext).getPushalarm());
         passwd = edit_pw.getText().toString();
 
         upload = (Button)v.findViewById(R.id.upload);

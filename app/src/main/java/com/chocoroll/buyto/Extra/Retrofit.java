@@ -1,6 +1,7 @@
 package com.chocoroll.buyto.Extra;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import retrofit.Callback;
@@ -10,7 +11,7 @@ import retrofit.http.POST;
 public interface Retrofit {
     public static final String ROOT = "http://ourproject.dothome.co.kr/buytogether";
     @POST("/login/login.php")
-    public void login(@Body JsonObject info, Callback<String> callback);
+    public void login(@Body JsonObject info, Callback<JsonElement> callback);
     @POST("/login/join.php")
     public void join(@Body JsonObject info, Callback<String> callback);
     @POST("/login/ch_myinfo.php")//key값 passwd
