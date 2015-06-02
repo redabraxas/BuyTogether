@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -22,6 +23,8 @@ import com.chocoroll.buyto.R;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import org.json.JSONObject;
+
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
@@ -31,8 +34,6 @@ public class LoginActivity extends Activity {
     ProgressDialog dialog;
     String id;
     String passwd;
-    String pushalarm;
-    String result;
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -128,62 +129,58 @@ public class LoginActivity extends Activity {
 
                                 dialog.dismiss();
                                 JsonObject jsonObject = element.getAsJsonObject();
-
-
-                                pushalarm = (jsonObject.get("pushalarm")).toString();
-
-                                String level = (jsonObject.get("level")).toString();
-
-                                String result = (jsonObject.get("result")).toString();
-
+                                String result = (jsonObject.get("result")).getAsString();
 
 
                                 if(result.equals("success")){
 
 
+                                    String pushalarm = (jsonObject.get("pushalarm")).getAsString();
+                                    String level = (jsonObject.get("level")).getAsString();
+
                                     // 자동로그인에 체크가 되어있따면
                                     CheckBox check_auto = (CheckBox)findViewById(R.id.auto_login);
-                                    if(check_auto.isChecked()){
+                                    if(check_auto.isChecked()) {
                                         SharedPreferences setting = getSharedPreferences("setting", MODE_PRIVATE);
                                         SharedPreferences.Editor editor = setting.edit();
 
                                         editor.putString("id", id);
-                                        editor.putString("pw",passwd);
+                                        editor.putString("pw", passwd);
                                         editor.putBoolean("auto_login", true);
                                         editor.commit();
+                                    }
 
 
-                                        ((MainActivity)MainActivity.mContext).setPushalarm(pushalarm);
+                                    ((MainActivity)MainActivity.mContext).setPushalarm(pushalarm);
+                                    ((MainActivity)MainActivity.mContext).setUserId(id);
 
-                                        ((MainActivity)MainActivity.mContext).setUserId(id);
-
-                                        if(level.equals("1"))
-                                        {
-                                            ((MainActivity)MainActivity.mContext).menu_setting(MainActivity.USER);
-                                        }
-                                        else if(level.equals("2"))
-                                        {
-                                            ((MainActivity)MainActivity.mContext).menu_setting(MainActivity.USER);
-                                        }
-                                        else if(level.equals("3"))
-                                        {
-                                            ((MainActivity)MainActivity.mContext).menu_setting(MainActivity.SELLER);
-                                        }else if(level.equals("4")){
-                                            ((MainActivity)MainActivity.mContext).menu_setting(MainActivity.ADMIN);
-                                        }
-                                        finish();
+                                    if(level.equals("1"))
+                                    {
+                                        ((MainActivity)MainActivity.mContext).menu_setting(MainActivity.USER);
+                                    }
+                                    else if(level.equals("2"))
+                                    {
+                                        ((MainActivity)MainActivity.mContext).menu_setting(MainActivity.USER);
+                                    }
+                                    else if(level.equals("3"))
+                                    {
+                                        ((MainActivity)MainActivity.mContext).menu_setting(MainActivity.SELLER);
+                                    }else if(level.equals("4")){
+                                        ((MainActivity)MainActivity.mContext).menu_setting(MainActivity.ADMIN);
+                                    }
+                                    finish();
 
 
-                                    }else if(result.equals("id_fail")){
+                                }else if(result.equals("id_fail")){
 
-                                    new AlertDialog.Builder(LoginActivity.this).setMessage("아이디를 다시 확인해주세요.")
-                                            .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialog, int which) {
-                                                    dialog.dismiss();
+                                new AlertDialog.Builder(LoginActivity.this).setMessage("아이디를 다시 확인해주세요.")
+                                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                dialog.dismiss();
 
-                                                }
-                                            }).show();
+                                            }
+                                        }).show();
 
                                 }else{
 
@@ -199,7 +196,7 @@ public class LoginActivity extends Activity {
 
                                 }
 
-                                }
+
 
                             }
 

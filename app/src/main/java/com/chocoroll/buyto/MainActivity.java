@@ -65,9 +65,7 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
     private String userid="";
     private int loginmode=0;
     private String result;
-    private String pushalarm;
     private String push="";
-    private String level;
     ArrayList<BookMark> bookMarkList= new ArrayList<BookMark>();
     BookMarkAdapter bookMarkAdapter;
 
@@ -129,27 +127,24 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
 
         titleURL = (TextView)findViewById(R.id.title_url);
 
-//        // 자동로그인에 체크가 되어있따면
-//        SharedPreferences setting = getSharedPreferences("setting", MODE_PRIVATE);
-//        if(setting.getBoolean("auto_login", false)){
-//
-//            dialog = new ProgressDialog(MainActivity.this);
-//            dialog.setMessage("로그인 정보를 받아오는 중입니다...");
-//            dialog.setIndeterminate(true);
-//            dialog.setCancelable(false);
-//            dialog.show();
-//
-//
-//
-//            userid = setting.getString("id", "");
-//            String passwd = setting.getString("pw","");
-//            JsonObject info = new JsonObject();
-//            info.addProperty("id", userid);
-//            info.addProperty("pw", passwd);
-//            Login(info);
-//
-//        }else
-        {
+        // 자동로그인에 체크가 되어있따면
+        SharedPreferences setting = getSharedPreferences("setting", MODE_PRIVATE);
+        if(setting.getBoolean("auto_login", false)){
+
+            dialog = new ProgressDialog(MainActivity.this);
+            dialog.setMessage("로그인 정보를 받아오는 중입니다...");
+            dialog.setIndeterminate(true);
+            dialog.setCancelable(false);
+            dialog.show();
+
+            userid = setting.getString("id", "");
+            String passwd = setting.getString("pw","");
+            JsonObject info = new JsonObject();
+            info.addProperty("id", userid);
+            info.addProperty("pw", passwd);
+            Login(info);
+
+        }else{
             menu_setting(LOGOUTUSER);
         }
 
@@ -172,12 +167,11 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
                             dialog.dismiss();
 
                             JsonObject jsonObject = element.getAsJsonObject();
-                            Log.e("result",jsonObject.toString());
-                            result = (jsonObject.get("result")).toString();
+                            result = (jsonObject.get("result")).getAsString();
 
                             if (result.equals("success")) {
-                                level = (jsonObject.get("level")).getAsString();
-                                pushalarm = (jsonObject.get("pushalarm")).getAsString();
+                                String pushalarm = (jsonObject.get("pushalarm")).getAsString();
+                                String level = (jsonObject.get("level")).getAsString();
 
                                 setUserId(userid);
                                 setPushalarm(pushalarm);
@@ -190,7 +184,9 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
                                     menu_setting(MainActivity.SELLER);
                                 } else if (level.equals("4")) {
                                     menu_setting(MainActivity.ADMIN);
-                                } }
+                                }
+
+                            }
                             else if (result.equals("id_fail")) {
 
                                     new AlertDialog.Builder(MainActivity.this).setMessage("아이디를 확인하시고 다시 로그인 해주세요")
@@ -202,19 +198,19 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
                                                 }
                                             }).show();
 
-                                } else if (result.equals("pw_fail")) {
+                            } else if (result.equals("pw_fail")) {
 
-                                    new AlertDialog.Builder(MainActivity.this).setMessage("비밀번호가 변경되었으니 다시 로그인 해주세요.")
-                                            .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialog, int which) {
-                                                    dialog.dismiss();
+                                new AlertDialog.Builder(MainActivity.this).setMessage("비밀번호가 변경되었으니 다시 로그인 해주세요.")
+                                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                dialog.dismiss();
 
-                                                }
-                                            }).show();
+                                            }
+                                        }).show();
 
 
-                                }
+                            }
 
                         }
 
@@ -265,7 +261,6 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
                         @Override
                         public void success(JsonArray jsonElements, Response response) {
 
-                            dialog.dismiss();
                             bookMarkList.clear();
 
                             for (int i = 0; i < jsonElements.size(); i++) {
