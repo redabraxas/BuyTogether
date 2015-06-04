@@ -11,17 +11,14 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.chocoroll.buyto.Admin.AdminFragment;
 import com.chocoroll.buyto.AllDeal.AllDealFragment;
@@ -347,12 +344,12 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
         tabs.setCurrentTab(0);
         for(int i=0; i<tabs.getTabWidget().getChildCount(); i++){
             tabs.getTabWidget().getChildAt(i).setBackgroundColor(getResources().getColor(R.color.slide_tab_bar));
-            ((TextView) tabs.getTabWidget().getChildAt(i).findViewById(android.R.id.title)).setTextColor(Color.parseColor("#ffffff"));
+            ((TextView) tabs.getTabWidget().getChildAt(i).findViewById(android.R.id.title)).setTextColor(Color.parseColor("#D9D9D9"));
             tabs.getTabWidget().getChildAt(i).getLayoutParams().height = 80;
         }
 
         tabs.getTabWidget().getChildAt(tabs.getCurrentTab()).setBackgroundColor(getResources().getColor(R.color.slide_tab_backgroud));
-        ((TextView) tabs.getTabWidget().getChildAt(tabs.getCurrentTab()).findViewById(android.R.id.title)).setTextColor(Color.parseColor("#000000"));
+        ((TextView) tabs.getTabWidget().getChildAt(tabs.getCurrentTab()).findViewById(android.R.id.title)).setTextColor(Color.parseColor("#D9D9D9"));
 
 
         tabs.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
@@ -360,10 +357,10 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
             public void onTabChanged(String s) {
                 for(int i=0; i<tabs.getTabWidget().getChildCount(); i++){
                     tabs.getTabWidget().getChildAt(i).setBackgroundColor(getResources().getColor(R.color.slide_tab_bar));
-                    ((TextView) tabs.getTabWidget().getChildAt(i).findViewById(android.R.id.title)).setTextColor(Color.parseColor("#ffffff"));
+                    ((TextView) tabs.getTabWidget().getChildAt(i).findViewById(android.R.id.title)).setTextColor(Color.parseColor("#D9D9D9"));
                 }
                 tabs.getTabWidget().getChildAt(tabs.getCurrentTab()).setBackgroundColor(getResources().getColor(R.color.slide_tab_backgroud));
-                ((TextView) tabs.getTabWidget().getChildAt(tabs.getCurrentTab()).findViewById(android.R.id.title)).setTextColor(Color.parseColor("#000000"));
+                ((TextView) tabs.getTabWidget().getChildAt(tabs.getCurrentTab()).findViewById(android.R.id.title)).setTextColor(Color.parseColor("#D9D9D9"));
             }
         });
 

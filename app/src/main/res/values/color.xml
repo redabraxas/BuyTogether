@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="main_color">#9981cf65</color>
+    <color name="main_color">#BEE8BA</color>
 
     <color name="slide_backgroud">#ff57555c</color>
-    <color name="slide_tab_bar">#ff5c5b5a</color>
-    <color name="slide_tab_backgroud">#ffcecece</color>
-    <color name ="slide_line">#ff5c5b5a</color>
-
-    <color name ="category_background">#99a0ff7a</color>
+    <color name="slide_tab_bar">#4B5E6E</color>
+    <color name="slide_tab_backgroud">#727A8C</color>
+    <color name ="slide_line">#C2C2C2</color>
+    <color name="slide_text">#D9D9D9</color>
+    <color name ="category_background">#BEE8BA</color>
 
     <color name="tab_indicate">#ff295349</color>
-    <color name="tab_background">#99a0ff7a</color>
+    <color name="tab_background">#BEE8BA</color>
 
     <color name="seller">#99ff002d</color>
     <color name="user">#99faff00</color>

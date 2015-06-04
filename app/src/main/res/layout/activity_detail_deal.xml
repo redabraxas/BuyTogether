@@ -8,7 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="#BEE8BA">
+        android:background="@color/main_color">
 
 
             <com.chocoroll.buyto.Model.MyTextViewBold
@@ -34,26 +34,18 @@
         android:orientation="vertical" >
     </LinearLayout>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_weight="11"
-        android:layout_height="0dp">
     <LinearLayout
         android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-
-            <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        android:layout_weight="11"
+        android:layout_height="0dp"
+        android:orientation="vertical">
                     <LinearLayout
                         android:padding="10dp"
                         android:id="@+id/pro_info"
                         android:orientation="vertical"
                         android:layout_width="match_parent"
 
-                        android:layout_height="405dp">
+                        android:layout_height="wrap_content">
 
 
 
@@ -111,8 +103,8 @@
 
                         <ImageView
                             android:layout_gravity="center"
-                            android:layout_width="290dp"
-                            android:layout_height="290dp"
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
                             android:src="@drawable/example"
                             android:id="@+id/imageView" />
 
@@ -185,17 +177,15 @@
                 <android.support.v4.view.ViewPager
                     android:id="@+id/pager"
                     android:layout_width="match_parent"
-                    android:layout_height="500dp"
+                    android:layout_height="match_parent"
                     android:layout_below="@+id/tabs"
                     tools:context=".MainActivity" />
 
             </LinearLayout>
 
-            </LinearLayout>
-
 
     </LinearLayout>
-    </ScrollView>
+
 
     <LinearLayout
         android:layout_width="match_parent"
