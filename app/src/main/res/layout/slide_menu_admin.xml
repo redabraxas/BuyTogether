@@ -39,11 +39,11 @@
                     android:background="@color/slide_tab_backgroud">
 
 
-                    <com.chocoroll.buyto.Model.MyTextViewBold
+                    <com.chocoroll.buyto.Model.MyTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="menu_hi"
-                        android:textColor="#000000"
+                        android:textColor="#D9D9D9"
                         android:padding="10dp"
                         android:textSize="15dp"
                         android:id="@+id/menu_hi" />
@@ -73,7 +73,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginLeft="17dp"
-                            android:textColor="#686868"
+                            android:textColor="#D9D9D9"
                             android:text="@string/menu_myinfo"
                             android:textSize="20dp"
                             android:typeface="sans" />
@@ -103,7 +103,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginLeft="17dp"
-                            android:textColor="#686868"
+                            android:textColor="#D9D9D9"
                             android:text="@string/menu_logout"
                             android:textSize="20dp"
                             android:typeface="sans" />
@@ -138,7 +138,7 @@
                             android:layout_gravity="center"
                             android:layout_marginLeft="17dp"
                             android:text="@string/menu_admin"
-                            android:textColor="#686868"
+                            android:textColor="#D9D9D9"
                             android:textSize="20dp"
                             android:typeface="sans" />
 
@@ -168,7 +168,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginLeft="17dp"
-                            android:textColor="#686868"
+                            android:textColor="#D9D9D9"
                             android:text="@string/menu_mydeal"
                             android:textSize="20dp"
                             android:typeface="sans" />
@@ -217,7 +217,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginLeft="17dp"
-                            android:textColor="#686868"
+                            android:textColor="#D9D9D9"
                             android:text="@string/menu_all"
                             android:textSize="20dp"
                             android:typeface="sans" />
@@ -248,7 +248,7 @@
                             android:layout_gravity="center"
                             android:layout_marginLeft="17dp"
                             android:text="@string/menu_wish"
-                            android:textColor="#686868"
+                            android:textColor="#D9D9D9"
                             android:textSize="20dp"
                             android:typeface="sans" />
 
@@ -280,7 +280,7 @@
                             android:layout_gravity="center"
                             android:layout_marginLeft="17dp"
                             android:text="@string/menu_make"
-                            android:textColor="#686868"
+                            android:textColor="#D9D9D9"
                             android:textSize="20dp"
                             android:typeface="sans" />
 
@@ -314,7 +314,7 @@
                             android:layout_gravity="center"
                             android:layout_marginLeft="17dp"
                             android:text="@string/menu_make_wish"
-                            android:textColor="#686868"
+                            android:textColor="#D9D9D9"
                             android:textSize="20dp"
                             android:typeface="sans" />
 
@@ -346,7 +346,7 @@
                             android:layout_gravity="center"
                             android:layout_marginLeft="17dp"
                             android:text="@string/menu_bookmark"
-                            android:textColor="#686868"
+                            android:textColor="#D9D9D9"
                             android:textSize="20dp"
                             android:typeface="sans" />
 
@@ -378,7 +378,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/textPush"
-                        android:textColor="#686868"/>
+                        android:textColor="#D9D9D9"/>
 
 
                     <ListView

@@ -6,6 +6,23 @@
     android:background="#FFFFFF"
     android:orientation="vertical" >
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/main_color">
+
+        <com.chocoroll.buyto.Model.MyTextViewBold
+            android:gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:lineSpacingMultiplier="1.4"
+            android:paddingTop="10dp"
+            android:textSize="20dp"
+            android:text="> MAKE WISH DEAL"
+            android:textColor="#F7F7F7" />
+    </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -33,12 +50,12 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal" >
 
-                    <TextView
+                    <com.chocoroll.buyto.Model.MyTextViewBold
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text="카테고리 : "
-                        android:textColor="#000000"
+                        android:textColor="#8C8C8C"
                         android:textSize="15dp"
                         android:typeface="sans" />
 
@@ -71,7 +88,7 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
-                android:background="#336c97cf"
+                android:background="#E8F0DF"
                 android:orientation="vertical" >
             </LinearLayout>
 
@@ -89,12 +106,12 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal" >
 
-                    <TextView
+                    <com.chocoroll.buyto.Model.MyTextViewBold
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text="상품명 : "
-                        android:textColor="#000000"
+                        android:textColor="#8C8C8C"
                         android:textSize="15dp"
                         android:typeface="sans" />
 
@@ -105,7 +122,7 @@
                         android:background="@null"
                         android:padding="10dp"
                         android:singleLine="true"
-                        android:textColor="#000000"
+                        android:textColor="#8C8C8C"
                         android:textSize="15dp"
                         android:typeface="sans" />
                 </LinearLayout>
@@ -114,7 +131,7 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
-                android:background="#336c97cf"
+                android:background="#E8F0DF"
                 android:orientation="vertical" >
             </LinearLayout>
 
@@ -132,12 +149,12 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal" >
 
-                    <TextView
+                    <com.chocoroll.buyto.Model.MyTextViewBold
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text="상품 코멘트 : "
-                        android:textColor="#000000"
+                        android:textColor="#8C8C8C"
                         android:textSize="15dp"
                         android:typeface="sans" />
 
@@ -149,7 +166,7 @@
                         android:hint="상품에 대한 간단한 코멘트를 입력해주세요."
                         android:maxLines="4"
                         android:padding="10dp"
-                        android:textColor="#000000"
+                        android:textColor="#8C8C8C"
                         android:textSize="15dp"
                         android:typeface="sans" />
                 </LinearLayout>
@@ -159,7 +176,7 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
-                android:background="#336c97cf"
+                android:background="#E8F0DF"
                 android:orientation="vertical" >
             </LinearLayout>
 
@@ -177,12 +194,12 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal" >
 
-                    <TextView
+                    <com.chocoroll.buyto.Model.MyTextViewBold
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text="상품 이미지  "
-                        android:textColor="#000000"
+                        android:textColor="#8C8C8C"
                         android:textSize="15dp"
                         android:typeface="sans" />
 
@@ -195,7 +212,7 @@
                         android:layout_height="30dp"
                         android:layout_marginLeft="5dp"
                         android:text="upload"
-                        android:background="#336c97cf"
+                        android:background="#E8F0DF"
                         android:textSize="13dp"
                         android:typeface="sans" />
 
@@ -218,7 +235,7 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
-                android:background="#336c97cf"
+                android:background="#E8F0DF"
                 android:orientation="vertical" >
             </LinearLayout>
 
@@ -230,29 +247,31 @@
                 android:gravity="center"
                 android:orientation="horizontal" >
 
-                <Button
+                <com.chocoroll.buyto.Model.MyTextViewBold
+                    android:clickable="true"
                     android:layout_margin="10dp"
                     android:id="@+id/uploadButton"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginRight="10dp"
                     android:text="작성"
                     android:background="@null"
-                    android:textColor="#0099CC"
-                    android:textSize="13dp"
-                    android:typeface="sans" />
+                    android:textColor="@color/main_color"
+                    android:textSize="13dp"/>
 
-                <Button
+                <com.chocoroll.buyto.Model.MyTextViewBold
+                    android:clickable="true"
                     android:layout_margin="10dp"
                     android:id="@+id/report_cancelbt"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="10dp"
                     android:text="취소"
                     android:background="@null"
-                    android:textColor="#ff4444"
+                    android:textColor="#7F7F7F"
                     android:textSize="13dp"
                     android:typeface="sans" />
+
             </LinearLayout>
 
         </LinearLayout>
