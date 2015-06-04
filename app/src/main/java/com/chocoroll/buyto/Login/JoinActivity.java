@@ -13,14 +13,10 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -72,7 +68,7 @@ public class JoinActivity extends Activity {
 
 
         // 회원가입
-        Button btn_ok = (Button)findViewById(R.id.btn_join_ok);
+        TextView btn_ok = (TextView)findViewById(R.id.btn_join_ok);
         btn_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

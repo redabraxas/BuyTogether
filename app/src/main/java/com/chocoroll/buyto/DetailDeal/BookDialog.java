@@ -7,11 +7,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
-import com.chocoroll.buyto.R;
 import com.chocoroll.buyto.Extra.Retrofit;
+import com.chocoroll.buyto.R;
 import com.google.gson.JsonObject;
 
 import retrofit.Callback;
@@ -47,7 +47,7 @@ public class BookDialog  extends Dialog {
         setContentView(R.layout.dialog_book);
         this.setTitle("딜 신청");
 
-        Button replyAnswer = (Button) findViewById(R.id.btnBook);
+        TextView replyAnswer = (TextView) findViewById(R.id.btnBook);
         replyAnswer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

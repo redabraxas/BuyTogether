@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -64,7 +65,7 @@ public class DealStateFragment extends Fragment {
 
 
         tabs = (PagerSlidingTabStrip) v.findViewById(R.id.tabs);
-        //tabs.setTextColor(Color.WHITE);
+        tabs.setTextColor(Color.WHITE);
         pager = (ViewPager) v.findViewById(R.id.pager);
 
         adapter = new MyPagerAdapter(getChildFragmentManager());
