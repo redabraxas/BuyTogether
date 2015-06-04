@@ -40,22 +40,28 @@
         </LinearLayout>
 
 
+
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center">
 
             <EditText
-                android:layout_weight="4"
+                android:layout_weight="6"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/editSearch" />
 
-            <Button
+            <ImageButton
+                android:scaleType="fitXY"
+                android:background="@null"
+                android:src="@drawable/search2"
+                android:padding="10dp"
                 android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="검색"
+                android:layout_height="50dp"
                 android:id="@+id/btnSearch" />
         </LinearLayout>
 

@@ -251,7 +251,7 @@ public class MakeWishDealActivity extends Activity implements OnClickListener {
                             @Override
                             public void success(String result, Response response) {
                                 ldialog.dismiss();
-                                AlertDialog dialog = new AlertDialog.Builder(MakeWishDealActivity.this).setMessage(result)
+                                new AlertDialog.Builder(MakeWishDealActivity.this).setTitle("성공").setMessage("딜을 올리는데 성공하셨습니다.")
                                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dia, int which) {
