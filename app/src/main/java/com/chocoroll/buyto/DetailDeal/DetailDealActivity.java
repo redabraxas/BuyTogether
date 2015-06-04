@@ -58,9 +58,17 @@ public class DetailDealActivity extends FragmentActivity{
         ((TextView)findViewById(R.id.price)).setText(product.getPrice()+" 원");
 
 
+
         new DownloadImageTask((ImageView) findViewById(R.id.dealLogo))
                 .execute(product.getThumbnail());
 
+        if(product.getLevel().equals("seller")){
+            ( findViewById(R.id.level_bar)).setBackgroundColor(getResources().getColor(R.color.seller));
+            ((TextView)findViewById(R.id.level_bar)).setText("SELLER");
+        }else{
+            ( findViewById(R.id.level_bar)).setBackgroundColor(getResources().getColor(R.color.user));
+            ((TextView)findViewById(R.id.level_bar)).setText("USER");
+        }
 
         tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         //tabs.setTextColor(Color.WHITE);
