@@ -147,11 +147,9 @@ public class DealStateFragment extends Fragment {
         String key;
         ArrayList<DealState> bookDealList = new ArrayList<DealState>();
         ArrayList<Deal> keepDealList = new ArrayList<Deal>();
-        ArrayList<WishDeal> wishDealList = new ArrayList<WishDeal>();
 
         DealStateAdapter mBookDealAdapter;
         DealAdapter mKeepDealAdapter;
-        WishDealAdapter mWishDealAdapter;
         ListView listView;
 
 
@@ -254,6 +252,7 @@ public class DealStateFragment extends Fragment {
                                 }
 
                                 listView.setAdapter(mBookDealAdapter);
+
                             }
 
                             @Override

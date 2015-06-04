@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -60,6 +61,16 @@ public class SellerFragment extends Fragment {
 
         listViewSeller = (ListView) v.findViewById(R.id.listViewSeller);
         mAdapter= new SellerDealAdapter(getActivity(), R.layout.model_seller_deal, sellerDealList);
+        listViewSeller.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Deal item = (Deal) mAdapter.getItem(i);
+                Intent intent = new Intent(getActivity(), DetailDealActivity.class);
+                intent.putExtra("product", item);
+                startActivity(intent);
+            }
+        });
 
         getSellerDealList();
 
