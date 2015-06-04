@@ -80,6 +80,11 @@ public class MakeDealActivity extends Activity implements OnClickListener {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_deal);
+
+        String name = getIntent().getStringExtra("name");
+        if(!name.equals("")){
+            ((EditText)findViewById(R.id.pro_name)).setText(name);
+        }
         uploadButton = (TextView) findViewById(R.id.uploadButton);
         btnselectpic = (Button) findViewById(R.id.button_selectpic);
         btnselectpic1 = (Button) findViewById(R.id.button_selectpic1);

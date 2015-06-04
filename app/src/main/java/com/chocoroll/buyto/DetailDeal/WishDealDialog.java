@@ -5,16 +5,19 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chocoroll.buyto.Extra.DownloadImageTask;
 import com.chocoroll.buyto.Extra.Retrofit;
 import com.chocoroll.buyto.MainActivity;
+import com.chocoroll.buyto.MakeDeal.MakeDealActivity;
 import com.chocoroll.buyto.Model.WishDeal;
 import com.chocoroll.buyto.R;
 import com.google.gson.JsonObject;
@@ -82,9 +85,16 @@ public class WishDealDialog extends Dialog{
         ((ImageButton)findViewById(R.id.btnwish)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+                if(((MainActivity)MainActivity.mContext).getUserId().equals("")){
+                    Toast.makeText(context,"로그인 유저만 사용할 수 있습니다.",Toast.LENGTH_SHORT).show();
+                }
+                else{
                 JsonObject info=new JsonObject();
                 info.addProperty("id",((MainActivity)MainActivity.mContext).getUserId());
                 info.addProperty("wishNum", dealNum);
+
 
                 dialog = new ProgressDialog(getContext());
                 dialog.setMessage("Upload ..");
@@ -92,10 +102,26 @@ public class WishDealDialog extends Dialog{
                 dialog.setCancelable(false);
                 dialog.show();
 
-                Wish(info);
+                Wish(info);}
             }
         });
 
+        ((TextView)findViewById(R.id.make_btn)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dismiss();
+
+                if(((MainActivity)MainActivity.mContext).getUserId().equals("")){
+                    Toast.makeText(context,"로그인 유저만 사용할 수 있습니다.",Toast.LENGTH_SHORT).show();
+                }
+                else{
+
+                Intent intent = new Intent(context, MakeDealActivity.class);
+                intent.putExtra("name",name);
+                context.startActivity(intent);
+                }
+            }
+        });
 
 
     }
@@ -114,8 +140,9 @@ public class WishDealDialog extends Dialog{
                     Wish.Wish(info, new Callback<String>() {
                         @Override
                         public void success(String result, Response response) {
-
                             dialog.dismiss();
+                            if(result.equals("success")) {
+
                                 new AlertDialog.Builder(getContext()).setMessage("Wish Deal에 등록되었습니다.")
                                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                             @Override
@@ -125,6 +152,21 @@ public class WishDealDialog extends Dialog{
                                             }
                                         }).show();
                                 cancel();
+                            }
+                            else
+
+                                {
+
+    new AlertDialog.Builder(getContext()).setMessage("Wish Deal에 이미 등록되어 있습니다.")
+            .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+
+                }
+            }).show();
+    cancel();
+}
                             }
 
 
