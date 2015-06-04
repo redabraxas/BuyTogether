@@ -238,7 +238,7 @@ public class DealStateFragment extends Fragment {
 
                                     switch (state) {
                                         case 0:
-                                            String waiting = (deal.get("deposit")).getAsString();
+                                            String waiting = (deal.get("waiting")).getAsString();
                                             bookDealList.add(new DealState(num, name, thumbnail, bCategory, sCategory, price, String.valueOf(state), waiting));
                                             break;
                                         default:
