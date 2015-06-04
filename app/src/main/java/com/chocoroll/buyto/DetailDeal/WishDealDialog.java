@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.chocoroll.buyto.Extra.DownloadImageTask;
 import com.chocoroll.buyto.Extra.Retrofit;
+import com.chocoroll.buyto.MainActivity;
 import com.chocoroll.buyto.Model.WishDeal;
 import com.chocoroll.buyto.R;
 import com.google.gson.JsonObject;
@@ -82,6 +83,7 @@ public class WishDealDialog extends Dialog{
             @Override
             public void onClick(View view) {
                 JsonObject info=new JsonObject();
+                info.addProperty("id",((MainActivity)MainActivity.mContext).getUserId());
                 info.addProperty("wishNum", dealNum);
 
                 dialog = new ProgressDialog(getContext());
