@@ -31,6 +31,7 @@ import com.chocoroll.buyto.Home.HomeFragment;
 import com.chocoroll.buyto.Login.JoinActivity;
 import com.chocoroll.buyto.Login.LoginActivity;
 import com.chocoroll.buyto.MakeDeal.MakeDealActivity;
+import com.chocoroll.buyto.MakeDeal.MakeWishDealActivity;
 import com.chocoroll.buyto.Mine.DealStateFragment;
 import com.chocoroll.buyto.Mine.MyInfoFragment;
 import com.chocoroll.buyto.Model.BookMark;
@@ -474,6 +475,7 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
             ((TextView)findViewById(R.id.menu_hi)).setText("환영합니다, "+userid+"님!");
 
             LinearLayout menu_make = (LinearLayout) findViewById(R.id.menu_make);
+            LinearLayout menu_make_wish = (LinearLayout) findViewById(R.id.menu_make_wish);
             LinearLayout menu_bookmark = (LinearLayout) findViewById(R.id.menu_bookmark);
             LinearLayout menu_logout = (LinearLayout) findViewById(R.id.menu_logout);
             LinearLayout menu_myInfo = (LinearLayout) findViewById(R.id.menu_myinfo);
@@ -485,6 +487,16 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
                 public void onClick(View view) {
                     slidingMenu.showContent(true);
                     Intent intent = new Intent(MainActivity.this, MakeDealActivity.class);
+                    startActivity(intent);
+                }
+            });
+
+            // 위시딜 만들기
+            menu_make_wish.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    slidingMenu.showContent(true);
+                    Intent intent = new Intent(MainActivity.this, MakeWishDealActivity.class);
                     startActivity(intent);
                 }
             });

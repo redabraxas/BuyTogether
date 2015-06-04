@@ -5,6 +5,7 @@
     <string name="menu_all">모든 딜 보기</string>
     <string name="menu_wish">위시 딜 보기</string>
     <string name="menu_make">딜 만들기</string>
+    <string name="menu_make_wish">위시딜 만들기</string>
     <string name="menu_admin">관리자 메뉴</string>
     <string name="menu_seller">나의 판매딜</string>
     <string name="menu_bookmark">즐겨찾기</string>

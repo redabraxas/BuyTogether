@@ -47,10 +47,10 @@ public class DealAdapter extends ArrayAdapter<Deal> {
             ((TextView) v.findViewById(R.id.txt_dday)).setText(p.getDday());
             ((TextView)  v.findViewById(R.id.txt_people)).setText(String.valueOf(p.getBook()+"/"+p.getMaxBook()));
 
-            if(p.getLevel().equals("user")){
-                ((LinearLayout) v.findViewById(R.id.level_bar)).setBackgroundColor(context.getResources().getColor(R.color.user));
-            }else{
+            if(p.getLevel().equals("seller")){
                 ((LinearLayout) v.findViewById(R.id.level_bar)).setBackgroundColor(context.getResources().getColor(R.color.seller));
+            }else{
+                ((LinearLayout) v.findViewById(R.id.level_bar)).setBackgroundColor(context.getResources().getColor(R.color.user));
             }
 
         }
