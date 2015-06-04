@@ -39,7 +39,6 @@ public class DetailDialog extends Dialog{
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dialog_detail_deal);
 
-
         new DownloadImageTask((ImageView) findViewById(R.id.detailDealImage))
                 .execute(url);
 

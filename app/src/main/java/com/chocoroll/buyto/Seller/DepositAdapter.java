@@ -51,7 +51,7 @@ public class DepositAdapter extends ArrayAdapter<Deposit> {
 
             ((TextView)  v.findViewById(R.id.txtName)).setText(p.getName());
 
-            Button btnDeposit = (Button)v.findViewById(R.id.btnDeposit);
+            TextView btnDeposit = (TextView)v.findViewById(R.id.btnDeposit);
             switch (p.getState()){
                 case 1:
                     btnDeposit.setText("입금 확인");
@@ -77,7 +77,7 @@ public class DepositAdapter extends ArrayAdapter<Deposit> {
                     btnDeposit.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-
+                            
                         }
                     });
                     break;

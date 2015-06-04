@@ -1,41 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:gravity="center">
+
+
     <LinearLayout
-        android:orientation="horizontal" android:layout_width="match_parent"
+        android:layout_weight="3"
+        android:orientation="vertical" android:layout_width="0dp"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <com.chocoroll.buyto.Model.MyTextView
+            android:padding="5dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
+            android:text="이름"
+            android:textColor="#6c6c6c"
             android:id="@+id/txtName" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="버튼"
-            android:id="@+id/btnDeposit" />
-    </LinearLayout>
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="wrap_content"
+        <com.chocoroll.buyto.Model.MyTextView
+            android:padding="5dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="New Text"
+            android:text="주소"
+            android:textColor="#6c6c6c"
             android:id="@+id/txtAddress" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <com.chocoroll.buyto.Model.MyTextView
+            android:padding="5dp"
+            android:textColor="#6c6c6c"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="New Text"
+            android:text="폰"
             android:id="@+id/txtPhone" />
+
     </LinearLayout>
+
+    <com.chocoroll.buyto.Model.MyTextViewBold
+        android:padding="10dp"
+        android:gravity="center"
+        android:clickable="true"
+        android:background="@color/main_color"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        android:text="버튼"
+        android:id="@+id/btnDeposit" />
+
+
 
 </LinearLayout>

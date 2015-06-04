@@ -216,17 +216,6 @@ public class SellerFragment extends Fragment {
                 ((TextView) v.findViewById(R.id.txt_dday)).setText(p.getDday());
                 ((TextView)  v.findViewById(R.id.txt_people)).setText(String.valueOf(p.getBook()+"/"+p.getMaxBook()));
 
-                ((TextView) v.findViewById(R.id.btnDetail)).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(context, DetailDealActivity.class);
-                        intent.putExtra("product", p);
-                        startActivity(intent);
-
-
-                    }
-                });
-
                 ((TextView) v.findViewById(R.id.btnDeposit)).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

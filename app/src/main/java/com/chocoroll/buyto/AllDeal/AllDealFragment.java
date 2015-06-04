@@ -273,6 +273,7 @@ public class AllDealFragment extends Fragment {
                         public void success(String result, Response response) {
 
                             dialog.dismiss();
+
                             if(result.equals("success")){
 
                                 ((MainActivity)MainActivity.mContext).getBookMark();

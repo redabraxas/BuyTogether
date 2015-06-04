@@ -99,19 +99,6 @@
             android:gravity="center">
 
             <com.chocoroll.buyto.Model.MyTextViewBold
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="상세보기"
-                android:textColor="#ffffff"
-                android:background="#CCCCCC"
-                android:paddingTop="7dp"
-                android:paddingBottom="7dp"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:layout_marginRight="10dp"
-                android:id="@+id/btnDetail" />
-
-            <com.chocoroll.buyto.Model.MyTextViewBold
                 android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
