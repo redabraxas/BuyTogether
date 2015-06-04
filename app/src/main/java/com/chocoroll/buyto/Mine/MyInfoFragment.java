@@ -32,19 +32,19 @@ import retrofit.client.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MyInfoFragment extends Fragment implements View.OnClickListener{
+public class MyInfoFragment extends Fragment{
 
 
     public MyInfoFragment() {
         // Required empty public constructor
     }
+
     Switch push;
     private ProgressDialog dialog;
-    private boolean passwdvalid;
-    private boolean passwdmatch;
     EditText edit_pw;
     EditText edit_pwconfirm;
     String passwd;
+    String passwd_confirm;
     int check;
     private String regExpStr = "^([a-z]+[0-9]+[a-z0-9]*|[0-9]+[a-z]+[a-z0-9]*)$";
     Button upload;
@@ -60,17 +60,53 @@ public class MyInfoFragment extends Fragment implements View.OnClickListener{
         edit_pw = (EditText)v.findViewById(R.id.edit_pw);
         edit_pwconfirm = (EditText)v.findViewById(R.id.edit_pwconfirm);
 
-        ((EditText)v.findViewById(R.id.edit_pwconfirm)).addTextChangedListener(MatchTextWatcher);
-        ((EditText)v.findViewById(R.id.edit_pw)).addTextChangedListener(ValidtyTextWatcher);
-
-
 
         push.setChecked(((MainActivity)MainActivity.mContext).getPushalarm());
-        passwd = edit_pw.getText().toString();
+
 
         upload = (Button)v.findViewById(R.id.upload);
 
-        upload.setOnClickListener(this);
+        upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                passwd = edit_pw.getText().toString();
+                passwd_confirm = edit_pwconfirm.getText().toString();
+
+                if(passwd.length()<5 || !passwd.matches(regExpStr)){
+                    AlertDialog dialog2 = new AlertDialog.Builder(getActivity()).setMessage("비밀번호는 6자이상이고 영어/숫자 혼합이어야합니다.")
+                            .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dia, int which) {
+                                    dia.dismiss();
+                                }
+                            }).show();
+                    TextView textView = (TextView) dialog2.findViewById(android.R.id.message);
+                    Typeface face=Typeface.SANS_SERIF;
+                    textView.setTypeface(face);
+
+                }else if(!passwd_confirm.equals(passwd)){
+                    AlertDialog dialog2 = new AlertDialog.Builder(getActivity()).setMessage("비밀번호가 일치하지 않습니다.")
+                            .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dia, int which) {
+                                    dia.dismiss();
+                                }
+                            }).show();
+                    TextView textView = (TextView) dialog2.findViewById(android.R.id.message);
+                    Typeface face=Typeface.SANS_SERIF;
+                    textView.setTypeface(face);
+
+                }else{
+                    changeMyPasswd();
+                }
+
+            }
+        });
+
+
+
+
         // 비밀번호 변경!
 
         push.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -83,8 +119,6 @@ public class MyInfoFragment extends Fragment implements View.OnClickListener{
                     check = 0;
 
                 changeMyPush();
-
-
 
             }
         });
@@ -156,85 +190,6 @@ public class MyInfoFragment extends Fragment implements View.OnClickListener{
 
     }
 
-
-
-
-    @Override
-    public void onClick(View v){
-
-        if(!passwdmatch||!passwdvalid)
-        {
-            AlertDialog dialog2 = new AlertDialog.Builder(this.getActivity()).setMessage("비밀번호를 확인해주세요.")
-                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dia, int which) {
-                            dia.dismiss();
-                        }
-                    }).show();
-            TextView textView = (TextView) dialog2.findViewById(android.R.id.message);
-            Typeface face=Typeface.SANS_SERIF;
-            textView.setTypeface(face);
-        }
-
-        else
-        {
-
-            changeMyPasswd();
-
-        }
-
-    }
-
-
-    private TextWatcher MatchTextWatcher = new TextWatcher() {
-
-        public void afterTextChanged(Editable s) {
-        }
-
-        public void beforeTextChanged(CharSequence s, int start, int count,
-                                      int after) {
-        }
-
-        public void onTextChanged(CharSequence s, int start, int before,
-                                  int count) {
-            EditText edit_pw = (EditText)v.findViewById(R.id.edit_pw);
-            if(s.length()==0);
-            else{
-                if(edit_pw.getText().toString().equals(s.toString()))
-
-                    passwdmatch=true;
-
-                else
-                    passwdmatch=false;
-
-            }
-        }
-
-    };
-    private TextWatcher ValidtyTextWatcher = new TextWatcher() {
-
-        public void afterTextChanged(Editable s) {
-        }
-
-        public void beforeTextChanged(CharSequence s, int start, int count,
-                                      int after) {
-        }
-
-        public void onTextChanged(CharSequence s, int start, int before,
-                                  int count) {
-            if(s.length()==0);
-
-            else{
-                if(s.length()>5&&s.toString().matches(regExpStr))
-                    passwdvalid=true;
-
-                else
-                   passwdvalid=false;
-
-            }
-        }
-
-    };
 
     void changeMyPasswd(){
         dialog = new ProgressDialog(this.getActivity());
