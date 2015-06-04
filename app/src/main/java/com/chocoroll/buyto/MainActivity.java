@@ -478,6 +478,8 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
             LinearLayout menu_myInfo = (LinearLayout) findViewById(R.id.menu_myinfo);
 
             TextView txtPush = (TextView) findViewById(R.id.textPush);
+
+
             // 딜 만들기
             menu_make.setOnClickListener(new View.OnClickListener() {
                 @Override
