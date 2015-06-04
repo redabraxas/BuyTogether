@@ -92,6 +92,8 @@ public interface Retrofit {
     public void getDealBookStateList(@Body JsonObject info, Callback<JsonArray> callback);
     @POST("/mydeal/showMyKeepDeal.php") // 나의 찜딜 리스트를 가져옴
     public void getDealKeepStateList(@Body JsonObject info, Callback<JsonArray> callback);
+    @POST("/seller/sellerDepositDecide.php") // 구매확정
+    public void sendBuySure(@Body JsonObject info, Callback<String> callback);
 
     // 즐겨찾기
     @POST("/mydeal/bookmarkList.php") // 북마크 리스트 가져옴
