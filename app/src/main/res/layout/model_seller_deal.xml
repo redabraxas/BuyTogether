@@ -13,55 +13,81 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:paddingLeft="10dp"
+        android:paddingLeft="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center">
 
         <com.chocoroll.buyto.Model.MyTextViewBold
 
-            android:layout_width="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="20dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:textSize="22dp"
-            android:text="상품이름"
-            android:layout_marginBottom="10dp"
-            android:textColor="@color/text"
-            android:id="@+id/txt_name"
-            android:layout_marginTop="10dp"
+            android:lineSpacingExtra="3dp"
+            android:textSize="18dp"
+            android:text="하kkkkkkkkkkkkkk"
+            android:layout_marginBottom="13dp"
+            android:textColor="#787878"
+            android:id="@+id/txt_category"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
+        <com.chocoroll.buyto.Model.MyTextView
+            android:layout_marginLeft="20dp"
+            android:layout_width="250dp"
+            android:layout_height="20dp"
+            android:textSize="16dp"
+            android:text="상품이름kkkkkkkkkkkkkkkkkkkk"
+            android:layout_marginBottom="10dp"
+            android:textColor="#8C8C8C"
+            android:id="@+id/txt_name"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <LinearLayout
+            android:layout_marginBottom="5dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center">
 
             <com.chocoroll.buyto.Model.MyTextView
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:layout_marginRight="10dp"
+                android:typeface="sans"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="17dp"
+                android:textSize="14dp"
                 android:text="현재인원"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:id="@+id/txt_people"
                 android:textColor="#f1ffffff"
-                android:background="#9981cf65" />
+                android:background="@color/main_color"
+                android:layout_centerVertical="true"
+                android:layout_centerInParent="true" />
 
             <com.chocoroll.buyto.Model.MyTextView
+                android:layout_marginLeft="10dp"
+                android:paddingBottom="3dp"
+                android:paddingTop="3dp"
+                android:typeface="sans"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:textSize="17dp"
+
+                android:textSize="14dp"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:text="마감날짜"
                 android:textColor="#f1ffffff"
                 android:background="#ffffa482"
                 android:id="@+id/txt_dday"
-                android:layout_gravity="bottom" />
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true" />
 
         </LinearLayout>
 
@@ -71,13 +97,18 @@
             android:layout_height="fill_parent"
             android:gravity="center">
 
-            <Button
+            <com.chocoroll.buyto.Model.MyTextViewBold
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="상세보기"
+                android:textColor="#ffffff"
+                android:background="@color/main_color"
+                android:padding="10dp"
+
                 android:id="@+id/btnDetail" />
 
-            <Button
+            <com.chocoroll.buyto.Model.MyTextViewBold
+                android:padding="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="입금자확인"

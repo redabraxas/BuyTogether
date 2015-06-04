@@ -1,37 +1,30 @@
 package com.chocoroll.buyto.Seller;
 
 import android.app.Activity;
-
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.chocoroll.buyto.DetailDeal.DetailDealActivity;
 import com.chocoroll.buyto.Extra.DownloadImageTask;
+import com.chocoroll.buyto.Extra.Retrofit;
 import com.chocoroll.buyto.MainActivity;
 import com.chocoroll.buyto.Model.Deal;
 import com.chocoroll.buyto.R;
-import com.chocoroll.buyto.Extra.Retrofit;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 
 import retrofit.Callback;
@@ -205,12 +198,14 @@ public class SellerFragment extends Fragment {
                 new DownloadImageTask((ImageView) v.findViewById(R.id.thumbnailDeal))
                         .execute(p.getThumbnail());
 
-                String str = "["+p.getbCategory()+"/"+p.getsCategory()+"]  "+p.getName();
-                ((TextView)  v.findViewById(R.id.txt_name)).setText(str);
+                String str = "["+p.getbCategory()+"/"+p.getsCategory()+"]";
+                ((TextView)v.findViewById(R.id.txt_category)).setText(str);
+                ((TextView)  v.findViewById(R.id.txt_name)).setText(p.getName());
+
                 ((TextView) v.findViewById(R.id.txt_dday)).setText(p.getDday());
                 ((TextView)  v.findViewById(R.id.txt_people)).setText(String.valueOf(p.getBook()+"/"+p.getMaxBook()));
 
-                ((Button) v.findViewById(R.id.btnDetail)).setOnClickListener(new View.OnClickListener() {
+                ((TextView) v.findViewById(R.id.btnDetail)).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Intent intent = new Intent(context, DetailDealActivity.class);
@@ -221,7 +216,7 @@ public class SellerFragment extends Fragment {
                     }
                 });
 
-                ((Button) v.findViewById(R.id.btnDeposit)).setOnClickListener(new View.OnClickListener() {
+                ((TextView) v.findViewById(R.id.btnDeposit)).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
