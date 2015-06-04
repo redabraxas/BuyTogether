@@ -5,60 +5,75 @@
     android:background="#ffffff">
 
     <TableLayout
+        android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
       >
         <TableRow
+            android:layout_margin="5dp"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
-            <TextView
+            <com.chocoroll.buyto.Model.MyTextViewBold
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="사업자 이름"
-                android:textColor="#000000"/>
+                android:text="판매처 : "
+                android:textColor="#6C6C6C"/>
 
-            <TextView
+            <com.chocoroll.buyto.Model.MyTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="사업자 이름"
-                android:textColor="#000000"
+                android:textColor="#5E5E5E"
                 android:id="@+id/txt_sellerName"/>
         </TableRow>
 
         <TableRow
+            android:layout_margin="5dp"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
 
-            <TextView
+            <com.chocoroll.buyto.Model.MyTextViewBold
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="사업자 번호:"
-                android:textColor="#000000"/>
+                android:text="문의처 : "
+                android:textColor="#6C6C6C"/>
 
-            <TextView
+            <com.chocoroll.buyto.Model.MyTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="사업자 번호"
-                android:textColor="#000000"
+                android:textColor="#5E5E5E"
                 android:id="@+id/txt_sellerNum"/>
         </TableRow>
 
         <TableRow
+            android:layout_margin="5dp"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
 
-            <TextView
+            <com.chocoroll.buyto.Model.MyTextViewBold
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:text="사업자 주소"/>
+                android:textColor="#6C6C6C"
+                android:text="사업자 주소 : "/>
 
-            <TextView
+            <com.chocoroll.buyto.Model.MyTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="사업자 주소"
-                android:textColor="#000000"
+                android:textColor="#5E5E5E"
                 android:id="@+id/txt_sellerAddr"/>
+
         </TableRow>
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#ACACAC"
+            android:orientation="vertical"
+            android:layout_marginBottom="10dp">
+        </LinearLayout>
     </TableLayout>
+
+
 </LinearLayout>

@@ -28,14 +28,6 @@
                 android:layout_marginBottom="10dp"
                 android:id="@+id/detailbtn"/>
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/detailDealImage"
-                android:scaleType="fitXY"
-                android:layout_gravity="center_horizontal" />
-
-
             <LinearLayout
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"

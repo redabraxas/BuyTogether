@@ -8,7 +8,7 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="70dp"
         android:layout_gravity="center_horizontal"
         android:padding="10dp">
 
@@ -19,13 +19,16 @@
             android:id="@+id/edit_qna"
             android:layout_gravity="center_horizontal" />
 
-        <Button
+        <com.chocoroll.buyto.Model.MyTextViewBold
+            android:clickable="true"
+            android:gravity="center"
+            android:textColor="#6C6C6C"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:text="작성"
-            android:id="@+id/btn_qna"
-            android:layout_gravity="center_horizontal" />
+            android:background="@null"
+            android:id="@+id/btn_qna" />
     </LinearLayout>
 
     <ListView
