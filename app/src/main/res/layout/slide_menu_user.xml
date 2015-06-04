@@ -366,7 +366,7 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:gravity="center"
-                    android:background="#ffcecece">
+                    android:background="@color/slide_tab_backgroud">
 
                     <com.chocoroll.buyto.Model.MyTextViewBold
                         android:layout_width="wrap_content"
