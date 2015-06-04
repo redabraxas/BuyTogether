@@ -42,7 +42,8 @@ import retrofit.client.Response;
 
 public class MakeDealActivity extends Activity implements OnClickListener {
 
-    private Button uploadButton, btnselectpic, btnselectpic1,cancelButton;
+    private TextView uploadButton, cancelButton;
+    private Button  btnselectpic1,btnselectpic;
     private ImageView imageview;
     private ImageView imageview1;
     private int serverResponseCode = 0;
@@ -79,12 +80,12 @@ public class MakeDealActivity extends Activity implements OnClickListener {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_deal);
-        uploadButton = (Button) findViewById(R.id.uploadButton);
+        uploadButton = (TextView) findViewById(R.id.uploadButton);
         btnselectpic = (Button) findViewById(R.id.button_selectpic);
         btnselectpic1 = (Button) findViewById(R.id.button_selectpic1);
         imageview = (ImageView) findViewById(R.id.imageView_pic);
         imageview1 = (ImageView) findViewById(R.id.imageView_pic1);
-        cancelButton = (Button) findViewById(R.id.report_cancelbt);
+        cancelButton = (TextView) findViewById(R.id.report_cancelbt);
          user_email =
               ((MainActivity)MainActivity.mContext).getUserId();
 

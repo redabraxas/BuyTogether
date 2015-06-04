@@ -38,7 +38,8 @@ import retrofit.client.Response;
 
 public class MakeWishDealActivity extends Activity implements OnClickListener {
 
-    private Button uploadButton, btnselectpic, cancelButton;
+    private TextView uploadButton,cancelButton;
+    private Button  btnselectpic;
     private ImageView imageview;
     private ProgressDialog ldialog = null;
 
@@ -61,10 +62,10 @@ public class MakeWishDealActivity extends Activity implements OnClickListener {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_wishdeal);
-        uploadButton = (Button) findViewById(R.id.uploadButton);
+        uploadButton = (TextView) findViewById(R.id.uploadButton);
         btnselectpic = (Button) findViewById(R.id.button_selectpic);
         imageview = (ImageView) findViewById(R.id.imageView_pic);
-        cancelButton = (Button) findViewById(R.id.report_cancelbt);
+        cancelButton = (TextView) findViewById(R.id.report_cancelbt);
         user_email =
                 ((MainActivity)MainActivity.mContext).getUserId();
 

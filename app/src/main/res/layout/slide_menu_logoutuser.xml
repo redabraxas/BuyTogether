@@ -43,7 +43,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="안녕하세요, 비회원님!"
-                        android:textColor="#686868"
+                        android:textColor="#D9D9D9"
                         android:padding="10dp"
                         android:textSize="15dp"/>
 
@@ -74,7 +74,7 @@
                             android:layout_gravity="center"
                             android:layout_marginLeft="17dp"
                             android:text="로그인"
-                            android:textColor="#686868"
+                            android:textColor="#D9D9D9"
                             android:textSize="20dp"
                             android:typeface="sans" />
 
@@ -105,7 +105,7 @@
                             android:layout_gravity="center"
                             android:layout_marginLeft="17dp"
                             android:text="회원가입"
-                            android:textColor="#686868"
+                            android:textColor="#D9D9D9"
                             android:textSize="20dp"
                             android:typeface="sans" />
 
@@ -145,7 +145,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginLeft="17dp"
-                            android:textColor="#686868"
+                            android:textColor="#D9D9D9"
                             android:text="@string/menu_all"
                             android:textSize="20dp"
                             android:typeface="sans" />
@@ -176,7 +176,7 @@
                             android:layout_gravity="center"
                             android:layout_marginLeft="17dp"
                             android:text="@string/menu_wish"
-                            android:textColor="#686868"
+                            android:textColor="#D9D9D9"
                             android:textSize="20dp"
                             android:typeface="sans" />
 
@@ -202,7 +202,7 @@
                     <com.chocoroll.buyto.Model.MyTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="#686868"
+                        android:textColor="#D9D9D9"
                         android:text="로그인 한 유저만 사용이 가능합니다."/>
 
                     </LinearLayout>
