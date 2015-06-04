@@ -75,7 +75,7 @@ final Deal p = items.get(position);
             ((TextView) v.findViewById(R.id.btnNO)).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    
+
 
 
                 }
