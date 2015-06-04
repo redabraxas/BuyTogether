@@ -3,13 +3,19 @@
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <LinearLayout
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.chocoroll.buyto.Model.MyTextViewBold
         android:gravity="center"
         android:layout_weight="1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="id"
+        android:textColor="@color/text"
         android:id="@+id/sellerID" />
 
     <LinearLayout
@@ -20,18 +26,22 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal">
 
-        <TextView
+        <com.chocoroll.buyto.Model.MyTextViewBold
+            android:textColor="@color/text_bright"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New Text"
             android:id="@+id/sellerNum" />
-        <TextView
+
+        <com.chocoroll.buyto.Model.MyTextViewBold
+            android:textColor="@color/text_bright"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New Text"
             android:id="@+id/sellerPhone" />
 
-        <TextView
+        <com.chocoroll.buyto.Model.MyTextViewBold
+            android:textColor="@color/text_bright"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New Text"
@@ -52,5 +62,6 @@
         android:layout_height="wrap_content"
         android:text="거절"
         android:id="@+id/btnNO" />
+    </LinearLayout>
 
 </LinearLayout>
