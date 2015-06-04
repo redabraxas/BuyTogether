@@ -88,6 +88,35 @@
         <item>주방가전</item>
     </string-array>
 
+    <string-array name="small_category_arrays_sport">
+        <item>전체보기</item>
+        <item>스포츠/기능화</item>
+        <item>스포츠의류</item>
+        <item>레포츠용품</item>
+        <item>자동차용품</item>
+        <item>해외직구</item>
+    </string-array>
+
+    <string-array name="small_category_arrays_goods">
+        <item>전체보기</item>
+        <item>유아동도서</item>
+        <item>일반도서</item>
+        <item>문구/팬시</item>
+        <item>취미</item>
+    </string-array>
+
+    <string-array name="small_category_arrays_pet">
+        <item>전체보기</item>
+        <item>강아지용품</item>
+        <item>고양이용품</item>
+        <item>관상어/소동물</item>
+    </string-array>
+
+
+
+
+
+
     <string-array name="bank">
         <item>신한</item>
         <item>우리</item>

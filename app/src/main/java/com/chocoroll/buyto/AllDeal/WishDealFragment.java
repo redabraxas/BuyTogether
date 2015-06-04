@@ -98,11 +98,21 @@ public class WishDealFragment extends Fragment {
                     adapter= ArrayAdapter.createFromResource(getActivity(), R.array.small_category_arrays_furniture,
                             android.R.layout.simple_spinner_item);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                }else if(item.equals("가전/디지털")){
-                    adapter= ArrayAdapter.createFromResource(getActivity(), R.array.small_category_arrays_digital,
+                }else if(item.equals("가전/디지털")) {
+                    adapter = ArrayAdapter.createFromResource(getActivity(), R.array.small_category_arrays_digital,
                             android.R.layout.simple_spinner_item);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                }else{
+                }else if(item.equals("스포츠/레저용품")){
+                    adapter = ArrayAdapter.createFromResource(getActivity(), R.array.small_category_arrays_sport,
+                            android.R.layout.simple_spinner_item);
+                }else if(item.equals("도서/문구/취미")){
+                    adapter = ArrayAdapter.createFromResource(getActivity(), R.array.small_category_arrays_goods,
+                            android.R.layout.simple_spinner_item);
+                }else if(item.equals("애완용품")){
+                    adapter = ArrayAdapter.createFromResource(getActivity(), R.array.small_category_arrays_pet,
+                            android.R.layout.simple_spinner_item);
+                }
+                else{
                     // 전체보기인 경우
                     getWishDealList("전체보기", "전체보기", "");
                     ((EditText)v.findViewById(R.id.editSearch)).setText("");

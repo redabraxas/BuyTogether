@@ -17,7 +17,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 
 	private static void generateNotification(Context context, String message) {
 
-		int icon = R.drawable.logo;
+		int icon = R.drawable.logo2;
 		long when = System.currentTimeMillis();
 
 

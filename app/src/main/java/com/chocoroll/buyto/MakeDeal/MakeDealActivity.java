@@ -206,6 +206,15 @@ public class MakeDealActivity extends Activity implements OnClickListener {
                     adapter= ArrayAdapter.createFromResource(MakeDealActivity.this, R.array.small_category_arrays_digital,
                             android.R.layout.simple_spinner_item);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                }else if(item.equals("스포츠/레저용품")){
+                    adapter = ArrayAdapter.createFromResource(MakeDealActivity.this, R.array.small_category_arrays_sport,
+                            android.R.layout.simple_spinner_item);
+                }else if(item.equals("도서/문구/취미")){
+                    adapter = ArrayAdapter.createFromResource(MakeDealActivity.this, R.array.small_category_arrays_goods,
+                            android.R.layout.simple_spinner_item);
+                }else if(item.equals("애완용품")){
+                    adapter = ArrayAdapter.createFromResource(MakeDealActivity.this, R.array.small_category_arrays_pet,
+                            android.R.layout.simple_spinner_item);
                 }else{
                     // 전체보기인 경우
 

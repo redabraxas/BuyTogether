@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <LinearLayout
-
+            android:gravity="center"
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
@@ -44,12 +44,14 @@
                 android:prompt="@string/small_category_prompt"
                 android:spinnerMode="dropdown" />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="★"
+            <ImageButton
+                android:scaleType="fitXY"
                 android:background="@null"
-                android:id="@+id/bookMark"/>
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/bookmark"
+                android:id="@+id/bookMark"
+                android:padding="10dp" />
 
         </LinearLayout>
 
@@ -57,19 +59,24 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center">
 
             <EditText
-                android:layout_weight="4"
+                android:layout_weight="6"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/editSearch" />
 
-            <Button
+            <ImageButton
+                android:scaleType="fitXY"
+                android:background="@null"
+                android:src="@drawable/search2"
+                android:padding="10dp"
                 android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="검색"
+                android:layout_height="50dp"
                 android:id="@+id/btnSearch" />
         </LinearLayout>
 

@@ -108,7 +108,15 @@ public class AllDealFragment extends Fragment {
                 }else if(item.equals("가전/디지털")){
                     adapter[0] = ArrayAdapter.createFromResource(getActivity(), R.array.small_category_arrays_digital,
                             android.R.layout.simple_spinner_item);
-
+                }else if(item.equals("스포츠/레저용품")){
+                    adapter[0] = ArrayAdapter.createFromResource(getActivity(), R.array.small_category_arrays_sport,
+                            android.R.layout.simple_spinner_item);
+                }else if(item.equals("도서/문구/취미")){
+                    adapter[0] = ArrayAdapter.createFromResource(getActivity(), R.array.small_category_arrays_goods,
+                            android.R.layout.simple_spinner_item);
+                }else if(item.equals("애완용품")){
+                    adapter[0] = ArrayAdapter.createFromResource(getActivity(), R.array.small_category_arrays_pet,
+                            android.R.layout.simple_spinner_item);
                 }else{
                     // 전체보기인 경우
                     getDealList("전체보기","전체보기","");
@@ -172,7 +180,7 @@ public class AllDealFragment extends Fragment {
 
 
 
-        ((Button)v.findViewById(R.id.bookMark)).setOnClickListener(new View.OnClickListener() {
+        (v.findViewById(R.id.bookMark)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
