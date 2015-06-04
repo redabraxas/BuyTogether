@@ -3,6 +3,8 @@ package com.chocoroll.buyto.DetailDeal;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.chocoroll.buyto.Extra.DownloadImageTask;
@@ -29,5 +31,13 @@ public class DetailDialog extends Dialog{
 
         new DownloadImageTask((ImageView) findViewById(R.id.detailDealImage))
                 .execute(url);
+
+        Button btn = (Button)findViewById(R.id.btnFinish);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dismiss();
+            }
+        });
     }
 }

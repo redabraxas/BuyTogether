@@ -4,9 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -19,8 +16,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.astuetz.PagerSlidingTabStrip;
@@ -29,8 +24,6 @@ import com.chocoroll.buyto.MainActivity;
 import com.chocoroll.buyto.Model.Deal;
 import com.chocoroll.buyto.R;
 import com.google.gson.JsonObject;
-
-import java.io.InputStream;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -223,7 +216,7 @@ public class DetailDealActivity extends FragmentActivity{
             View v = inflater.inflate(R.layout.fragment_product_detail, container, false);
             ((TextView)v.findViewById(R.id.seller_comment)).setText(product.getComment());
 
-            Button btn = (Button)v.findViewById(R.id.detailbtn);
+            TextView btn = (TextView)v.findViewById(R.id.detailbtn);
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
