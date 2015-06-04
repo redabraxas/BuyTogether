@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chocoroll.buyto.Extra.DownloadImageTask;
-import com.chocoroll.buyto.Model.Deal;
 import com.chocoroll.buyto.R;
 
 import java.util.ArrayList;
@@ -37,8 +36,9 @@ public class DealStateAdapter extends ArrayAdapter<DealState> {
             new DownloadImageTask((ImageView) v.findViewById(R.id.dealLogo))
                     .execute(p.getThumbnail());
 
-            String str = "["+p.getbCategory()+"/"+p.getsCategory()+"]  "+p.getDealName();
-            ((TextView)  v.findViewById(R.id.dealName)).setText(str);
+            String str = "["+p.getbCategory()+"/"+p.getsCategory()+"]";
+            ((TextView)v.findViewById(R.id.txt_category)).setText(str);
+            ((TextView)v.findViewById(R.id.txt_name)).setText(p.getDealName());
             ((TextView)  v.findViewById(R.id.statePrice)).setText(p.getPrice());
 
 
