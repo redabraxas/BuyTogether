@@ -70,13 +70,6 @@
     </LinearLayout>
 
 
-    <TextView
-        android:id="@+id/passwdconfirmtext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:typeface="sans" />
-
     <LinearLayout
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
@@ -118,26 +111,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/TextView02"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="이름"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:typeface="sans" />
-
-        <EditText
-            android:id="@+id/edit_join_name"
-            android:layout_marginLeft="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:gravity="center"
-            android:hint="이름을 입력해주세요."
-            android:singleLine="true"
-            android:textSize="12sp"
-            android:typeface="sans" />
 
     </LinearLayout>
 

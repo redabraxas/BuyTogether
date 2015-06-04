@@ -36,29 +36,20 @@ import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-//
-//import com.astuetz.PagerSlidingTabStrip;
-//import com.example.hangang.R;
-//import com.google.gson.JsonArray;
-//import com.google.gson.JsonObject;
-//import com.hangang.model.Notice;
-//import com.hangang.notice.Notice_BackFragment.MyPagerAdapter;
-//import com.hangang.retrofitinterface.Retrofit;
 
 
 public class JoinActivity extends Activity {
-    boolean dupl_flag = false;
+
     private ProgressDialog dialog;
-    private String id ;
+    private  String passwd_comfirm;
     private String passwd;
-    private String name;
     private String email;
-    private boolean passwdvalid;
-    private boolean passwdmatch;
+
     private String regExpStr = "^([a-z]+[0-9]+[a-z0-9]*|[0-9]+[a-z]+[a-z0-9]*)$";
     private String emailregex = "^[_a-zA-Z0-9-\\.]+@[\\.a-zA-Z0-9-]+\\.[a-zA-Z]+$";
     private String idregex = "^[a-zA-Z]{1}[a-zA-Z0-9_]{5,11}$";
-    private String nameregex="^[a-zA-Z]*$";
+
+    boolean seller_flag = false;
 
 
 
@@ -69,58 +60,27 @@ public class JoinActivity extends Activity {
         setContentView(R.layout.activity_join);
 
 
-        RegistPhoneID task1 = new RegistPhoneID();
-        task1.execute(JoinActivity.this);
-
         // TODO Auto-generated method stub
 //        final EditText edit_id = (EditText)findViewById(R.id.edit_join_id);
         final EditText edit_pw = (EditText)findViewById(R.id.edit_join_pw);
         final EditText edit_pwconfirm = (EditText)findViewById(R.id.edit_join_pwconfirm);
-        final EditText edit_name = (EditText)findViewById(R.id.edit_join_name);
         final EditText edit_email = (EditText)findViewById(R.id.edit_join_email);
+
+
         // 회원가입
-        ((EditText)JoinActivity.this.findViewById(R.id.edit_join_pwconfirm)).addTextChangedListener(MatchTextWatcher);
-        ((EditText)JoinActivity.this.findViewById(R.id.edit_join_pw)).addTextChangedListener(ValidtyTextWatcher);
         Button btn_ok = (Button)findViewById(R.id.btn_join_ok);
         btn_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-//                id = edit_id.getText().toString();
+                passwd_comfirm = edit_pwconfirm.getText().toString();
                 passwd = edit_pw.getText().toString();
-                name = edit_name.getText().toString();
                 email = edit_email.getText().toString();
                 //여기에 패스워드 길이랑 패턴 확인하는구문
 
-                if(!id.matches(idregex))
+                if(!email.matches(idregex))
                 {
                     AlertDialog dialog2 = new AlertDialog.Builder(JoinActivity.this).setMessage("잘못된 아이디입니다.")
-                            .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dia, int which) {
-                                    dia.dismiss();
-                                }
-                            }).show();
-                    TextView textView = (TextView) dialog2.findViewById(android.R.id.message);
-                    Typeface face=Typeface.SANS_SERIF;
-                    textView.setTypeface(face);
-                }
-                else if(!passwdmatch||!passwdvalid)
-                {
-                    AlertDialog dialog2 = new AlertDialog.Builder(JoinActivity.this).setMessage("비밀번호를 확인해주세요.")
-                            .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dia, int which) {
-                                    dia.dismiss();
-                                }
-                            }).show();
-                    TextView textView = (TextView) dialog2.findViewById(android.R.id.message);
-                    Typeface face=Typeface.SANS_SERIF;
-                    textView.setTypeface(face);
-                }
-                else if(!name.matches(nameregex))
-                {
-                    AlertDialog dialog2 = new AlertDialog.Builder(JoinActivity.this).setMessage("이름을 확인해주세요.")
                             .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dia, int which) {
@@ -143,17 +103,59 @@ public class JoinActivity extends Activity {
                     TextView textView = (TextView) dialog2.findViewById(android.R.id.message);
                     Typeface face=Typeface.SANS_SERIF;
                     textView.setTypeface(face);
-                }
+                }else if(passwd.length()<5 || !passwd.matches(regExpStr)){
+                    AlertDialog dialog2 = new AlertDialog.Builder(JoinActivity.this).setMessage("비밀번호는 6자이상이고 영어/숫자 혼합이어야합니다.")
+                            .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dia, int which) {
+                                    dia.dismiss();
+                                }
+                            }).show();
+                    TextView textView = (TextView) dialog2.findViewById(android.R.id.message);
+                    Typeface face=Typeface.SANS_SERIF;
+                    textView.setTypeface(face);
+
+                }else if(!passwd_comfirm.equals(passwd)){
+                    AlertDialog dialog2 = new AlertDialog.Builder(JoinActivity.this).setMessage("비밀번호가 일치하지 않습니다.")
+                            .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dia, int which) {
+                                    dia.dismiss();
+                                }
+                            }).show();
+                    TextView textView = (TextView) dialog2.findViewById(android.R.id.message);
+                    Typeface face=Typeface.SANS_SERIF;
+                    textView.setTypeface(face);
+
+                }else
+                {
+
+                    // 만약 판매자이면,
+                    if(seller_flag){
+
+                        String sellerNum = ((EditText) findViewById(R.id.Seller_edit_join_compnum)).getText().toString();
+                        String sellerAddr = ((EditText) findViewById(R.id.Seller_edit_join_compadd)).getText().toString();
+                        String sellerPhone = ((EditText) findViewById(R.id.Seller_edit_join_compphone)).getText().toString();
+
+                        if(sellerNum.equals("") || sellerAddr.equals("") || sellerPhone.equals("")){
+                             new AlertDialog.Builder(JoinActivity.this).setMessage("빈칸을 확인해주세요!!")
+                                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dia, int which) {
+
+                                        }
+                                    }).show();
+
+                        }else{
+                            RegistPhoneID task1 = new RegistPhoneID();
+                            task1.execute(JoinActivity.this);
+                        }
 
 
-
-              else
-              {
-
-
-                  RegistPhoneID task1 = new RegistPhoneID();
-                  task1.execute(JoinActivity.this);
-
+                    }else{
+                        RegistPhoneID task1 = new RegistPhoneID();
+                        task1.execute(JoinActivity.this);
+                    }
 
 
                 }
@@ -170,10 +172,18 @@ public class JoinActivity extends Activity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // TODO Auto-generated method stub
 
-                if (isChecked)
+                if (isChecked){
+
+                    seller_flag = true;
                     Layout.setVisibility(View.VISIBLE);
-                else
+                }
+
+                else{
+                    seller_flag = false;
                     Layout.setVisibility(View.GONE);
+
+                }
+
             }
         });
 
@@ -187,18 +197,11 @@ public class JoinActivity extends Activity {
         dialog.setCancelable(false);
         dialog.show();
 
-
-        TextView textView = (TextView) dialog.findViewById(android.R.id.message);
-        Typeface face=Typeface.SANS_SERIF;
-        textView.setTypeface(face);
-
         final JsonObject info=new JsonObject();
 
         info.addProperty("phoneID", phoneID);
-        info.addProperty("id", id);
-        info.addProperty("passwd", passwd);
-        info.addProperty("name", name);
-        info.addProperty("email", email);
+        info.addProperty("pw", passwd);
+        info.addProperty("id", email);
 
         new Thread(new Runnable() {
             public void run() {
@@ -213,36 +216,30 @@ public class JoinActivity extends Activity {
                         @Override
                         public void success(String result, Response response) {
                             dialog.dismiss();
-                            if(result.equals("Success"))
+                            if(result.equals("success"))
                                 finish();
                             else
                             {
-                                AlertDialog dialog2 = new AlertDialog.Builder(JoinActivity.this).setMessage("알수 없는 이유로 회원가입에 실패하였습니다.")
+                                new AlertDialog.Builder(JoinActivity.this).setMessage("알수 없는 이유로 회원가입에 실패하였습니다.")
                                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dia, int which) {
                                                 dia.dismiss();
                                             }
                                         }).show();
-                                TextView textView = (TextView) dialog2.findViewById(android.R.id.message);
-                                Typeface face=Typeface.SANS_SERIF;
-                                textView.setTypeface(face);
                             }
                         }
 
                         @Override
                         public void failure(RetrofitError retrofitError) {
                             dialog.dismiss();
-                            AlertDialog dialog2 = new AlertDialog.Builder(JoinActivity.this).setMessage("네트워크 상태를 확인해주세요.")
+                            new AlertDialog.Builder(JoinActivity.this).setMessage("네트워크 상태를 확인해주세요.")
                                     .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dia, int which) {
                                             dia.dismiss();
                                         }
                                     }).show();
-                            TextView textView = (TextView) dialog2.findViewById(android.R.id.message);
-                            Typeface face=Typeface.SANS_SERIF;
-                            textView.setTypeface(face);
                         }
                     });
                 }
@@ -252,93 +249,8 @@ public class JoinActivity extends Activity {
             }
         }).start();
     }
-    public void onClickedButton(View v){
-        setContentView(R.layout.activity_join);
-        CheckBox checkbox = (CheckBox) findViewById(R.id.seller_check);
-        final LinearLayout Layout = (LinearLayout) findViewById(R.id.seller_form);
-        checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                // TODO Auto-generated method stub
 
-                if (isChecked)
-                    Layout.setVisibility(View.VISIBLE);
-                else
-                    Layout.setVisibility(View.GONE);
-            }
-        });
 
-    }
-
-    private TextWatcher MatchTextWatcher = new TextWatcher() {
-
-        public void afterTextChanged(Editable s) {
-        }
-
-        public void beforeTextChanged(CharSequence s, int start, int count,
-                                      int after) {
-        }
-
-        public void onTextChanged(CharSequence s, int start, int before,
-                                  int count) {
-            EditText edit_pw = (EditText)findViewById(R.id.edit_join_pw);
-            EditText edit_pwconfirm = (EditText)findViewById(R.id.edit_join_pwconfirm);
-            TextView text=(TextView)(JoinActivity.this.findViewById(R.id.passwdconfirmtext));
-            if(s.length()==0)
-            {
-                text.setText("");
-            }
-            else{
-                if(edit_pw.getText().toString().equals(s.toString()))
-                {
-                    text.setText("일치합니다.");
-                    text.setTextColor(Color.parseColor("#4CAF50"));
-                    passwdmatch=true;
-                }
-                else
-                {
-                    text.setText("불일치합니다.");
-                    text.setTextColor(Color.parseColor("#F44336"));
-                    passwdmatch=false;
-                }
-            }
-        }
-
-    };
-    private TextWatcher ValidtyTextWatcher = new TextWatcher() {
-
-        public void afterTextChanged(Editable s) {
-        }
-
-        public void beforeTextChanged(CharSequence s, int start, int count,
-                                      int after) {
-        }
-
-        public void onTextChanged(CharSequence s, int start, int before,
-                                  int count) {
-
-            TextView text=(TextView)(JoinActivity.this.findViewById(R.id.passwdtext));
-            if(s.length()==0)
-            {
-                text.setText("");
-            }
-            else{
-                if(s.length()>5&&s.toString().matches(regExpStr))
-                {
-                    text.setText("사용가능한 비밀번호 입니다");
-                    text.setTextColor(Color.parseColor("#4CAF50"));
-                    passwdvalid=true;
-                }
-                else
-                {
-                    text.setText("사용 불가능한 비밀번호 입니다");
-                    text.setTextColor(Color.parseColor("#F44336"));
-                    passwdvalid=false;
-                }
-            }
-        }
-
-    };
 
 
 
@@ -370,7 +282,7 @@ public class JoinActivity extends Activity {
             super.onPostExecute(result);
 
 
-            //join(result);
+            join(result);
 
 
         }
