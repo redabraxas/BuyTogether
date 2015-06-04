@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -117,7 +118,7 @@ public class DepositFragment extends Fragment {
         dealNum = getArguments().getString("dealNum");
 
        tabs = (PagerSlidingTabStrip) v.findViewById(R.id.tabs);
-        //tabs.setTextColor(Color.WHITE);
+        tabs.setTextColor(Color.WHITE);
         pager = (ViewPager) v.findViewById(R.id.pager);
 
 
