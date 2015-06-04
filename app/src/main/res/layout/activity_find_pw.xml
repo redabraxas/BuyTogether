@@ -68,7 +68,6 @@
                 android:layout_width="247dp"
                 android:layout_height="wrap_content"
                 android:ems="9"
-                android:maxLength="12"
                 android:singleLine="true"
                 android:textSize="12dp"
                 android:typeface="sans"

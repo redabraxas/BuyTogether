@@ -24,7 +24,6 @@ import retrofit.client.Response;
 
 public class FindPWActivity extends FragmentActivity {
     ProgressDialog dialog;
-
     Button send;
     String user_email;
 
@@ -32,8 +31,6 @@ public class FindPWActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_pw);
-        // 아이디 입력 후 임시 비밀번호 발송
-        user_email = ((EditText)findViewById(R.id.user_email)).getText().toString();
 
         send = (Button)findViewById(R.id.send);
 
@@ -42,38 +39,37 @@ public class FindPWActivity extends FragmentActivity {
 
                 InputMethodManager pad=(InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                 ///로그인 버튼을 누르면 키패드 사라지게 만들기.
-                pad.hideSoftInputFromWindow(((EditText) findViewById(R.id.login_passwd)).getWindowToken(), 0);
+                pad.hideSoftInputFromWindow(((EditText) findViewById(R.id.user_email)).getWindowToken(), 0);
+
+                // 아이디 입력 후 임시 비밀번호 발송
+                user_email = ((EditText)findViewById(R.id.user_email)).getText().toString();
                 if(user_email.length()==0)
                 {
-                    AlertDialog dialog2 = new AlertDialog.Builder(FindPWActivity.this).setMessage("아이디를 입력해주세요.")
-                            .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-
-                                }
-                            }).show();
-                    TextView textView = (TextView) dialog2.findViewById(android.R.id.message);
-                    Typeface face=Typeface.SANS_SERIF;
-                    textView.setTypeface(face);
+                    new AlertDialog.Builder(FindPWActivity.this).setMessage("아이디를 입력해주세요.")
+                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    }).show();
                 }
                 else{
-                    JsonObject info=new JsonObject();
-                    info.addProperty("user_email", user_email);
-
-                    dialog = new ProgressDialog(FindPWActivity.this);
-                    dialog.setMessage("정보를 받아오는 중입니다...");
-                    dialog.setIndeterminate(true);
-                    dialog.setCancelable(false);
-                    dialog.show();
-
-                    Login(info);
+                    findPasswd();
                 }
             }
         });
     }
-    private void Login(final JsonObject info){
+    private void findPasswd(){
 
+
+        dialog = new ProgressDialog(FindPWActivity.this);
+        dialog.setMessage("정보를 받아오는 중입니다...");
+        dialog.setIndeterminate(true);
+        dialog.setCancelable(false);
+        dialog.show();
+
+        final JsonObject info=new JsonObject();
+        info.addProperty("user_email", user_email);
 
         new Thread(new Runnable() {
             public void run() {
@@ -94,7 +90,6 @@ public class FindPWActivity extends FragmentActivity {
                                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
-                                                dialog.dismiss();
 
                                             }
                                         }).show();
@@ -104,11 +99,11 @@ public class FindPWActivity extends FragmentActivity {
                                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
-                                                dialog.dismiss();
+                                                finish();
 
                                             }
                                         }).show();
-                                finish();
+
                             }
 
                         }
@@ -123,7 +118,6 @@ public class FindPWActivity extends FragmentActivity {
                                     .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                         // 확인 버튼 클릭시 설정
                                         public void onClick(DialogInterface dialog, int whichButton) {
-                                            finish();
 
                                         }
                                     });
@@ -143,5 +137,5 @@ public class FindPWActivity extends FragmentActivity {
 
     }
 
-    }
+}
 
