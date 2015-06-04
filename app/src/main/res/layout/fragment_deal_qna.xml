@@ -22,7 +22,7 @@
         <com.chocoroll.buyto.Model.MyTextViewBold
             android:clickable="true"
             android:gravity="center"
-            android:textColor="#6C6C6C"
+            android:textColor="#7C7C7C"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent"

@@ -11,15 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.chocoroll.buyto.Extra.Retrofit;
 import com.chocoroll.buyto.MainActivity;
 import com.chocoroll.buyto.R;
-import com.chocoroll.buyto.Extra.Retrofit;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
@@ -74,7 +73,7 @@ public class AnswerDialog extends Dialog{
 
         if(((MainActivity)MainActivity.mContext).getUserId().equals(seller) ||  ((MainActivity)MainActivity.mContext).getUserId().equals(writer)){
 
-            Button replyAnswer = (Button) findViewById(R.id.answer_ok);
+            TextView replyAnswer = (TextView) findViewById(R.id.answer_ok);
             replyAnswer.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

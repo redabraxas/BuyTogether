@@ -6,26 +6,28 @@
     android:padding="10dp">
 
 
+
+
         <ListView
             android:id="@+id/answer_list"
             android:layout_width="match_parent"
             android:layout_height="342dp"
             android:layout_weight="1"
             android:background="#FFFFFF"
-            android:divider="#336c97cf"
+            android:divider="#E8F0DF"
             android:dividerHeight="1dp" />
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#33a9a9a9"
+            android:background="#E8F0DF"
             android:padding="10dip" />
 
         <RelativeLayout
             android:id="@+id/seller_answer_box"
             android:layout_width="match_parent"
-            android:layout_height="100dp" >
+            android:layout_height="70dp" >
 
             <EditText
                 android:id="@+id/answer_content_this"
@@ -39,15 +41,17 @@
                 android:inputType="textMultiLine"
                 android:typeface="sans" />
 
-            <Button
+            <com.chocoroll.buyto.Model.MyTextViewBold
+                android:clickable="true"
                 android:id="@+id/answer_ok"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_alignParentRight="true"
                 android:gravity="center"
                 android:text="작성"
+                android:padding="10dp"
                 android:background="@null"
-                android:textColor="#0099CC"
+                android:textColor="@color/main_color"
                 android:textSize="13dp"
                 android:typeface="sans" />
         </RelativeLayout>
