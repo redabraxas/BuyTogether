@@ -4,21 +4,14 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.chocoroll.buyto.DetailDeal.DetailDealActivity;
-import com.chocoroll.buyto.Extra.DownloadImageTask;
 import com.chocoroll.buyto.Extra.Retrofit;
-import com.chocoroll.buyto.Model.Deal;
 import com.chocoroll.buyto.R;
-import com.chocoroll.buyto.Seller.DepositFragment;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
@@ -56,7 +49,7 @@ public class SellerAdapter extends ArrayAdapter<Seller> {
             ((TextView) v.findViewById(R.id.sellerPhone)).setText("폰번호: " +p.getPhone());
             ((TextView) v.findViewById(R.id.sellerOffice)).setText("사무실: "+p.getOffice());
 
-            ((Button) v.findViewById(R.id.btnOK)).setOnClickListener(new View.OnClickListener() {
+            ((TextView) v.findViewById(R.id.btnOK)).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
@@ -67,7 +60,7 @@ public class SellerAdapter extends ArrayAdapter<Seller> {
             });
 
 
-            ((Button) v.findViewById(R.id.btnNO)).setOnClickListener(new View.OnClickListener() {
+            ((TextView) v.findViewById(R.id.btnNO)).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     sendsSellerResult(p.getId(), "no");

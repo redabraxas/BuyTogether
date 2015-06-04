@@ -6,27 +6,32 @@
     <LinearLayout
         android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+
 
         <com.chocoroll.buyto.Model.MyTextViewBold
-        android:gravity="center"
-        android:layout_weight="1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="id"
-        android:textColor="@color/text"
-        android:id="@+id/sellerID" />
+            android:lineSpacingExtra="7dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="id"
+            android:textColor="@color/text"
+            android:id="@+id/sellerID" />
 
-    <LinearLayout
-        android:gravity="center"
-        android:orientation="vertical"
-        android:layout_weight="4"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
         <com.chocoroll.buyto.Model.MyTextViewBold
+            android:lineSpacingExtra="7dp"
+            android:layout_margin="3dp"
             android:textColor="@color/text_bright"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -34,6 +39,8 @@
             android:id="@+id/sellerNum" />
 
         <com.chocoroll.buyto.Model.MyTextViewBold
+            android:lineSpacingExtra="7dp"
+            android:layout_margin="3dp"
             android:textColor="@color/text_bright"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -41,27 +48,55 @@
             android:id="@+id/sellerPhone" />
 
         <com.chocoroll.buyto.Model.MyTextViewBold
+            android:lineSpacingExtra="7dp"
+            android:layout_margin="3dp"
             android:textColor="@color/text_bright"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New Text"
             android:id="@+id/sellerOffice" />
 
-    </LinearLayout>
+        </LinearLayout>
 
-    <Button
-        android:layout_weight="1"
-        android:layout_width="0dp"
+        <LinearLayout
+            android:layout_marginTop="3dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="3dp">
+
+    <com.chocoroll.buyto.Model.MyTextViewBold
+        android:textColor="#ffffff"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:background="@color/main_color"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
         android:text="승인"
+        android:textSize="17dp"
+        android:clickable="true"
         android:id="@+id/btnOK" />
 
-    <Button
-        android:layout_weight="1"
-        android:layout_width="0dp"
+    <com.chocoroll.buyto.Model.MyTextViewBold
+        android:layout_marginLeft="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="거절"
+        android:textColor="#ffffff"
+        android:background="#F27B77"
+        android:textSize="17dp"
+        android:clickable="true"
         android:id="@+id/btnNO" />
+            </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

@@ -52,10 +52,10 @@
                         <com.chocoroll.buyto.Model.MyTextView
                             android:layout_marginTop="5dp"
                             android:layout_width="match_parent"
-                            android:layout_height="23dp"
+                            android:layout_height="24dp"
                             android:textSize="17dp"
-                            android:layout_marginLeft="10dp"
-                            android:text="상품이름ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ짤리"
+                            android:layout_marginLeft="7dp"
+                            android:text="상품이름ㅇㅇㅇㅇㅇㅇ리"
                             android:layout_marginBottom="5dp"
                             android:textColor="#8C8C8C"
                             android:id="@+id/txt_name"
@@ -64,20 +64,24 @@
                             android:layout_alignParentStart="true" />
 
 
+
+
                         <LinearLayout
+                            android:layout_marginRight="5dp"
                             android:layout_marginBottom="5dp"
-                            android:layout_marginLeft="20dp"
+                            android:layout_marginLeft="5dp"
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
                             <ImageView
-                                android:layout_marginRight="20dp"
+                                android:layout_marginRight="15dp"
                                 android:layout_width="130dp"
                                 android:layout_height="130dp"
                                 android:id="@+id/dealLogo" />
 
                             <LinearLayout
+                                android:layout_marginLeft="10dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:orientation="vertical">
@@ -85,11 +89,13 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal">
+
                             <com.chocoroll.buyto.Model.MyTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="23dp"
                                 android:textSize="15dp"
                                 android:text="현재인원"
+                                android:layout_marginRight="10dp"
                                 android:paddingTop="6dp"
                                 android:paddingBottom="4dp"
                                 android:paddingLeft="4dp"
@@ -103,7 +109,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="23dp"
                                 android:textSize="15dp"
-                                android:layout_marginLeft="10dp"
                                 android:paddingTop="6dp"
                                 android:paddingBottom="4dp"
                                 android:paddingLeft="4dp"
@@ -129,7 +134,7 @@
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal">
                                 <com.chocoroll.buyto.Model.MyTextView
-                                    android:paddingLeft="3dp"
+                                    android:paddingLeft="5dp"
                                     android:textColor="#8C8C8C"
                                     android:textSize="14dp"
                                     android:layout_width="wrap_content"
@@ -139,8 +144,8 @@
                                 <com.chocoroll.buyto.Model.MyTextView
                                     android:gravity="end"
                                     android:id="@+id/price"
-                                    android:paddingRight="3dp"
-                                    android:text="10000원"
+                                    android:paddingRight="5dp"
+                                    android:text="21000000원"
                                     android:layout_width="130dp"
                                     android:layout_height="wrap_content"
                                     android:textColor="#5E5E5E"/>
