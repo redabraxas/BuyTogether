@@ -15,11 +15,13 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chocoroll.buyto.Admin.AdminFragment;
 import com.chocoroll.buyto.AllDeal.AllDealFragment;
@@ -634,4 +636,5 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
     public void changeTitle(String str) {
         titleURL.setText(str);
     }
+
 }

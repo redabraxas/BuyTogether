@@ -17,8 +17,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.chocoroll.buyto.DetailDeal.DetailDealActivity;
 import com.chocoroll.buyto.MainActivity;
@@ -74,7 +76,7 @@ public class AllDealFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_all_deal, container, false);
+        final View v = inflater.inflate(R.layout.fragment_all_deal, container, false);
 
         final Spinner spinnerS = (Spinner)v.findViewById(R.id.spinner_small_category);
         final Spinner spinnerB = (Spinner)v.findViewById(R.id.spinner_big_category);
@@ -109,7 +111,7 @@ public class AllDealFragment extends Fragment {
 
                 }else{
                     // 전체보기인 경우
-                    getDealList("전체보기","전체보기");
+                    getDealList("전체보기","전체보기","");
                 }
 
 
@@ -133,7 +135,7 @@ public class AllDealFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 adapter[0].setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 String item = spinnerS.getSelectedItem().toString();
-                getDealList(spinnerB.getSelectedItem().toString(),item);
+                getDealList(spinnerB.getSelectedItem().toString(),item, "");
             }
 
             @Override
@@ -142,12 +144,35 @@ public class AllDealFragment extends Fragment {
             }
         });
 
+        (v.findViewById(R.id.btnSearch)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String str =((EditText)v.findViewById(R.id.editSearch)).getText().toString();
+
+                if(str.equals("")){
+                    Toast.makeText(getActivity(),"검색어를 입력해주세요",Toast.LENGTH_SHORT).show();
+                }else{
+                    
+                }
+            }
+        });
+
+
+
+
+
         ((Button)v.findViewById(R.id.bookMark)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
                 String bCategory = spinnerB.getSelectedItem().toString();
-                String sCategory =spinnerS.getSelectedItem().toString();
-                addBookMark(bCategory,sCategory);
+
+                if (!bCategory.equals("전체보기")) {
+                    String sCategory = spinnerS.getSelectedItem().toString();
+                    addBookMark(bCategory, sCategory);
+                }
+
             }
         });
 
@@ -304,7 +329,7 @@ public class AllDealFragment extends Fragment {
         ((AllDealListner)getActivity()).changeTitle("");
     }
 
-    void getDealList(String bCategory, String sCategory){
+    void getDealList(String bCategory, String sCategory, String search){
 
         dialog = new ProgressDialog(getActivity());
         dialog.setMessage("딜 리스트를 받아오는 중입니다...");
@@ -316,6 +341,7 @@ public class AllDealFragment extends Fragment {
         final JsonObject info = new JsonObject();
         info.addProperty("bCategory",bCategory);
         info.addProperty("sCategory",sCategory);
+        info.addProperty("search",search);
 
         new Thread(new Runnable() {
             public void run() {

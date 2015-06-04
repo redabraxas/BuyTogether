@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -13,9 +14,11 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.astuetz.PagerSlidingTabStrip;
+import com.chocoroll.buyto.DetailDeal.DetailDealActivity;
 import com.chocoroll.buyto.Extra.Retrofit;
 import com.chocoroll.buyto.MainActivity;
 import com.chocoroll.buyto.Model.Deal;
@@ -338,6 +341,17 @@ public class DealStateFragment extends Fragment {
                                 }
 
                                 listView.setAdapter(mKeepDealAdapter);
+                                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                                    @Override
+                                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                        Deal item = (Deal) mKeepDealAdapter.getItem(i);
+                                        Intent intent = new Intent(getActivity(), DetailDealActivity.class);
+                                        intent.putExtra("product", item);
+                                        startActivity(intent);
+                                    }
+                                });
+
                             }
 
                             @Override

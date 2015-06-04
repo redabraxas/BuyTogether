@@ -12,39 +12,69 @@
         android:orientation="vertical" >
     </LinearLayout>
 
+
     <LinearLayout
         android:background="@color/main_color"
         android:padding="10dp"
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
 
 
-        <Spinner
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinner_big_category"
-            android:entries="@array/big_category_arrays"
-            android:prompt="@string/big_category_prompt"
-            android:spinnerMode="dropdown" />
+            <Spinner
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinner_big_category"
+                android:entries="@array/big_category_arrays"
+                android:prompt="@string/big_category_prompt"
+                android:spinnerMode="dropdown" />
 
-        <Spinner
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinner_small_category"
-            android:prompt="@string/small_category_prompt"
-            android:spinnerMode="dropdown" />
+            <Spinner
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinner_small_category"
+                android:prompt="@string/small_category_prompt"
+                android:spinnerMode="dropdown" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="★"
-            android:background="@null"
-            android:id="@+id/bookMark"/>
-    </LinearLayout>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="★"
+                android:background="@null"
+                android:id="@+id/bookMark"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:layout_weight="4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/editSearch" />
+
+            <Button
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="검색"
+                android:id="@+id/btnSearch" />
+        </LinearLayout>
+
+
+        </LinearLayout>
 
 
     <LinearLayout
