@@ -40,7 +40,8 @@
             <com.chocoroll.buyto.Model.MyTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="오호호호호"
+                android:lineSpacingExtra="7dp"
+                android:text="오호호호호엡ㅈ걷적ㅂ;ㅈㄷㄱ;ㅣㄷ작디;ㅏㄱㄷ;ㅣ가디가ㅣㄷ가디ㅏㄱ디가디가디가딕ㄷ"
                 android:layout_marginBottom="30dp"
                 android:textColor="#7C7C7C"
                 android:id="@+id/seller_comment" />

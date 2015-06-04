@@ -16,7 +16,7 @@
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent">
-            <TextView
+            <com.chocoroll.buyto.Model.MyTextViewBold
                 android:id="@+id/title_bar_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
+        <com.chocoroll.buyto.Model.MyTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -54,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-            <TextView
+            <com.chocoroll.buyto.Model.MyTextViewBold
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="I D : "
@@ -68,7 +68,6 @@
                 android:layout_width="247dp"
                 android:layout_height="wrap_content"
                 android:ems="9"
-                android:inputType="textPassword"
                 android:maxLength="12"
                 android:singleLine="true"
                 android:textSize="12dp"

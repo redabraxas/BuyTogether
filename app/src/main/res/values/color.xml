@@ -9,6 +9,7 @@
     <color name="slide_text">#D9D9D9</color>
     <color name ="category_background">#BEE8BA</color>
     <color name="text">#5E5E5E</color>
+    <color name="text_bright">#8C8C8C</color>
 
 
     <color name="tab_indicate">#ff295349</color>
