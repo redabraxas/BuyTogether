@@ -63,6 +63,7 @@
                         android:textSize="18dp"
                         android:layout_gravity="center"/>
                     <EditText
+                        android:textColor="#6B6B6B"
                         android:id="@+id/login_id"
                         android:layout_width="150dp"
                         android:layout_height="35dp"
@@ -97,6 +98,7 @@
                         android:layout_gravity="center"/>
 
                     <EditText
+                        android:textColor="#6B6B6B"
                         android:id="@+id/login_passwd"
                         android:layout_width="150dp"
                         android:layout_height="35dp"

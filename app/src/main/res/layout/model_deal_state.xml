@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#ffffff"
     android:padding="10dp">
@@ -14,21 +15,37 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center">
-        <TextView
-            android:layout_width="wrap_content"
+
+        <com.chocoroll.buyto.Model.MyTextViewBold
+
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:textSize="15dp"
-            android:text="상품이름"
-            android:layout_marginBottom="10dp"
-            android:textColor="#f1393939"
-            android:id="@+id/dealName"
-            android:layout_marginTop="10dp"
+            android:lineSpacingExtra="3dp"
+            android:textSize="18dp"
+            android:text="하kkkkkkkkkkkkkk"
+            android:layout_marginBottom="13dp"
+            android:textColor="#787878"
+            android:id="@+id/txt_category"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
+        <com.chocoroll.buyto.Model.MyTextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="250dp"
+            android:layout_height="20dp"
+            android:textSize="16dp"
+            android:text="상품이름kkkkkkkkkkkkkkkkkkkk"
+            android:layout_marginBottom="10dp"
+            android:textColor="#8C8C8C"
+            android:id="@+id/txt_name"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
 
         <LinearLayout
@@ -41,113 +58,145 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center">
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="3dp"
+                >
 
-                <TextView
+                <com.chocoroll.buyto.Model.MyTextViewBold
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="13dp"
-                    android:text="대기번호"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
+                    android:text="대기 번호"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:paddingLeft="7dp"
+                    android:paddingRight="7dp"
                     android:textColor="#f1ffffff"
-                    android:background="#9981cf65" />
+                    android:background="#9981cf65"/>
 
-                <TextView
+                <com.chocoroll.buyto.Model.MyTextViewBold
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:textSize="13dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
-                    android:text="입금하세요"
+                    android:text="111"
+                    android:textColor="#787878"
                     android:layout_gravity="bottom"
                     android:id="@+id/stateNum" />
 
             </LinearLayout>
 
             <LinearLayout
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="3dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center">
+               >
 
-                <TextView
+                <com.chocoroll.buyto.Model.MyTextViewBold
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="13dp"
-                    android:text="마감날짜"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
+                    android:text="마감 날짜"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:paddingLeft="7dp"
+                    android:paddingRight="7dp"
                     android:textColor="#f1ffffff"
-                    android:background="#9981cf65" />
+                    android:background="#9981cf65"/>
 
-                <TextView
+                <com.chocoroll.buyto.Model.MyTextViewBold
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:textSize="13dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
-                    android:text="없습니다"
+                    android:text="입금하세요"
+                    android:textColor="#787878"
                     android:layout_gravity="bottom"
                     android:id="@+id/stateDate" />
+
 
             </LinearLayout>
 
             <LinearLayout
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="3dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center">
+                >
 
-                <TextView
+                <com.chocoroll.buyto.Model.MyTextViewBold
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="13dp"
-                    android:text="입금계좌"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
+                    android:text="입금 계좌"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:paddingLeft="7dp"
+                    android:paddingRight="7dp"
                     android:textColor="#f1ffffff"
-                    android:background="#9981cf65" />
+                    android:background="#9981cf65"/>
 
-                <TextView
+                <com.chocoroll.buyto.Model.MyTextViewBold
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:textSize="13dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
-                    android:text="없습니다"
+                    android:text="110-444-594832"
+                    android:textColor="#787878"
                     android:layout_gravity="bottom"
                     android:id="@+id/stateDeposit" />
 
             </LinearLayout>
 
             <LinearLayout
+                android:layout_marginLeft="20dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center">
+                android:layout_height="wrap_content">
 
-                <TextView
+                <com.chocoroll.buyto.Model.MyTextViewBold
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="13dp"
-                    android:text="입금금액"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
+                    android:text="입금 금액"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:paddingLeft="7dp"
+                    android:paddingRight="7dp"
                     android:textColor="#f1ffffff"
-                    android:background="#9981cf65" />
+                    android:background="#9981cf65"/>
 
-                <TextView
+
+                <com.chocoroll.buyto.Model.MyTextViewBold
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:textSize="13dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
-                    android:text="없습니다"
+                    android:text="입금하세요"
+                    android:textColor="#787878"
                     android:layout_gravity="bottom"
                     android:id="@+id/statePrice" />
 
