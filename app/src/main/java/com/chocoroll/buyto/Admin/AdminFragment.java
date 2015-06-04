@@ -20,7 +20,6 @@ import android.widget.ListView;
 import com.astuetz.PagerSlidingTabStrip;
 import com.chocoroll.buyto.Extra.Retrofit;
 import com.chocoroll.buyto.Model.Deal;
-import com.chocoroll.buyto.Model.DealAdapter;
 import com.chocoroll.buyto.R;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -145,7 +144,7 @@ public class AdminFragment extends Fragment {
         // 판매자 명단
         ArrayList<Seller> sellerList = new ArrayList<Seller>();
 
-        DealAdapter mDealAdapter;
+        CheckDealAdapter mDealAdapter;
         SellerAdapter mSellerAdapter;
         ListView listView;
         public AdminListFragemnt() {
@@ -181,7 +180,7 @@ public class AdminFragment extends Fragment {
 
 
             if(key.equals("dealList")){
-                mDealAdapter = new DealAdapter(getActivity(), R.layout.model_deal, dealList);
+                mDealAdapter = new CheckDealAdapter(getActivity(), R.layout.model_check_deal, dealList);
                 getAdminDealList();
 
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
