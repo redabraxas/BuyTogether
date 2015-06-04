@@ -77,4 +77,8 @@ public class DealState {
     public String getPrice() {
         return price;
     }
+
+    public String getWaiting() {
+        return waiting;
+    }
 }

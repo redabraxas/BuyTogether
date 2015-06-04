@@ -72,6 +72,10 @@ public interface Retrofit {
     public void getDepositList(@Body JsonObject info, Callback<JsonArray> callback);
     @POST("/seller/sellerDepositCheck.php") // 입금 확인
     public void sendDepositCheck(@Body JsonObject info, Callback<String> callback);
+    @POST("/seller/sellerDelivery.php") // 배송
+    public void sellerDeliveryOK(@Body JsonObject info, Callback<String> callback);
+    @POST("/seller/sellerDelete.php") // 삭제
+    public void sellerDelete(@Body JsonObject info, Callback<String> callback);
 
     // 관리자메뉴
     @POST("/listview/dealState3List.php") // 관리자에게 딜 승인/거절 리스트

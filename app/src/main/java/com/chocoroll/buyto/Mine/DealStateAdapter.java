@@ -41,14 +41,26 @@ public class DealStateAdapter extends ArrayAdapter<DealState> {
             ((TextView)v.findViewById(R.id.txt_name)).setText(p.getDealName());
             ((TextView)  v.findViewById(R.id.statePrice)).setText(p.getPrice());
 
+            ((TextView)  v.findViewById(R.id.buySure)).setVisibility(View.INVISIBLE);
 
-            if(p.getStateNum().equals("0")){
+            int stateNum = Integer.valueOf(p.getStateNum());
+            if(stateNum ==0){
+                ((TextView)  v.findViewById(R.id.stateNum)).setText(p.getWaiting());
+
+            }else{
                 ((TextView) v.findViewById(R.id.stateDate)).setText(p.getDate());
                 ((TextView)  v.findViewById(R.id.stateDeposit)).setText(p.getDeposit());
-            }else{
-                ((TextView)  v.findViewById(R.id.stateNum)).setText(p.getStateNum());
-            }
 
+                switch (stateNum){
+                    case 1:
+                        ((TextView)  v.findViewById(R.id.stateString)).setText("입금요망");
+                        break;
+                    case 2:
+                        ((TextView)  v.findViewById(R.id.stateString)).setText("배송중");
+                        ((TextView)  v.findViewById(R.id.buySure)).setVisibility(View.VISIBLE);
+                        break;
+                }
+            }
 
         }
         return v;
