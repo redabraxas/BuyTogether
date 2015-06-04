@@ -18,6 +18,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -220,6 +221,9 @@ public class DetailDealActivity extends FragmentActivity{
             // Inflate the layout for this fragment
             View v = inflater.inflate(R.layout.fragment_product_detail, container, false);
             ((TextView)v.findViewById(R.id.seller_comment)).setText(product.getComment());
+
+            Button btn = (Button)v.findViewById(R.id.detailbtn);
+
 
             new DownloadImageTask((ImageView) v.findViewById(R.id.detailDealImage))
                     .execute(product.getDetailView());
