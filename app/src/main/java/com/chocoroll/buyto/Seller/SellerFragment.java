@@ -128,9 +128,11 @@ public class SellerFragment extends Fragment {
 
                                 String state = (deal.get("state")).getAsString();
 
+                                String level = (deal.get("level")).getAsString();
+
 
                                 sellerDealList.add(new Deal(num, name, price, bCategory, sCategory, dday, maxBook, keep, book, thumbnail, detailView,
-                                        comment, seller, phone, state));
+                                        comment, seller, phone, state, level));
                             }
 
                             listViewSeller.setAdapter(mAdapter);

@@ -1,11 +1,14 @@
 package com.chocoroll.buyto.Model;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chocoroll.buyto.Extra.DownloadImageTask;
@@ -43,6 +46,13 @@ public class DealAdapter extends ArrayAdapter<Deal> {
             ((TextView) v.findViewById(R.id.txt_name)).setText(p.getName());
             ((TextView) v.findViewById(R.id.txt_dday)).setText(p.getDday());
             ((TextView)  v.findViewById(R.id.txt_people)).setText(String.valueOf(p.getBook()+"/"+p.getMaxBook()));
+
+            if(p.getLevel().equals("user")){
+                ((LinearLayout) v.findViewById(R.id.level_bar)).setBackgroundColor(context.getResources().getColor(R.color.user));
+            }else{
+                ((LinearLayout) v.findViewById(R.id.level_bar)).setBackgroundColor(context.getResources().getColor(R.color.seller));
+            }
+
         }
         return v;
     }

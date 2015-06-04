@@ -106,10 +106,14 @@
 
                     </LinearLayout>
 
+
+
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="3dp"
                     android:background="@color/slide_line"></LinearLayout>
+
 
 
 
@@ -137,14 +141,6 @@
                     </LinearLayout>
 
 
-                    <ListView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/listViewDeal"
-                        android:layout_gravity="center_horizontal" />
-
-
-
 
 
                     <LinearLayout
@@ -153,6 +149,37 @@
                         android:background="@color/slide_line"></LinearLayout>
 
 
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        android:id="@+id/menu_seller">
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/left_menu" />
+
+
+                        <com.chocoroll.buyto.Model.MyTextViewBold
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="17dp"
+                            android:text="@string/menu_seller"
+                            android:textColor="#686868"
+                            android:textSize="20dp"
+                            android:typeface="sans" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/slide_line"></LinearLayout>
 
                 </LinearLayout>
 

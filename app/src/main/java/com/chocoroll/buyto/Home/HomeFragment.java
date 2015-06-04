@@ -189,9 +189,11 @@ public class HomeFragment extends Fragment {
 
                                 String state = (deal.get("state")).getAsString();
 
+                                String level = (deal.get("level")).getAsString();
+
 
                                 pTodayList.add(new Deal(num, name,price, bCategory, sCategory, dday, maxBook, keep,book, thumbnail, detailView,
-                                        comment, seller, phone, state));
+                                        comment, seller, phone, state, level));
                             }
 
                             getBestDealList();
@@ -268,9 +270,11 @@ public class HomeFragment extends Fragment {
 
                                 String state = (deal.get("state")).getAsString();
 
+                                String level = (deal.get("level")).getAsString();
+
 
                                 pDdayList.add(new Deal(num, name,price, bCategory, sCategory, dday, maxBook, keep,book, thumbnail, detailView,
-                                        comment, seller, phone, state));
+                                        comment, seller, phone, state,level));
                             }
 
                             dialog.dismiss();
@@ -416,9 +420,11 @@ public class HomeFragment extends Fragment {
 
                                 String state = (deal.get("state")).getAsString();
 
+                                String level = (deal.get("level")).getAsString();
+
 
                                 pDealList.add(new Deal(num, name,price, bCategory, sCategory, dday, maxBook, keep,book, thumbnail, detailView,
-                                        comment, seller, phone, state));
+                                        comment, seller, phone, state, level));
 
                             }
                             getBestWishList();

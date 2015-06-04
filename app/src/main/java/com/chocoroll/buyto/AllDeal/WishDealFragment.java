@@ -15,8 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.chocoroll.buyto.DetailDeal.WishDealDialog;
 import com.chocoroll.buyto.Extra.Retrofit;
@@ -35,9 +37,6 @@ import retrofit.client.Response;
 
 
 public class WishDealFragment extends Fragment {
-
-
-    ProgressDialog dialog;
 
     ArrayList<WishDeal> pList;
     WishDealAdapter mAdapter;
@@ -66,7 +65,7 @@ public class WishDealFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_wish_deal, container, false);
+        final View v = inflater.inflate(R.layout.fragment_wish_deal, container, false);
 
         final Spinner spinnerS = (Spinner)v.findViewById(R.id.spinner_small_category);
         final Spinner spinnerB = (Spinner)v.findViewById(R.id.spinner_big_category);
@@ -105,12 +104,8 @@ public class WishDealFragment extends Fragment {
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 }else{
                     // 전체보기인 경우
-                    dialog = new ProgressDialog(getActivity());
-                    dialog.setMessage("위시 딜 리스트를 받아오는 중입니다...");
-                    dialog.setIndeterminate(true);
-                    dialog.setCancelable(false);
-                    dialog.show();
-                    getWishDealList("전체보기", "전체보기");
+                    getWishDealList("전체보기", "전체보기", "");
+                    ((EditText)v.findViewById(R.id.editSearch)).setText("");
                 }
 
 
@@ -127,14 +122,10 @@ public class WishDealFragment extends Fragment {
         spinnerS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                dialog = new ProgressDialog(getActivity());
-                dialog.setMessage("위시 딜 리스트를 받아오는 중입니다...");
-                dialog.setIndeterminate(true);
-                dialog.setCancelable(false);
-                dialog.show();
 
                 String item = spinnerS.getSelectedItem().toString();
-                getWishDealList(spinnerB.getSelectedItem().toString(), item);
+                getWishDealList(spinnerB.getSelectedItem().toString(), item, "");
+                ((EditText)v.findViewById(R.id.editSearch)).setText("");
             }
 
             @Override
@@ -142,6 +133,34 @@ public class WishDealFragment extends Fragment {
 
             }
         });
+
+
+
+        (v.findViewById(R.id.btnSearch)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String str =((EditText)v.findViewById(R.id.editSearch)).getText().toString();
+
+                if(str.equals("")){
+                    Toast.makeText(getActivity(), "검색어를 입력해주세요", Toast.LENGTH_SHORT).show();
+                }else{
+
+                    String bCategory = spinnerB.getSelectedItem().toString();
+
+                    if (bCategory.equals("전체보기")) {
+                        getWishDealList("전체보기", "전체보기", str);
+                    }else{
+                        String sCategory = spinnerS.getSelectedItem().toString();
+                        getWishDealList(bCategory, sCategory, str);
+                    }
+
+
+
+
+                }
+            }
+        });
+
 
 
         pList = new ArrayList<WishDeal>();
@@ -166,7 +185,7 @@ public class WishDealFragment extends Fragment {
 
             }
         }) ;
-        getWishDealList("전체보기", "전체보기");
+        getWishDealList("전체보기", "전체보기", "");
 
         return v;
     }
@@ -183,11 +202,18 @@ public class WishDealFragment extends Fragment {
         ((WishDealListner)getActivity()).changeTitle("");
     }
 
-    void getWishDealList(String bCategory, String sCategory){
+    void getWishDealList(String bCategory, String sCategory, String search){
+
+        final ProgressDialog dialog = new ProgressDialog(getActivity());
+        dialog.setMessage("위시 딜 리스트를 받아오는 중입니다...");
+        dialog.setIndeterminate(true);
+        dialog.setCancelable(false);
+        dialog.show();
 
         final JsonObject info = new JsonObject();
         info.addProperty("bCategory",bCategory);
         info.addProperty("sCategory",sCategory);
+        info.addProperty("search",search);
 
         new Thread(new Runnable() {
             public void run() {

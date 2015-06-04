@@ -37,6 +37,9 @@ public class Deal implements Parcelable{
     // 상태
     String state;
 
+    // 레벨
+    String level;
+
 
     public Deal(Parcel in) {
         readFromParcel(in);
@@ -45,7 +48,7 @@ public class Deal implements Parcelable{
     public Deal(String num, String name, String price, String bCategory, String sCategory,
                 String dday, String maxBook, String keep, String book,
                 String thumbnail, String detailView, String comment,
-                String seller, String phone, String state){
+                String seller, String phone, String state, String level){
         this.num  = num;
         this.name = name;
         this.price= price;
@@ -68,6 +71,7 @@ public class Deal implements Parcelable{
 
         this.state = state;
 
+        this.level= level;
 
 
 
@@ -103,6 +107,10 @@ public class Deal implements Parcelable{
         return state;
     }
 
+    public String getLevel() {
+        return level;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -133,6 +141,8 @@ public class Deal implements Parcelable{
 
         parcel.writeString(state);
 
+        parcel.writeString(level);
+
     }
 
     private void readFromParcel(Parcel in){
@@ -157,6 +167,8 @@ public class Deal implements Parcelable{
         phone = in.readString();
 
         state = in.readString();
+
+        level =in.readString();
 
     }
 

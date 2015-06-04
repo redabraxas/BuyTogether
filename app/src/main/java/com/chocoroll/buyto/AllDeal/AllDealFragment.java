@@ -112,6 +112,7 @@ public class AllDealFragment extends Fragment {
                 }else{
                     // 전체보기인 경우
                     getDealList("전체보기","전체보기","");
+                    ((EditText)v.findViewById(R.id.editSearch)).setText("");
                 }
 
 
@@ -136,6 +137,7 @@ public class AllDealFragment extends Fragment {
                 adapter[0].setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 String item = spinnerS.getSelectedItem().toString();
                 getDealList(spinnerB.getSelectedItem().toString(),item, "");
+                ((EditText)v.findViewById(R.id.editSearch)).setText("");
             }
 
             @Override
@@ -152,7 +154,16 @@ public class AllDealFragment extends Fragment {
                 if(str.equals("")){
                     Toast.makeText(getActivity(),"검색어를 입력해주세요",Toast.LENGTH_SHORT).show();
                 }else{
-                    
+
+                    String bCategory = spinnerB.getSelectedItem().toString();
+
+                    if (bCategory.equals("전체보기")) {
+                        getDealList("전체보기","전체보기",str);
+                    }else{
+                        String sCategory = spinnerS.getSelectedItem().toString();
+                        getDealList(bCategory, sCategory, str );
+                    }
+
                 }
             }
         });
@@ -383,9 +394,11 @@ public class AllDealFragment extends Fragment {
 
                                 String state = (deal.get("state")).getAsString();
 
+                                String level = (deal.get("level")).getAsString();
+
 
                                 pList.add(new Deal(num, name,price, bCategory, sCategory, dday, maxBook, keep,book, thumbnail, detailView,
-                                        comment, seller, phone, state));
+                                        comment, seller, phone, state,level));
 
                             }
 
