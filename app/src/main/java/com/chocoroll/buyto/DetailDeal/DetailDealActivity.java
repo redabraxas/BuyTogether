@@ -18,6 +18,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -223,43 +224,27 @@ public class DetailDealActivity extends FragmentActivity{
             ((TextView)v.findViewById(R.id.seller_comment)).setText(product.getComment());
 
             Button btn = (Button)v.findViewById(R.id.detailbtn);
+            btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    String url = product.getDetailView();
+                    DetailDialog detailDialog = new DetailDialog(getActivity(), url);
+                    WindowManager.LayoutParams wm = new WindowManager.LayoutParams();
+                    wm.copyFrom(detailDialog.getWindow().getAttributes());
+                    wm.width=200;
+                    wm.height=200;
+
+                    detailDialog.show();
 
 
-            new DownloadImageTask((ImageView) v.findViewById(R.id.detailDealImage))
-                    .execute(product.getDetailView());
+                }
+            });
 
 
 
             return v;
         }
-
-
-        private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-            ImageView bmImage;
-
-            public DownloadImageTask(ImageView bmImage) {
-                this.bmImage = bmImage;
-            }
-
-            protected Bitmap doInBackground(String... urls) {
-                String urldisplay = urls[0];
-                Bitmap mIcon11 = null;
-                try {
-                    InputStream in = new java.net.URL(urldisplay).openStream();
-                    mIcon11 = BitmapFactory.decodeStream(in);
-                } catch (Exception e) {
-                    Log.e("Error", e.getMessage());
-                    e.printStackTrace();
-                }
-                return mIcon11;
-            }
-
-            protected void onPostExecute(Bitmap result) {
-                bmImage.setImageBitmap(result);
-            }
-        }
-
-
 
         @Override
         public void onAttach(Activity activity) {
