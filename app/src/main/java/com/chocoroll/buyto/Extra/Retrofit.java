@@ -12,8 +12,10 @@ public interface Retrofit {
     public static final String ROOT = "http://ourproject.dothome.co.kr/buytogether";
     @POST("/login/login.php")
     public void login(@Body JsonObject info, Callback<JsonElement> callback);
-    @POST("/login/join.php")
+    @POST("/login/join.php")    //
     public void join(@Body JsonObject info, Callback<String> callback);
+    @POST("/login/join.php")
+    public void seller_join(@Body JsonObject info, Callback<String> callback);
     @POST("/login/ch_myinfo.php")//key값 passwd
     public void ch_passwd(@Body JsonObject info, Callback<String> callback);
     @POST("/login/find_passwd.php")//key 값 "user_email" 받고, 없으면 failed 출력 + 현재 user의 비밀번호 발송한 임시 비밀번호로 변경

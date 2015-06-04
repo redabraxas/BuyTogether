@@ -66,7 +66,6 @@
                         android:id="@+id/login_id"
                         android:layout_width="150dp"
                         android:layout_height="35dp"
-                        android:maxLength="12"
                         android:singleLine="true"
                         android:typeface="sans"
                         android:background="@null"/>
@@ -102,7 +101,6 @@
                         android:layout_width="150dp"
                         android:layout_height="35dp"
                         android:inputType="textPassword"
-                        android:maxLength="12"
                         android:singleLine="true"
                         android:typeface="sans"
                         android:background="@null"/>

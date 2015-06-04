@@ -45,6 +45,11 @@ public class JoinActivity extends Activity {
     private String passwd;
     private String email;
 
+    String sellerCompany;
+    String sellerNum;
+    String sellerAddr;
+    String sellerPhone;
+
     private String regExpStr = "^([a-z]+[0-9]+[a-z0-9]*|[0-9]+[a-z]+[a-z0-9]*)$";
     private String emailregex = "^[_a-zA-Z0-9-\\.]+@[\\.a-zA-Z0-9-]+\\.[a-zA-Z]+$";
 
@@ -119,11 +124,12 @@ public class JoinActivity extends Activity {
                     // 만약 판매자이면,
                     if(seller_flag){
 
-                        String sellerNum = ((EditText) findViewById(R.id.Seller_edit_join_compnum)).getText().toString();
-                        String sellerAddr = ((EditText) findViewById(R.id.Seller_edit_join_compadd)).getText().toString();
-                        String sellerPhone = ((EditText) findViewById(R.id.Seller_edit_join_compphone)).getText().toString();
+                         sellerCompany = ((EditText) findViewById(R.id.Seller_edit_join_compname)).getText().toString();
+                         sellerNum = ((EditText) findViewById(R.id.Seller_edit_join_compnum)).getText().toString();
+                         sellerAddr = ((EditText) findViewById(R.id.Seller_edit_join_compadd)).getText().toString();
+                         sellerPhone = ((EditText) findViewById(R.id.Seller_edit_join_compphone)).getText().toString();
 
-                        if(sellerNum.equals("") || sellerAddr.equals("") || sellerPhone.equals("")){
+                        if(sellerCompany.equals("")|| sellerNum.equals("") || sellerAddr.equals("") || sellerPhone.equals("")){
                              new AlertDialog.Builder(JoinActivity.this).setMessage("빈칸을 확인해주세요!!")
                                     .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                         @Override
@@ -159,11 +165,9 @@ public class JoinActivity extends Activity {
                 // TODO Auto-generated method stub
 
                 if (isChecked){
-
                     seller_flag = true;
                     Layout.setVisibility(View.VISIBLE);
                 }
-
                 else{
                     seller_flag = false;
                     Layout.setVisibility(View.GONE);
@@ -240,6 +244,77 @@ public class JoinActivity extends Activity {
 
 
 
+
+    void seller_join(final String phoneID){
+        dialog = new ProgressDialog(JoinActivity.this);
+        dialog.setMessage("회원가입 요청중입니다...");
+        dialog.setIndeterminate(true);
+        dialog.setCancelable(false);
+        dialog.show();
+
+        final JsonObject info=new JsonObject();
+
+        info.addProperty("phoneID", phoneID);
+        info.addProperty("pw", passwd);
+        info.addProperty("id", email);
+
+        // 셀러를 위한!
+        info.addProperty("sellerNum", sellerNum);
+        info.addProperty("sellerOffice", sellerAddr);
+        info.addProperty("sellerCom", sellerCompany);
+        info.addProperty("phone", sellerPhone);
+
+        new Thread(new Runnable() {
+            public void run() {
+
+                try {
+
+                    RestAdapter restAdapter = new RestAdapter.Builder()
+                            .setEndpoint(Retrofit.ROOT)  //call your base url
+                            .build();
+                    Retrofit join = restAdapter.create(Retrofit.class); //this is how retrofit create your api
+                    join.seller_join(info,new Callback<String>() {
+                        @Override
+                        public void success(String result, Response response) {
+                            dialog.dismiss();
+                            if(result.equals("success"))
+                                finish();
+                            else
+                            {
+                                new AlertDialog.Builder(JoinActivity.this).setMessage("알수 없는 이유로 회원가입에 실패하였습니다.")
+                                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dia, int which) {
+                                                dia.dismiss();
+                                            }
+                                        }).show();
+                            }
+                        }
+
+                        @Override
+                        public void failure(RetrofitError retrofitError) {
+                            dialog.dismiss();
+                            new AlertDialog.Builder(JoinActivity.this).setMessage("네트워크 상태를 확인해주세요.")
+                                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dia, int which) {
+                                            dia.dismiss();
+                                        }
+                                    }).show();
+                        }
+                    });
+                }
+                catch (Throwable ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+
+
+
+
     // 처음 실행 시 기기 아이디를 등록한다!!
     public class RegistPhoneID extends AsyncTask<Context , Integer , String> {
 
@@ -268,7 +343,12 @@ public class JoinActivity extends Activity {
             super.onPostExecute(result);
 
 
-            join(result);
+            if(seller_flag){
+                seller_join(result);
+            }else{
+                join(result);
+            }
+
 
 
         }
