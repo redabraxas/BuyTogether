@@ -195,6 +195,20 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
                                                 public void onClick(DialogInterface dialog, int which) {
                                                     dialog.dismiss();
 
+                                                    userid="";
+                                                    loginmode=MainActivity.LOGOUTUSER;
+
+                                                    SharedPreferences setting1 = getSharedPreferences("setting", MODE_PRIVATE);
+                                                    SharedPreferences.Editor editor = setting1.edit();
+
+                                                    editor.remove("id");
+                                                    editor.remove("loginmode");
+                                                    editor.remove("auto_login");
+                                                    editor.clear();
+                                                    editor.commit();
+
+                                                    menu_setting(LOGOUTUSER);
+
                                                 }
                                             }).show();
 
@@ -205,6 +219,20 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                                 dialog.dismiss();
+
+                                                userid="";
+                                                loginmode=MainActivity.LOGOUTUSER;
+
+                                                SharedPreferences setting1 = getSharedPreferences("setting", MODE_PRIVATE);
+                                                SharedPreferences.Editor editor = setting1.edit();
+
+                                                editor.remove("id");
+                                                editor.remove("loginmode");
+                                                editor.remove("auto_login");
+                                                editor.clear();
+                                                editor.commit();
+
+                                                menu_setting(LOGOUTUSER);
 
                                             }
                                         }).show();
@@ -585,7 +613,8 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
                 }
             });
 
-            if(position == SELLER){
+
+            if(position == SELLER || position ==USER){
 
                 LinearLayout menu_seller = (LinearLayout) findViewById(R.id.menu_seller);
                 menu_seller.setOnClickListener(new View.OnClickListener() {
@@ -602,6 +631,7 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
 
                     }
                 });
+
 
             }else  if(position == ADMIN){
 

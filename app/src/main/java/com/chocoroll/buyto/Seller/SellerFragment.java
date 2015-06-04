@@ -77,7 +77,7 @@ public class SellerFragment extends Fragment {
     void getSellerDealList(){
 
         final ProgressDialog  dialog = new ProgressDialog(getActivity());
-        dialog.setMessage("셀러의 딜 리스트를 가져오는 중입니다...");
+        dialog.setMessage("나의 판매 딜 리스트를 가져오는 중입니다...");
         dialog.setIndeterminate(true);
         dialog.setCancelable(false);
         dialog.show();
@@ -140,7 +140,7 @@ public class SellerFragment extends Fragment {
 
                         @Override
                         public void failure(RetrofitError retrofitError) {
-
+                            dialog.dismiss();
                             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                             builder.setTitle("네트워크가 불안정합니다.")        // 제목 설정
                                     .setMessage("네트워크를 확인해주세요")        // 메세지 설정
@@ -148,7 +148,6 @@ public class SellerFragment extends Fragment {
                                     .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                         // 확인 버튼 클릭시 설정
                                         public void onClick(DialogInterface dialog, int whichButton) {
-                                            getActivity().finish();
                                         }
                                     });
 
