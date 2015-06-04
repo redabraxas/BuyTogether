@@ -93,7 +93,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/left_menu" />
+                            android:src="@drawable/logout" />
                         <com.chocoroll.buyto.Model.MyTextViewBold
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -127,7 +127,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/left_menu" />
+                            android:src="@drawable/dealstate" />
                         <com.chocoroll.buyto.Model.MyTextViewBold
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
