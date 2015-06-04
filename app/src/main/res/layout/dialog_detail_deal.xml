@@ -7,18 +7,19 @@
 
     <ScrollView
         android:padding="10dp"
-        android:layout_weight="10"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:id="@+id/scrollView"
         android:layout_gravity="center_horizontal">
 
+
         <ImageView
-            android:adjustViewBounds="true"
-            android:scaleType="fitXY"
+            android:scaleType="fitCenter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/detailDealImage" />
+
+
     </ScrollView>
 
     <Button
