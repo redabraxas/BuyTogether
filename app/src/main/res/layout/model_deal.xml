@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.chocoroll.buyto.Model.MyTextView
+            <com.chocoroll.buyto.Model.MyTextViewBold
                 android:paddingTop="3dp"
                 android:paddingBottom="1dp"
                 android:layout_marginLeft="3dp"
@@ -46,6 +46,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:paddingTop="13dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -54,10 +55,11 @@
                 android:layout_marginTop="2dp"
                 android:layout_marginLeft="20dp"
                 android:layout_width="250dp"
-                android:layout_height="18dp"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="3dp"
                 android:textSize="18dp"
-                android:text="하"
-                android:layout_marginBottom="15dp"
+                android:text="하kkkkkkkkkkkkkkkkkkkkkkkk"
+                android:layout_marginBottom="13dp"
                 android:textColor="#787878"
                 android:id="@+id/txt_category"
                 android:layout_centerVertical="true"

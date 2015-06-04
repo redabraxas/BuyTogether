@@ -18,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.astuetz.PagerSlidingTabStrip;
+import com.chocoroll.buyto.DetailDeal.DetailDialog;
 import com.chocoroll.buyto.Extra.Retrofit;
 import com.chocoroll.buyto.Model.Deal;
 import com.chocoroll.buyto.R;
@@ -187,7 +188,7 @@ public class AdminFragment extends Fragment {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         Deal item =(Deal)mDealAdapter.getItem(i);
-                        PreDealDialog preDealDialog = new PreDealDialog(getActivity(), item);
+                        DetailDialog preDealDialog = new DetailDialog(getActivity(), item.getDetailView());
                         preDealDialog.show();
                     }
                 });
