@@ -19,18 +19,18 @@
             android:id="@+id/dealLogo" />
 
         <com.chocoroll.buyto.Model.MyTextViewBold
+            android:layout_marginTop="10dp"
             android:clickable="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
             android:textSize="13dp"
             android:paddingTop="4dp"
             android:paddingBottom="4dp"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:text="구매확정"
-            android:textColor="#fffbffed"
-            android:background="#ffff484a"
+            android:textColor="#fff"
+            android:background="#E3807B"
             android:id="@+id/buySure" />
     </LinearLayout>
 

@@ -8,13 +8,12 @@
     <ScrollView
         android:padding="10dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/scrollView"
         android:layout_gravity="center_horizontal">
 
 
         <ImageView
-            android:scaleType="fitCenter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/detailDealImage" />
@@ -22,12 +21,13 @@
 
     </ScrollView>
 
-    <Button
-        android:textStyle="bold"
-        android:layout_weight="1"
+    <com.chocoroll.buyto.Model.MyTextViewBold
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@null"
-        android:text="cancel"
+        android:layout_height="30dp"
+        android:background="#fff"
+        android:gravity="center"
+        android:layout_margin="10dp"
+        android:text="CANCEL"
+        android:textColor="#6C6C6C"
         android:id="@+id/btnFinish" />
 </LinearLayout>

@@ -24,8 +24,6 @@ import com.chocoroll.buyto.Extra.Retrofit;
 import com.chocoroll.buyto.MainActivity;
 import com.chocoroll.buyto.Model.Deal;
 import com.chocoroll.buyto.Model.DealAdapter;
-import com.chocoroll.buyto.Model.WishDeal;
-import com.chocoroll.buyto.Model.WishDealAdapter;
 import com.chocoroll.buyto.R;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
