@@ -1,5 +1,6 @@
 package com.chocoroll.buyto.Extra;
 
+import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -20,6 +21,7 @@ public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
     }
 
     protected Bitmap doInBackground(String... urls) {
+
         String urldisplay = urls[0];
         Bitmap mIcon11 = null;
         try {

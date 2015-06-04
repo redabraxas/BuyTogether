@@ -15,6 +15,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -239,12 +240,17 @@ public class DetailDealActivity extends FragmentActivity{
 
                     String url = product.getDetailView();
                     DetailDialog detailDialog = new DetailDialog(getActivity(), url);
-                    WindowManager.LayoutParams wm = new WindowManager.LayoutParams();
-                    wm.copyFrom(detailDialog.getWindow().getAttributes());
-                    wm.width=200;
-                    wm.height=200;
+
+                    WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+                    lp.copyFrom(detailDialog.getWindow().getAttributes());
+                    lp.width = 800;
+
 
                     detailDialog.show();
+
+                    Window window = detailDialog.getWindow();
+                    window.setAttributes(lp);
+
 
 
                 }
