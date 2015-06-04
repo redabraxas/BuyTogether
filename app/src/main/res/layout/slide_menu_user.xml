@@ -64,7 +64,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/left_menu" />
+                            android:src="@drawable/myinfo" />
                         <com.chocoroll.buyto.Model.MyTextViewBold
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -160,7 +160,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/left_menu" />
+                            android:src="@drawable/mydeal" />
 
 
                         <com.chocoroll.buyto.Model.MyTextViewBold
@@ -200,7 +200,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/left_menu" />
+                            android:src="@drawable/showdeal" />
 
 
                         <com.chocoroll.buyto.Model.MyTextViewBold
@@ -230,7 +230,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/left_menu" />
+                            android:src="@drawable/showdeal" />
 
 
                         <com.chocoroll.buyto.Model.MyTextViewBold
@@ -262,7 +262,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/left_menu" />
+                            android:src="@drawable/makedeal" />
 
 
                         <com.chocoroll.buyto.Model.MyTextViewBold
@@ -295,7 +295,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/left_menu" />
+                            android:src="@drawable/makedeal" />
 
 
                         <com.chocoroll.buyto.Model.MyTextViewBold
@@ -331,7 +331,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/left_menu" />
+                            android:src="@drawable/bookmark" />
 
 
                         <com.chocoroll.buyto.Model.MyTextViewBold
