@@ -12,17 +12,19 @@
         android:padding="5dp"
         android:layout_gravity="center_horizontal">
 
-        <TextView
+        <com.chocoroll.buyto.Model.MyTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="아이디"
+            android:textColor="#8C8C8C"
             android:id="@+id/qna_id"
             android:layout_gravity="center_horizontal" />
 
-        <TextView
+        <com.chocoroll.buyto.Model.MyTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="날짜"
+            android:textColor="#8C8C8C"
             android:id="@+id/qna_date"
             android:layout_gravity="center_horizontal"
             android:layout_alignParentTop="true"
@@ -34,7 +36,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/main_color"></LinearLayout>
+        android:background="#E8F0DF"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -42,26 +44,31 @@
         android:orientation="horizontal"
         android:padding="5dp">
 
-        <TextView
+        <com.chocoroll.buyto.Model.MyTextView
             android:padding="5dp"
             android:gravity="center"
-            android:layout_weight="3"
+            android:layout_weight="4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="내용"
+            android:textColor="#8C8C8C"
             android:id="@+id/qna_content" />
 
 
-            <Button
-                style="?android:attr/buttonStyleSmall"
+            <com.chocoroll.buyto.Model.MyTextViewBold
+                android:textColor="#ffffff"
+                android:padding="5dp"
+                android:background="#ACACAC"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="답변보기"
+                android:text="답변 [ 1 ]"
                 android:id="@+id/qna_showAnswer"
-                android:layout_gravity="right" />
+                android:layout_gravity="center"
+                android:gravity="center"/>
 
         </LinearLayout>
+
 
 
 </LinearLayout>

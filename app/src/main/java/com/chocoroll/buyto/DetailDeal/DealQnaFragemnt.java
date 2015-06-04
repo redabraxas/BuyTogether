@@ -5,8 +5,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -110,8 +108,6 @@ public class DealQnaFragemnt extends Fragment {
         mAdapter= new QnaAdapter(getActivity(), R.layout.model_qna, qnaList, dealNum, seller);
 
         listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-        listView.setDivider(new ColorDrawable(Color.LTGRAY));
-        listView.setDividerHeight(3);
         listView.setAdapter(mAdapter);
 
         getQnaList();

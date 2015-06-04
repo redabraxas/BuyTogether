@@ -5,16 +5,16 @@
     android:background="#ffffff"
     android:padding="10dp">
 
-
-
-
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
         <ListView
             android:id="@+id/answer_list"
             android:layout_width="match_parent"
-            android:layout_height="342dp"
-            android:layout_weight="1"
+            android:layout_height="300dp"
             android:background="#FFFFFF"
-            android:divider="#E8F0DF"
+            android:divider="#88B39B"
             android:dividerHeight="1dp" />
 
         <LinearLayout
@@ -24,14 +24,15 @@
             android:background="#E8F0DF"
             android:padding="10dip" />
 
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/seller_answer_box"
             android:layout_width="match_parent"
             android:layout_height="70dp" >
 
             <EditText
                 android:id="@+id/answer_content_this"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="7"
                 android:layout_height="fill_parent"
                 android:layout_alignParentLeft="true"
                 android:layout_toLeftOf="@+id/answer_ok"
@@ -44,7 +45,8 @@
             <com.chocoroll.buyto.Model.MyTextViewBold
                 android:clickable="true"
                 android:id="@+id/answer_ok"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="2"
                 android:layout_height="fill_parent"
                 android:layout_alignParentRight="true"
                 android:gravity="center"
@@ -54,8 +56,8 @@
                 android:textColor="@color/main_color"
                 android:textSize="13dp"
                 android:typeface="sans" />
-        </RelativeLayout>
+        </LinearLayout>
 
-
+</LinearLayout>
 
 </LinearLayout>

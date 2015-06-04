@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -44,8 +45,8 @@ public class BookDialog  extends Dialog {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dialog_book);
-        this.setTitle("딜 신청");
 
         TextView replyAnswer = (TextView) findViewById(R.id.btnBook);
         replyAnswer.setOnClickListener(new View.OnClickListener() {

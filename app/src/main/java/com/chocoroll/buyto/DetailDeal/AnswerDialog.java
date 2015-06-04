@@ -10,10 +10,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chocoroll.buyto.Extra.Retrofit;
@@ -60,8 +61,9 @@ public class AnswerDialog extends Dialog{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dialog_answer_list);
-        this.setTitle("답변보기");
+
 
         m_ListView=(ListView) findViewById(R.id.answer_list);
         m_Adapter=new AnswerAdapter(getContext(), R.layout.model_answer, answerList);
@@ -69,7 +71,7 @@ public class AnswerDialog extends Dialog{
 
 
         // 답변 달기는 셀러 또는 질문 작성자만 할 수 있다.
-        RelativeLayout answerbox = (RelativeLayout)findViewById(R.id.seller_answer_box);
+        LinearLayout answerbox = (LinearLayout)findViewById(R.id.seller_answer_box);
 
         if(((MainActivity)MainActivity.mContext).getUserId().equals(seller) ||  ((MainActivity)MainActivity.mContext).getUserId().equals(writer)){
 
