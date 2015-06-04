@@ -678,4 +678,7 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
         titleURL.setText(str);
     }
 
+
+
+
 }

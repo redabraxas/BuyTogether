@@ -17,7 +17,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.SlidingDrawer;
 import android.widget.TextView;
 
 import com.astuetz.PagerSlidingTabStrip;
@@ -40,6 +42,9 @@ public class DetailDealActivity extends FragmentActivity{
     private PagerSlidingTabStrip tabs;
     private ViewPager pager;
     private MyPagerAdapter adapter;
+
+    SlidingDrawer slidingDrawer;
+    static Button slideHandleButton;
 
 
     @Override
@@ -81,6 +86,18 @@ public class DetailDealActivity extends FragmentActivity{
         pager.setPageMargin(pageMargin);
         pager.setAdapter(adapter);
         tabs.setViewPager(pager);
+
+
+
+
+        // 슬라이딩 드로워 연결
+        slideHandleButton = (Button) findViewById(R.id.slideHandleButton);
+        slidingDrawer = (SlidingDrawer) findViewById(R.id.SlidingDrawer);
+        slidingDrawer.bringToFront();
+
+        new DownloadImageTask((ImageView) findViewById(R.id.detailDealImage))
+                .execute(product.getDetailView());
+
 
 
         // 찜 버튼
@@ -238,18 +255,19 @@ public class DetailDealActivity extends FragmentActivity{
                 @Override
                 public void onClick(View view) {
 
-                    String url = product.getDetailView();
-                    DetailDialog detailDialog = new DetailDialog(getActivity(), url);
-
-                    WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-                    lp.copyFrom(detailDialog.getWindow().getAttributes());
-                    lp.width = 800;
-
-
-                    detailDialog.show();
-
-                    Window window = detailDialog.getWindow();
-                    window.setAttributes(lp);
+                    slideHandleButton.performClick();
+//                    String url = product.getDetailView();
+//                    DetailDialog detailDialog = new DetailDialog(getActivity(), url);
+//
+//                    WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+//                    lp.copyFrom(detailDialog.getWindow().getAttributes());
+//                    lp.width = 800;
+//
+//
+//                    detailDialog.show();
+//
+//                    Window window = detailDialog.getWindow();
+//                    window.setAttributes(lp);
 
 
 
@@ -391,6 +409,22 @@ public class DetailDealActivity extends FragmentActivity{
                 }
             }
         }).start();
+
+    }
+
+
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onBackPressed() {
+
+        // 슬라이딩 드로워가 열려있을때는 닫고, 홈이 아닐때는 홈으로 이동한다.
+        if (slidingDrawer.isOpened()) {
+            slidingDrawer.close ();
+        }else{
+            super.onBackPressed();
+        }
+
 
     }
 
