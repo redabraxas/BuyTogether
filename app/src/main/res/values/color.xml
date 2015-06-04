@@ -8,6 +8,8 @@
     <color name ="slide_line">#C2C2C2</color>
     <color name="slide_text">#D9D9D9</color>
     <color name ="category_background">#BEE8BA</color>
+    <color name="text">#5E5E5E</color>
+
 
     <color name="tab_indicate">#ff295349</color>
     <color name="tab_background">#BEE8BA</color>
