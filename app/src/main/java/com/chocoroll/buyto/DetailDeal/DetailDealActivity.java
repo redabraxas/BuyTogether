@@ -16,9 +16,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.astuetz.PagerSlidingTabStrip;
+import com.chocoroll.buyto.Extra.DownloadImageTask;
 import com.chocoroll.buyto.Extra.Retrofit;
 import com.chocoroll.buyto.MainActivity;
 import com.chocoroll.buyto.Model.Deal;
@@ -54,6 +56,12 @@ public class DetailDealActivity extends FragmentActivity{
         ((TextView) findViewById(R.id.txt_people)).setText(String.valueOf(product.getBook() + "/" + product.getMaxBook()));
 
         ((TextView)findViewById(R.id.price)).setText(product.getPrice()+" 원");
+
+
+        new DownloadImageTask((ImageView) findViewById(R.id.dealLogo))
+                .execute(product.getThumbnail());
+
+
         tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         //tabs.setTextColor(Color.WHITE);
         pager = (ViewPager) findViewById(R.id.pager);

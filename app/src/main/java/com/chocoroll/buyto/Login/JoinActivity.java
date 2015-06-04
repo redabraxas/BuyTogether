@@ -47,7 +47,6 @@ public class JoinActivity extends Activity {
 
     private String regExpStr = "^([a-z]+[0-9]+[a-z0-9]*|[0-9]+[a-z]+[a-z0-9]*)$";
     private String emailregex = "^[_a-zA-Z0-9-\\.]+@[\\.a-zA-Z0-9-]+\\.[a-zA-Z]+$";
-    private String idregex = "^[a-zA-Z]{1}[a-zA-Z0-9_]{5,11}$";
 
     boolean seller_flag = false;
 
@@ -78,20 +77,7 @@ public class JoinActivity extends Activity {
                 email = edit_email.getText().toString();
                 //여기에 패스워드 길이랑 패턴 확인하는구문
 
-                if(!email.matches(idregex))
-                {
-                    AlertDialog dialog2 = new AlertDialog.Builder(JoinActivity.this).setMessage("잘못된 아이디입니다.")
-                            .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dia, int which) {
-                                    dia.dismiss();
-                                }
-                            }).show();
-                    TextView textView = (TextView) dialog2.findViewById(android.R.id.message);
-                    Typeface face=Typeface.SANS_SERIF;
-                    textView.setTypeface(face);
-                }
-                else if(!email.matches(emailregex))
+                if(!email.matches(emailregex))
                 {
                     AlertDialog dialog2 = new AlertDialog.Builder(JoinActivity.this).setMessage("잘못된 이메일입니다.")
                             .setPositiveButton("확인", new DialogInterface.OnClickListener() {
