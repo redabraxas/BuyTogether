@@ -514,6 +514,7 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
                 public void onClick(View view) {
                     slidingMenu.showContent(true);
                     Intent intent = new Intent(MainActivity.this, MakeDealActivity.class);
+                    intent.putExtra("case","menu");
                     startActivity(intent);
                 }
             });

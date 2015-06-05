@@ -256,20 +256,6 @@ public class DetailDealActivity extends FragmentActivity{
                 public void onClick(View view) {
 
                     slideHandleButton.performClick();
-//                    String url = product.getDetailView();
-//                    DetailDialog detailDialog = new DetailDialog(getActivity(), url);
-//
-//                    WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-//                    lp.copyFrom(detailDialog.getWindow().getAttributes());
-//                    lp.width = 800;
-//
-//
-//                    detailDialog.show();
-//
-//                    Window window = detailDialog.getWindow();
-//                    window.setAttributes(lp);
-
-
 
                 }
             });

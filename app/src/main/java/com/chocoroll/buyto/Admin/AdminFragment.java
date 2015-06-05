@@ -15,10 +15,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SlidingDrawer;
 
 import com.astuetz.PagerSlidingTabStrip;
-import com.chocoroll.buyto.DetailDeal.DetailDialog;
+import com.chocoroll.buyto.Extra.DownloadImageTask;
 import com.chocoroll.buyto.Extra.Retrofit;
 import com.chocoroll.buyto.Model.Deal;
 import com.chocoroll.buyto.R;
@@ -35,6 +38,9 @@ import retrofit.client.Response;
 
 public class AdminFragment extends Fragment {
 
+    SlidingDrawer slidingDrawer;
+    static Button slideHandleButton;
+    static ImageView detailView;
 
     private PagerSlidingTabStrip tabs;
     private ViewPager pager;
@@ -70,6 +76,13 @@ public class AdminFragment extends Fragment {
         pager.setPageMargin(pageMargin);
         pager.setAdapter(adapter);
         tabs.setViewPager(pager);
+
+        // 슬라이딩 드로워 연결
+        slideHandleButton = (Button) v.findViewById(R.id.slideHandleButton);
+        slidingDrawer = (SlidingDrawer) v.findViewById(R.id.SlidingDrawer);
+        slidingDrawer.bringToFront();
+
+        detailView = (ImageView) v.findViewById(R.id.detailDealImage);
 
         return v;
     }
@@ -188,8 +201,10 @@ public class AdminFragment extends Fragment {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         Deal item =(Deal)mDealAdapter.getItem(i);
-                        DetailDialog preDealDialog = new DetailDialog(getActivity(), item.getDetailView());
-                        preDealDialog.show();
+                        new DownloadImageTask(detailView)
+                                .execute(item.getDetailView());
+
+                        slideHandleButton.performClick();
                     }
                 });
 

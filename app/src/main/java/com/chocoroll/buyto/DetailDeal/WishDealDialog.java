@@ -118,6 +118,7 @@ public class WishDealDialog extends Dialog{
 
                 Intent intent = new Intent(context, MakeDealActivity.class);
                 intent.putExtra("name",name);
+                intent.putExtra("case","wishdeal");
                 context.startActivity(intent);
                 }
             }
