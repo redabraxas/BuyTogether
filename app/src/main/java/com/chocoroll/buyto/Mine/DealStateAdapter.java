@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.chocoroll.buyto.Extra.DownloadImageTask;
 import com.chocoroll.buyto.Extra.Retrofit;
 import com.chocoroll.buyto.MainActivity;
 import com.chocoroll.buyto.R;
+import com.chocoroll.buyto.Seller.DepositFragment;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
@@ -74,6 +76,8 @@ public class DealStateAdapter extends ArrayAdapter<DealState> {
                         ((TextView)  v.findViewById(R.id.stateString)).setText("입금요망");
                         break;
                     case 2:
+                        ((TextView)  v.findViewById(R.id.stateString)).setText("입금확인");
+                    case 3:
                         ((TextView)  v.findViewById(R.id.stateString)).setText("배송중");
                         ((TextView)  v.findViewById(R.id.buySure)).setVisibility(View.VISIBLE);
                         break;
@@ -122,6 +126,13 @@ public class DealStateAdapter extends ArrayAdapter<DealState> {
                                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                             // 확인 버튼 클릭시 설정
                                             public void onClick(DialogInterface dialog, int whichButton) {
+
+                                                ((MainActivity)MainActivity.mContext).removeAllStack();
+                                                FragmentTransaction ft = ((MainActivity)MainActivity.mContext).getSupportFragmentManager().beginTransaction();
+                                                ft.replace(R.id.container, new DealStateFragment());
+                                                ft.setTransition(FragmentTransaction.TRANSIT_NONE);
+                                                ft.addToBackStack(null);
+                                                ft.commit();
                                             }
                                         });
                             }else{

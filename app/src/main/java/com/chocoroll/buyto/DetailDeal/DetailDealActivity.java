@@ -20,7 +20,9 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SlidingDrawer;
+import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.chocoroll.buyto.Extra.DownloadImageTask;
@@ -28,6 +30,7 @@ import com.chocoroll.buyto.Extra.Retrofit;
 import com.chocoroll.buyto.MainActivity;
 import com.chocoroll.buyto.Model.Deal;
 import com.chocoroll.buyto.R;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import retrofit.Callback;
@@ -292,21 +295,91 @@ public class DetailDealActivity extends FragmentActivity{
             // Inflate the layout for this fragment
             View v = inflater.inflate(R.layout.fragment_seller_detail, container, false);
 
-            ((TextView)v.findViewById(R.id.txt_sellerName)).setText(product.getName());
-            ((TextView)v.findViewById(R.id.txt_sellerNum)).setText(product.getPhone());
+            ((TextView)v.findViewById(R.id.sellerSite)).setText(product.getSite());
+            ((TextView)v.findViewById(R.id.sellerTel)).setText(product.getPhone());
+
+            if(product.getLevel().equals("seller")){
+
+                getSellerInfo();
+
+            }
 
             return v;
         }
 
+        void getSellerInfo(){
+            final ProgressDialog dialog = new ProgressDialog(getActivity());
+            dialog.setMessage("사업자 정보를 가져오는 중입니다...");
+            dialog.setIndeterminate(true);
+            dialog.setCancelable(false);
+            dialog.show();
 
-        @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
-        }
+            final JsonObject info = new JsonObject();
+            info.addProperty("id", product.getSeller());
 
-        @Override
-        public void onDetach() {
-            super.onDetach();
+            new Thread(new Runnable() {
+                public void run() {
+                    try {
+
+                        RestAdapter restAdapter = new RestAdapter.Builder()
+                                .setEndpoint(Retrofit.ROOT)  //call your base url
+                                .build();
+                        Retrofit retrofit = restAdapter.create(Retrofit.class); //this is how retrofit create your api
+                        retrofit.getSellerInfo(info, new Callback<JsonElement>() {
+
+                            @Override
+                            public void success(JsonElement element, Response response) {
+
+                                dialog.dismiss();
+
+                                JsonObject jsonObject = element.getAsJsonObject();
+                                String result = (jsonObject.get("result")).getAsString();
+
+                                if (result.equals("success")) {
+
+                                    String sellerNum =   (jsonObject.get("sellerNum")).getAsString();
+                                    String sellerComName =   (jsonObject.get("sellerComName")).getAsString();
+                                    String sellerOffice =   (jsonObject.get("sellerOffice")).getAsString();
+
+                                    TableLayout seller_box = (TableLayout)getView().findViewById(R.id.seller_box);
+
+                                    seller_box.setVisibility(View.VISIBLE);
+                                    ((TextView)getView().findViewById(R.id.sellerNum)).setText(sellerNum);
+                                    ((TextView)getView().findViewById(R.id.sellerComName)).setText(sellerComName);
+                                    ((TextView)getView().findViewById(R.id.sellerAddr)).setText(sellerOffice);
+
+                                } else if (result.equals("failed")) {
+                                    Toast.makeText(getActivity(), "사업자 정보를 가져오지 못했습니다.", Toast.LENGTH_SHORT).show();
+
+                                }
+
+                            }
+
+                            @Override
+                            public void failure(RetrofitError retrofitError) {
+                                dialog.dismiss();
+
+                                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                                builder.setTitle("네트워크가 불안정합니다.")        // 제목 설정
+                                        .setMessage("네트워크를 확인해주세요")        // 메세지 설정
+                                        .setCancelable(false)        // 뒤로 버튼 클릭시 취소 가능 설정
+                                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                            // 확인 버튼 클릭시 설정
+                                            public void onClick(DialogInterface dialog, int whichButton) {
+                                            }
+                                        });
+
+                                AlertDialog dialog = builder.create();    // 알림창 객체 생성
+                                dialog.show();    // 알림창 띄우기
+
+                            }
+                        });
+                    }
+                    catch (Throwable ex) {
+
+                    }
+                }
+            }).start();
         }
     }
 

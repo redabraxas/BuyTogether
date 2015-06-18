@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.chocoroll.buyto.Extra.DownloadImageTask;
 import com.chocoroll.buyto.Extra.Retrofit;
+import com.chocoroll.buyto.MainActivity;
 import com.chocoroll.buyto.Model.Deal;
 import com.chocoroll.buyto.R;
 import com.google.gson.JsonObject;
@@ -80,7 +82,7 @@ public CheckDealAdapter(Context context, int textViewResourceId, ArrayList<Deal>
                 @Override
                 public void onClick(View view) {
 
-                    sendDealResult(p.getNum(), "ok");
+                    sendDealResult(p.getNum(), "no");
 
 
                 }
@@ -140,6 +142,14 @@ public CheckDealAdapter(Context context, int textViewResourceId, ArrayList<Deal>
                                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                             // 확인 버튼 클릭시 설정
                                             public void onClick(DialogInterface dialog, int whichButton) {
+
+
+                                                ((MainActivity)MainActivity.mContext).removeAllStack();
+                                                FragmentTransaction ft = ((MainActivity)MainActivity.mContext).getSupportFragmentManager().beginTransaction();
+                                                ft.replace(R.id.container, new AdminFragment());
+                                                ft.setTransition(FragmentTransaction.TRANSIT_NONE);
+                                                ft.addToBackStack(null);
+                                                ft.commit();
                                             }
                                         });
 

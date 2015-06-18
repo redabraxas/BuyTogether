@@ -7,8 +7,7 @@
     <TableLayout
         android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-      >
+        android:layout_height="wrap_content">
         <TableRow
             android:layout_margin="5dp"
             android:layout_width="fill_parent"
@@ -16,15 +15,15 @@
             <com.chocoroll.buyto.Model.MyTextViewBold
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="판매처 : "
+                android:text="사이트 : "
                 android:textColor="#7C7C7C"/>
 
             <com.chocoroll.buyto.Model.MyTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="사업자 이름"
+                android:text="사이트"
                 android:textColor="#7C7C7C"
-                android:id="@+id/txt_sellerName"/>
+                android:id="@+id/sellerSite"/>
         </TableRow>
 
         <TableRow
@@ -41,9 +40,65 @@
             <com.chocoroll.buyto.Model.MyTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="사업자 번호"
+                android:text="문의처"
                 android:textColor="#7C7C7C"
-                android:id="@+id/txt_sellerNum"/>
+                android:id="@+id/sellerTel"/>
+        </TableRow>
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#ACACAC"
+            android:orientation="vertical"
+            android:layout_marginBottom="10dp">
+        </LinearLayout>
+    </TableLayout>
+
+
+
+
+    <TableLayout
+        android:visibility="gone"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/seller_box">
+        <TableRow
+            android:layout_margin="5dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <com.chocoroll.buyto.Model.MyTextViewBold
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="사업자번호 : "
+                android:textColor="#7C7C7C"/>
+
+            <com.chocoroll.buyto.Model.MyTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="사업자번호"
+                android:textColor="#7C7C7C"
+                android:id="@+id/sellerNum"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="5dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <com.chocoroll.buyto.Model.MyTextViewBold
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="회사이름 : "
+                android:textColor="#7C7C7C"/>
+
+            <com.chocoroll.buyto.Model.MyTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="회사이름"
+                android:textColor="#7C7C7C"
+                android:id="@+id/sellerComName"/>
         </TableRow>
 
         <TableRow
@@ -55,14 +110,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#7C7C7C"
-                android:text="사업자 주소 : "/>
+                android:text="사업체 주소 : "/>
 
             <com.chocoroll.buyto.Model.MyTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="사업자 주소"
+                android:text="판매사이트"
                 android:textColor="#7C7C7C"
-                android:id="@+id/txt_sellerAddr"/>
+                android:id="@+id/sellerAddr"/>
 
         </TableRow>
         <LinearLayout

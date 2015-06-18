@@ -14,7 +14,7 @@ public interface Retrofit {
     public void login(@Body JsonObject info, Callback<JsonElement> callback);
     @POST("/login/join.php")    //
     public void join(@Body JsonObject info, Callback<String> callback);
-    @POST("/login/join.php")
+    @POST("/login/sellerJoin.php")
     public void seller_join(@Body JsonObject info, Callback<String> callback);
     @POST("/login/ch_myinfo.php")//key값 passwd
     public void ch_passwd(@Body JsonObject info, Callback<String> callback);
@@ -82,7 +82,7 @@ public interface Retrofit {
     public void getAdminDealList(Callback<JsonArray> callback);
     @POST("/listview/sellerRequestList.php") // 관리자에게 판매자 승인/거절 리스트
     public void getAdminSellerList(Callback<JsonArray> callback);
-    @POST("/seller/sellerDepositCheck.php") // 딜 승인/거절
+    @POST("/mydeal/dealState3to0.php") // 딜 승인/거절
     public void sendDealResult(@Body JsonObject info, Callback<String> callback);
     @POST("/seller/sellerRequestUp.php") // 판매자 승인/거절
     public void sendsSellerResult(@Body JsonObject info, Callback<String> callback);
@@ -102,4 +102,8 @@ public interface Retrofit {
     public void addBookMark(@Body JsonObject info, Callback<String> callback);
     @POST("/mydeal/bookmarkDelete.php") // 북마크 삭제
     public void deleteBookMark(@Body JsonObject info, Callback<String> callback);
+
+
+    @POST("/seller/getSellerInfo.php") // 셀러정보 가져오기
+    public void getSellerInfo(@Body JsonObject info, Callback<JsonElement> callback);
 }

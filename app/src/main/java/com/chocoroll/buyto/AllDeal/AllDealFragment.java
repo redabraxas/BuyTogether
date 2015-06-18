@@ -400,6 +400,7 @@ public class AllDealFragment extends Fragment {
                                 String comment = (deal.get("proComment")).getAsString();
 
                                 String seller = (deal.get("sellerID")).getAsString();
+                                String site = (deal.get("site")).getAsString();
                                 String phone = (deal.get("phone")).getAsString();
 
                                 String state = (deal.get("state")).getAsString();
@@ -408,7 +409,7 @@ public class AllDealFragment extends Fragment {
 
 
                                 pList.add(new Deal(num, name,price, bCategory, sCategory, dday, maxBook, keep,book, thumbnail, detailView,
-                                        comment, seller, phone, state,level));
+                                        comment, seller, site, phone, state,level));
 
                             }
 

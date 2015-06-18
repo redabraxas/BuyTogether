@@ -4,20 +4,17 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.util.TypedValue;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.chocoroll.buyto.Extra.DownloadImageTask;
 import com.chocoroll.buyto.Extra.Retrofit;
-import com.chocoroll.buyto.Model.Deal;
+import com.chocoroll.buyto.MainActivity;
+import com.chocoroll.buyto.Mine.DealStateFragment;
 import com.chocoroll.buyto.R;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
@@ -31,6 +28,7 @@ import retrofit.client.Response;
  * Created by RA on 2015-05-23.
  */
 public class DepositAdapter extends ArrayAdapter<Deposit> {
+
 
     private ArrayList<Deposit> items;
     private Context context;
@@ -73,6 +71,9 @@ public class DepositAdapter extends ArrayAdapter<Deposit> {
                     });
                     break;
                 case 3:
+                    btnDeposit.setVisibility(View.INVISIBLE);
+                    break;
+                case 4:
                     btnDeposit.setText("삭제");
                     btnDeposit.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -91,7 +92,7 @@ public class DepositAdapter extends ArrayAdapter<Deposit> {
     }
 
 
-    void sendDepositCheck(String dealNum, String id){
+    void sendDepositCheck(final String dealNum, String id){
         final ProgressDialog dialog = new ProgressDialog(context);
         dialog.setMessage("입금 리스트를 가져오는 중입니다...");
         dialog.setIndeterminate(true);
@@ -131,6 +132,19 @@ public class DepositAdapter extends ArrayAdapter<Deposit> {
                                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                             // 확인 버튼 클릭시 설정
                                             public void onClick(DialogInterface dialog, int whichButton) {
+
+
+                                                ((MainActivity)MainActivity.mContext).removeAllStack();
+                                                FragmentTransaction ft = ((MainActivity)MainActivity.mContext).getSupportFragmentManager().beginTransaction();
+                                                ft.replace(R.id.container, new SellerFragment());
+                                                ft.setTransition(FragmentTransaction.TRANSIT_NONE);
+                                                ft.addToBackStack(null);
+                                                ft.commit();
+
+                                                DepositFragment depositFragment = DepositFragment.newInstance(dealNum);
+                                                ((MainActivity)MainActivity.mContext).getSupportFragmentManager().beginTransaction().add(R.id.container, depositFragment).addToBackStack(null).commit();
+
+
                                             }
                                         });
                             }else{
@@ -176,7 +190,7 @@ public class DepositAdapter extends ArrayAdapter<Deposit> {
 
 
 
-    void sellerDeliveryOK(String dealNum, String id){
+    void sellerDeliveryOK(final String dealNum, String id){
         final ProgressDialog dialog = new ProgressDialog(context);
         dialog.setMessage("배송 확인을 하는 중입니다...");
         dialog.setIndeterminate(true);
@@ -214,6 +228,18 @@ public class DepositAdapter extends ArrayAdapter<Deposit> {
                                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                             // 확인 버튼 클릭시 설정
                                             public void onClick(DialogInterface dialog, int whichButton) {
+
+
+                                                ((MainActivity)MainActivity.mContext).removeAllStack();
+                                                FragmentTransaction ft = ((MainActivity)MainActivity.mContext).getSupportFragmentManager().beginTransaction();
+                                                ft.replace(R.id.container, new SellerFragment());
+                                                ft.setTransition(FragmentTransaction.TRANSIT_NONE);
+                                                ft.addToBackStack(null);
+                                                ft.commit();
+
+                                                DepositFragment depositFragment = DepositFragment.newInstance(dealNum);
+                                                ((MainActivity)MainActivity.mContext).getSupportFragmentManager().beginTransaction().add(R.id.container, depositFragment).addToBackStack(null).commit();
+
                                             }
                                         });
                             }else{
@@ -259,9 +285,9 @@ public class DepositAdapter extends ArrayAdapter<Deposit> {
 
 
 
-    void sellerDelete(String dealNum, String id){
+    void sellerDelete(final String dealNum, String id){
         final ProgressDialog dialog = new ProgressDialog(context);
-        dialog.setMessage("배송 확인을 하는 중입니다...");
+        dialog.setMessage("삭제를 하는 중입니다...");
         dialog.setIndeterminate(true);
         dialog.setCancelable(false);
         dialog.show();
@@ -297,6 +323,18 @@ public class DepositAdapter extends ArrayAdapter<Deposit> {
                                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                             // 확인 버튼 클릭시 설정
                                             public void onClick(DialogInterface dialog, int whichButton) {
+
+
+                                                ((MainActivity)MainActivity.mContext).removeAllStack();
+                                                FragmentTransaction ft = ((MainActivity)MainActivity.mContext).getSupportFragmentManager().beginTransaction();
+                                                ft.replace(R.id.container, new SellerFragment());
+                                                ft.setTransition(FragmentTransaction.TRANSIT_NONE);
+                                                ft.addToBackStack(null);
+                                                ft.commit();
+
+                                                DepositFragment depositFragment = DepositFragment.newInstance(dealNum);
+                                                ((MainActivity)MainActivity.mContext).getSupportFragmentManager().beginTransaction().add(R.id.container, depositFragment).addToBackStack(null).commit();
+
                                             }
                                         });
                             }else{

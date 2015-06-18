@@ -373,7 +373,7 @@ public class MainActivity extends FragmentActivity implements AllDealFragment.Al
         for(int i=0; i<tabs.getTabWidget().getChildCount(); i++){
             tabs.getTabWidget().getChildAt(i).setBackgroundColor(getResources().getColor(R.color.slide_tab_bar));
             ((TextView) tabs.getTabWidget().getChildAt(i).findViewById(android.R.id.title)).setTextColor(Color.parseColor("#D9D9D9"));
-            tabs.getTabWidget().getChildAt(i).getLayoutParams().height = 80;
+            tabs.getTabWidget().getChildAt(i).getLayoutParams().height = 120;
         }
 
         tabs.getTabWidget().getChildAt(tabs.getCurrentTab()).setBackgroundColor(getResources().getColor(R.color.slide_tab_backgroud));

@@ -32,6 +32,7 @@ public class Deal implements Parcelable{
 
     // 판매자 정보
     String seller;
+    String site;
     String phone;
 
     // 상태
@@ -48,7 +49,7 @@ public class Deal implements Parcelable{
     public Deal(String num, String name, String price, String bCategory, String sCategory,
                 String dday, String maxBook, String keep, String book,
                 String thumbnail, String detailView, String comment,
-                String seller, String phone, String state, String level){
+                String seller, String site, String phone, String state, String level){
         this.num  = num;
         this.name = name;
         this.price= price;
@@ -68,6 +69,7 @@ public class Deal implements Parcelable{
 
         this.seller= seller;
         this.phone =phone;
+        this.site =site;
 
         this.state = state;
 
@@ -111,6 +113,10 @@ public class Deal implements Parcelable{
         return level;
     }
 
+    public String getSite() {
+        return site;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -137,6 +143,7 @@ public class Deal implements Parcelable{
         parcel.writeString(comment);
 
         parcel.writeString(seller);
+        parcel.writeString(site);
         parcel.writeString(phone);
 
         parcel.writeString(state);
@@ -164,6 +171,7 @@ public class Deal implements Parcelable{
         comment =in.readString();
 
         seller = in.readString();
+        site = in.readString();
         phone = in.readString();
 
         state = in.readString();

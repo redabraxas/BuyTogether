@@ -33,10 +33,11 @@ import retrofit.client.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DepositFragment extends Fragment {
+public class DepositFragment extends Fragment{
 
     ArrayList<Deposit> nameList = new ArrayList<Deposit>();
     ArrayList<Deposit> checkList  = new ArrayList<Deposit>();
+    ArrayList<Deposit> deliveryList  = new ArrayList<Deposit>();
     ArrayList<Deposit> confirmList  = new ArrayList<Deposit>();
 
     String dealNum;
@@ -60,7 +61,6 @@ public class DepositFragment extends Fragment {
     private MyPagerAdapter adapter;
 
 
-
     public class MyPagerAdapter extends FragmentPagerAdapter {
 
         public MyPagerAdapter(FragmentManager fm) {
@@ -72,7 +72,7 @@ public class DepositFragment extends Fragment {
         }
         @Override
         public int getCount() {
-            return 3;
+            return 4;
         }
 
         @Override
@@ -83,6 +83,8 @@ public class DepositFragment extends Fragment {
                 case 1:
                     return new DeporitListFragemnt(checkList);
                 case 2:
+                    return new DeporitListFragemnt(deliveryList);
+                case 3:
                     return new DeporitListFragemnt(confirmList);
             }
 
@@ -98,6 +100,8 @@ public class DepositFragment extends Fragment {
                 case 1:
                     return "입금자";
                 case 2:
+                    return "배송중";
+                case 3:
                     return "구입확정";
                 default:
                     return "";
@@ -173,6 +177,9 @@ public class DepositFragment extends Fragment {
                                         checkList.add(new Deposit(dealNum, id, name, phone, address, state));
                                         break;
                                     case 3:
+                                        deliveryList.add(new Deposit(dealNum, id, name, phone, address, state));
+                                        break;
+                                    case 4:
                                         confirmList.add(new Deposit(dealNum, id, name, phone, address, state));
                                         break;
                                 }

@@ -239,7 +239,6 @@ public class DealStateFragment extends Fragment {
                                             bookDealList.add(new DealState(num, name, thumbnail, bCategory, sCategory, price, String.valueOf(state), waiting));
                                             break;
                                         default:
-
                                             String deposit = (deal.get("account")).getAsString();
                                             String date = (deal.get("date")).getAsString();
                                             bookDealList.add(new DealState(num, name, thumbnail, bCategory, sCategory, price, String.valueOf(state), deposit, date));
@@ -256,6 +255,7 @@ public class DealStateFragment extends Fragment {
                             @Override
                             public void failure(RetrofitError retrofitError) {
 
+                                dialog.dismiss();
                                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                                 builder.setTitle("네트워크가 불안정합니다.")        // 제목 설정
                                         .setMessage("네트워크를 확인해주세요")        // 메세지 설정
@@ -263,7 +263,6 @@ public class DealStateFragment extends Fragment {
                                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                             // 확인 버튼 클릭시 설정
                                             public void onClick(DialogInterface dialog, int whichButton) {
-                                                getActivity().finish();
                                             }
                                         });
 
@@ -328,6 +327,7 @@ public class DealStateFragment extends Fragment {
                                     String comment = (deal.get("proComment")).getAsString();
 
                                     String seller = (deal.get("sellerID")).getAsString();
+                                    String site = (deal.get("site")).getAsString();
                                     String phone = (deal.get("phone")).getAsString();
 
                                     String state = (deal.get("state")).getAsString();
@@ -336,7 +336,7 @@ public class DealStateFragment extends Fragment {
 
 
                                     keepDealList.add(new Deal(num, name, price, bCategory, sCategory, dday, maxBook, keep, book, thumbnail, detailView,
-                                            comment, seller, phone, state, level));
+                                            comment, seller, site, phone, state, level));
 
                                 }
 
@@ -364,7 +364,6 @@ public class DealStateFragment extends Fragment {
                                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                             // 확인 버튼 클릭시 설정
                                             public void onClick(DialogInterface dialog, int whichButton) {
-                                                getActivity().finish();
                                             }
                                         });
 

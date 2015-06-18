@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,9 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.chocoroll.buyto.Extra.Retrofit;
+import com.chocoroll.buyto.MainActivity;
 import com.chocoroll.buyto.R;
+import com.chocoroll.buyto.Seller.SellerFragment;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
@@ -120,6 +123,13 @@ public class SellerAdapter extends ArrayAdapter<Seller> {
                                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                             // 확인 버튼 클릭시 설정
                                             public void onClick(DialogInterface dialog, int whichButton) {
+
+                                                ((MainActivity)MainActivity.mContext).removeAllStack();
+                                                FragmentTransaction ft = ((MainActivity)MainActivity.mContext).getSupportFragmentManager().beginTransaction();
+                                                ft.replace(R.id.container, new AdminFragment());
+                                                ft.setTransition(FragmentTransaction.TRANSIT_NONE);
+                                                ft.addToBackStack(null);
+                                                ft.commit();
                                             }
                                         });
 
